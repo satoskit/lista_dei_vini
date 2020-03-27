@@ -10,7 +10,7 @@ useLayoutEffect(() => {
     })
 });
     return (
-        <View style={styles.content}>
+        <View style={styles.container}>
             <Text>There will be a list of wines!</Text>
         </View>
     )
@@ -18,12 +18,6 @@ useLayoutEffect(() => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        // backgroundColor: white,
-        // alignItem: 'center',
-        // justifyContent: 'center',
-    },
-    content: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
