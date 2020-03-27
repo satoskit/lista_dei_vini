@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screens/Home';
 import List from './screens/List';
 import Statistics from './screens/Statistics';
+import EditList from './screens/EditList';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,8 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="MyList" component={List} options={{title: 'My List' }}/>
         <Stack.Screen name="MyStat" component={Statistics} options={{title: 'My Statistics' }}/>
+
+        <Stack.Screen name="EditList" component={EditList} options={{title: 'Edit' }}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
