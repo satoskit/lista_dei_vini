@@ -32,27 +32,38 @@ export default function ListItem () {
     ];
     const Item = ({id, name, pic}) => {
         return (
-            <View>
+            <View style={styles.list}>
                 <Text style={styles.item}>Name: {name}</Text>
                 <Text>Picture: {pic}</Text>
             </View>
         );
     }
     return (
-        <FlatList data={listData}
+        listData.length ? <FlatList data={listData}
             renderItem={({item}) => <Item  
                 name={item.name} pic={item.pic}
                 keyExtractor={item => item.id}
             />}
         />
+            : <View style={styles.emptyList}>
+                <Text>Start adding an item!</Text>
+            </View>
     )
 }
 
 const styles = StyleSheet.create({
     list: {
+        flex: 1,
+        alignItems: 'flex-start',
+        // justifyContent: 'flex-start'
     },
     item: {
         padding: 10,
         fontSize: 30,
+    },
+    emptyList: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });

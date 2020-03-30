@@ -25,40 +25,24 @@ export default function List({navigation}) {
     const getList = () => {
         return list;
     };
-    if(list == null) {
-        return (
-            <View style={styles.container}>
-                <View>
-                    <Text>Start adding an item!</Text>
-                </View>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('EditList')} 
-                    style={styles.addButton}
-                >
-                    <Icon name="plus-circle" size={30} color="#990000"/>
-                </TouchableOpacity>
-            </View>
-        )
-    } else {
-        return (
-            <View style={styles.container}>
-                <ListItem />
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('EditList')} 
-                    style={styles.addButton}
-                >
-                    <Icon name="plus-circle" size={30} color="#990000"/>
-                </TouchableOpacity>
-            </View>
-        ) 
-    }
+    return (
+        <View style={styles.container}>
+            <ListItem />
+            <TouchableOpacity
+                onPress={() => navigation.navigate('EditList')} 
+                style={styles.addButton}
+            >
+                <Icon name="plus-circle" size={30} color="#990000"/>
+            </TouchableOpacity>
+        </View>
+    ) 
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         // alignItems: 'center',
-        justifyContent: 'flex-start'
+        // justifyContent: 'flex-start'
     },
     addButton: {
         alignItems: 'center',
