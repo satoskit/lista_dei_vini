@@ -13,7 +13,7 @@ export default function EditList({navigation}) {
                     <TouchableOpacity onPress={() => navigation.navigate('MyList')} 
                         title="Done"
                         style={styles.doneButton} >
-                            <Text>Done</Text>
+                            <Text style={styles.buttonItem}>Done</Text>
                     </TouchableOpacity>
                 )
             })
@@ -44,10 +44,12 @@ const styles = StyleSheet.create({
     },
     doneButton: {
         backgroundColor: '#fff',
-        color: '#990000',
         fontSize: 23,
         borderRadius: 5,
         padding: 10,
         marginRight: 15
+    },
+    buttonItem: {
+        color: '#990000',
     }
 });

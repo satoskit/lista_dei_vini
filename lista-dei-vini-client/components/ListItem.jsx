@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     },
     item: {
         padding: 10,
-        fontSize: 30,
+        fontSize: 25,
     },
     emptyList: {
         flex: 1,

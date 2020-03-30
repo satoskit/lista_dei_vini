@@ -32,7 +32,7 @@ export default function List({navigation}) {
                 onPress={() => navigation.navigate('EditList')} 
                 style={styles.addButton}
             >
-                <Icon name="plus-circle" size={30} color="#990000"/>
+                <Icon name="plus-circle" size={35} color="#990000"/>
             </TouchableOpacity>
         </View>
     ) 
