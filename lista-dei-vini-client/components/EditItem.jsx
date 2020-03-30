@@ -4,11 +4,21 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 export default function EditItem({title}) {
     const [ value, onChangeText ] = useState('')
     return(
+        (title !== 'Year') ? 
         <View>
             <Text style={styles.title}>{title}</Text>
             <TextInput style={styles.input} 
                 onChangeText={text => onChangeText(text)}
                 value={value} />
+        </View>
+        : 
+        <View>
+            <Text style={styles.title}>{title}</Text>
+            <TextInput style={styles.input} 
+                onChangeText={text => onChangeText(text)}
+                value={value} 
+                keyboardType='numeric'
+                maxLength={4} />
         </View>
     )
 }
