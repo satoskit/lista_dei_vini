@@ -5,7 +5,14 @@ export default function ListItem () {
     let listData = [
         {
             id: 1,
-            pic: 'picture1'
+            name: 'Red Wine',
+            stars: 4,
+            type: 'red',
+            year: 2018,
+            winary: 'Some Cantina',
+            country: 'Italy',
+            grape: 'Pinot Noir',
+            pic: 'picture1',
         },
         {
             id: 2,
