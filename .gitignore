@@ -27,3 +27,6 @@ hs_err_pid*
 
 # nodejs?
 node_modules/
+
+# for private use
+logbook.md
