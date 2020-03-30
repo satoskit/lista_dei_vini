@@ -19,10 +19,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={screenStyles} >
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="MyList" component={List} options={{title: 'My List' }, headerOptions}/>
-        <Stack.Screen name="MyStat" component={Statistics} options={{title: 'My Statistics' }, headerOptions }/>
+        <Stack.Screen name="MyList" component={List} 
+          options={{title: 'My List', headerOptions}} />
+        <Stack.Screen name="MyStat" component={Statistics} options={{title: 'My Statistics', headerOptions}} />
 
-        <Stack.Screen name="EditList" component={EditList} options={{title: 'Edit' }, headerOptions }/>
+        <Stack.Screen name="EditList" component={EditList} options={{title: 'Edit', headerOptions }}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -49,9 +50,6 @@ const screenStyles = {
 }
 
 const headerOptions = {
-  headerTitleStyle: {
-    fontWeight: 'bold'
-  },
   headerBackImage: () => <Icon name="arrow-alt-circle-left" size={30} color='#fff' />,//<Image source={require('./assets/arrow-alt-circle-left-solid.svg')} />,
   headerBackTitle: 'Back',
   //headerBackTitleVisible: true 
