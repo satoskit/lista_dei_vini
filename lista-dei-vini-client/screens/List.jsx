@@ -1,10 +1,14 @@
-import React, { useLayoutEffect } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useLayoutEffect, useState } from 'react';
+import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { black } from 'color-name';
+// import { FlatList } from 'react-native-gesture-handler';
+import ListItem from '../components/ListItem';
 
 export default function List({navigation}) {
+    // const [ isLoading, setLoading ] = useState(true);
+    // const [ list, setList ] = useState([]);
+    
     // useLayoutEffect(() => {
     //     navigation.setOptions({
     //         headerRight: () => (
@@ -12,26 +16,57 @@ export default function List({navigation}) {
     //         )
     //     })
     // });
-    return (
-        <View style={styles.container}>
-            <View>
-                <Text>There will be a list of wines!</Text>
+    let list = [
+        {key: 'Red Wine'},
+        {key: 'White Wine'},
+        {key: 'Rose Wine'},
+        {key: 'Sparkling Wine'}
+    ];
+    const getList = () => {
+        return list;
+    };
+    if(list == null) {
+        return (
+            <View style={styles.container}>
+                <View>
+                    <Text>Start adding an item!</Text>
+                </View>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('EditList')} 
+                    style={styles.addButton}
+                >
+                    <Icon name="plus-circle" size={30} color="#990000"/>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity
-                onPress={() => navigation.navigate('EditList')} 
-                style={styles.addButton}
-            >
-                <Icon name="plus-circle" size={30} color="#990000"/>
-            </TouchableOpacity>
-        </View>
-    )
+        )
+    } else {
+        return (
+            <View style={styles.container}>
+                <View >
+                {/* <FlatList data={list}
+                    renderItem={({item}) => <ListItem style={styles.item} title={item.title}
+                >
+                    </ListItem>}
+                >
+                </FlatList> */}
+                    <ListItem />
+                </View>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('EditList')} 
+                    style={styles.addButton}
+                >
+                    <Icon name="plus-circle" size={30} color="#990000"/>
+                </TouchableOpacity>
+            </View>
+        ) 
+    }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        // alignItems: 'center',
+        justifyContent: 'flex-start'
     },
     addButton: {
         alignItems: 'center',
@@ -40,5 +75,11 @@ const styles = StyleSheet.create({
         right: 12,
         width: 60,
         height: 60,
+    },
+    list: {
+        justifyContent: 'flex-start'
+    },
+    item: {
+        padding: 10,
     }
 });
