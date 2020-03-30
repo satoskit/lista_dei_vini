@@ -42,15 +42,7 @@ export default function List({navigation}) {
     } else {
         return (
             <View style={styles.container}>
-                <View >
-                {/* <FlatList data={list}
-                    renderItem={({item}) => <ListItem style={styles.item} title={item.title}
-                >
-                    </ListItem>}
-                >
-                </FlatList> */}
-                    <ListItem />
-                </View>
+                <ListItem />
                 <TouchableOpacity
                     onPress={() => navigation.navigate('EditList')} 
                     style={styles.addButton}

@@ -5,7 +5,6 @@ export default function ListItem () {
     let listData = [
         {
             id: 1,
-            name: 'Red Wine',
             pic: 'picture1'
         },
         {
@@ -37,15 +36,13 @@ export default function ListItem () {
             renderItem={({item}) => <Item  
                 name={item.name} pic={item.pic}
                 keyExtractor={item => item.id}
-        />}
-    >
-    </FlatList>
+            />}
+        />
     )
 }
 
 const styles = StyleSheet.create({
     list: {
-        justifyContent: 'flex-start'
     },
     item: {
         padding: 10,
