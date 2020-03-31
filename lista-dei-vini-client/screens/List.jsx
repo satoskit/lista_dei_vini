@@ -27,7 +27,7 @@ export default function List({navigation}) {
     };
     return (
         <View style={styles.container}>
-            <ListItem />
+            <ListItem navigation={navigation} />
             <TouchableOpacity
                 onPress={() => navigation.navigate('EditList')} 
                 style={styles.addButton}

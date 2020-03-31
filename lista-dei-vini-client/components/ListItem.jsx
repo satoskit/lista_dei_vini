@@ -1,7 +1,9 @@
-import React from 'react';
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-export default function ListItem () {
+import Item from './Item';
+
+export default function ListItem ({navigation}) {
     let listData = [
         {
             id: 1,
@@ -30,21 +32,21 @@ export default function ListItem () {
             pic: 'picture4'
         }
     ];
-    const Item = ({id, name, pic}) => {
-        return (
-            <View style={styles.list}>
-                <Text style={styles.item}>Name: {name}</Text>
-                <Text>Picture: {pic}</Text>
-            </View>
-        );
-    }
+    const [ selected, setSelected ] = useState(new Map());
+
     return (
         listData.length ? <FlatList data={listData}
-            renderItem={({item}) => <Item  
-                name={item.name} pic={item.pic}
-                keyExtractor={item => item.id}
-            />}
-        />
+                renderItem={({item}) => (
+                    <Item  
+                        id={item.id}
+                        name={item.name} pic={item.pic}
+                        // selected={!!selected.get(item.id)}
+                        // onPress={onPress}
+                        navigation={navigation}
+                    />)}
+                    keyExtractor={item => item.id}
+                    extraData={selected}
+                />
             : <View style={styles.emptyList}>
                 <Text>Start adding an item!</Text>
             </View>
