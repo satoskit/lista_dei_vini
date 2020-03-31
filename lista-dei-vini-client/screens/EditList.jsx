@@ -27,7 +27,7 @@ export default function EditList({navigation}) {
             <EditItemPicker title='Type' />
             <EditItem title='Year' />
             <EditItem title='Country' />
-            <EditItem title='Winary' />
+            <EditItem title='Winery' />
             <EditItem title='Grape' />
             <EditItem title='Picture' />
         </View>
