@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import EditItem from '../components/EditItem';
-import ListItemPicker from '../components/ListItemPicker';
+import EditItemPicker from '../components/EditItemPicker';
 
 export default function EditList({navigation}) {
     const [ isEditing, setIsEditing ] = useState(false);
@@ -24,7 +24,7 @@ export default function EditList({navigation}) {
             <Text>Here you can edit your wine list.</Text>
             <EditItem title='Name' />
             {/* TODO: make grade stars */}
-            <ListItemPicker title='Type' />
+            <EditItemPicker title='Type' />
             <EditItem title='Year' />
             <EditItem title='Country' />
             <EditItem title='Winary' />
