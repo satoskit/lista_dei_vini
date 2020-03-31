@@ -35,6 +35,13 @@ public class Item {
 		
 	}
 	
+	public Item(String name, int grade, String type, String country) {
+		this.name = name;
+		this.grade = grade;
+		this.type = type;
+		this.country = country;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -88,6 +95,11 @@ public class Item {
 	}
 	public void setCreated_at(Timestamp created_at) {
 		this.created_at = created_at;
+	}
+	
+	@Override
+	public String toString() {
+		return "Grade: " + grade + " || " + name + " | " + type + " | " + country; 
 	}
 
 }
