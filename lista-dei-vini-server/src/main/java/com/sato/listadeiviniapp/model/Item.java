@@ -25,7 +25,7 @@ public class Item {
 	@Column
 	private String country;
 	@Column
-	private String winary;
+	private String winery;
 	@Column
 	private String grape;
 	@Column
@@ -78,11 +78,11 @@ public class Item {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public String getWinary() {
-		return winary;
+	public String getWinery() {
+		return winery;
 	}
-	public void setWinary(String winary) {
-		this.winary = winary;
+	public void setWinery(String winery) {
+		this.winery = winery;
 	}
 	public String getGrape() {
 		return grape;
