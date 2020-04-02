@@ -19,6 +19,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 			allowGetters = true
 		)
 public abstract class DateAudit implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2351781712154911173L;
+
 	@CreatedDate
 	private Instant createdAt;
 	
