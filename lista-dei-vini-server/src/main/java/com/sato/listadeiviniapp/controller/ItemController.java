@@ -26,8 +26,7 @@ public class ItemController {
 	
 	@GetMapping("/list")
 	public List<Item> getList() {
-//		return itemService
-		return null;
+		return itemService.getList();
 	}
 	
 	@GetMapping("/list/")
