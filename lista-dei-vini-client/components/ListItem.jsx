@@ -4,7 +4,9 @@ import { FlatList, StyleSheet, Text, View, TouchableOpacity } from "react-native
 import Item from './Item';
 
 export default function ListItem ({navigation}) {
-    let listData = [
+    const [ isLoading, setLoading ] = useState(true);
+    const [ listData, setListData ] = useState([]);
+    let listDataTest = [
         {
             id: 1,
             name: 'Red Wine',
@@ -32,6 +34,15 @@ export default function ListItem ({navigation}) {
             pic: 'picture4'
         }
     ];
+
+    const getList = () => {
+        return fetch('http://localhost:8080/api/v1/list')
+            .then((response) => response.json())
+            .then((json) => setListData(json.data))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false))
+    }
+
     const [ selected, setSelected ] = useState(new Map());
 
     return (
