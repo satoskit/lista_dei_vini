@@ -2,7 +2,9 @@ package com.sato.listadeiviniapp.service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.sato.listadeiviniapp.model.Item;
+import com.sato.listadeiviniapp.model.ItemJson;
 import com.sato.listadeiviniapp.repository.ItemRepository;
 
 @Service
@@ -44,55 +47,61 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public void deleteItem(Long id) {
+//		Optional<Item> itemOptional =itemRepo.findById(id);
+//		Item item = itemOptional.get();
+		
+		itemRepo.deleteById(id);
+	}
+
+	@Override
+	public List<ItemJson> getList() {
+		List<Item> item = itemRepo.findAll();
+		return null;
+	}
+
+	@Override
+	public ItemJson getItemById(Long id) {
 		Optional<Item> itemOptional =itemRepo.findById(id);
 		Item item = itemOptional.get();
-		itemRepo.delete(item);
+		logger.info("Get an item! " + item.getName());
+		ItemJson itemJson = new ItemJson();
+		itemJson = itemJson.convertItem(item);
+		
+		return itemJson;
 	}
 
-	@Override
-	public List<Item> getList() {
-		return itemRepo.findAll();
-	}
+//	@Override
+//	public List<ItemJson> getItemsByGrade(Integer grade) {
+//		return itemRepo.findAllByGrade(grade);
+//	}
+//	
+//	@Override
+//	public List<ItemJson> getItemsByCountry(String country) {
+//		return itemRepo.findAllByCountry(country);
+//	}
+//
+//	@Override
+//	public List<ItemJson> getItemsByType(String type) {
+//		return itemRepo.findAllByType(type);
+//	}
+//
+//	@Override
+//	public List<ItemJson> getItemsByGrape(String grape) {
+//		return itemRepo.findAllByGrape(grape);
+//	}
+//
+//	@Override
+//	public List<ItemJson> getItemsByYear(Integer year) {
+//		return itemRepo.findAllByYear(year);
+//	}
+//
+//	@Override
+//	public List<ItemJson> getItemsByWinery(String winery) {
+//		return itemRepo.findAllByWinery(winery);
+//	}
 
 	@Override
-	public Item getItemById(Long id) {
-		Optional<Item> itemOptional =itemRepo.findById(id);
-		Item item = itemOptional.get();
-		return item;
-	}
-
-	@Override
-	public List<Item> getItemsByGrade(int grade) {
-		return itemRepo.findAllByGrade(grade);
-	}
-	
-	@Override
-	public List<Item> getItemsByCountry(String country) {
-		return itemRepo.findAllByCountry(country);
-	}
-
-	@Override
-	public List<Item> getItemsByType(String type) {
-		return itemRepo.findAllByType(type);
-	}
-
-	@Override
-	public List<Item> getItemsByGrape(String grape) {
-		return itemRepo.findAllByGrape(grape);
-	}
-
-	@Override
-	public List<Item> getItemsByYear(int year) {
-		return itemRepo.findAllByYear(year);
-	}
-
-	@Override
-	public List<Item> getItemsByWinery(String winery) {
-		return itemRepo.findAllByWinery(winery);
-	}
-
-	@Override
-	public List<Item> sortByGradeAsc(int grade) {
+	public List<Item> sortByGradeAsc(Integer grade) {
 		return itemRepo.findAll(Sort.by(Sort.Direction.ASC, "grade"));
 	}
 
@@ -112,7 +121,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<Item> sortByYearAsc(int year) {
+	public List<Item> sortByYearAsc(Integer year) {
 		return itemRepo.findAll(Sort.by(Sort.Direction.ASC, "year"));
 	}
 
@@ -122,7 +131,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<Item> sortByGradeDesc(int grade) {
+	public List<Item> sortByGradeDesc(Integer grade) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -146,7 +155,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<Item> sortByYearDesc(int year) {
+	public List<Item> sortByYearDesc(Integer year) {
 		// TODO Auto-generated method stub
 		return null;
 	}

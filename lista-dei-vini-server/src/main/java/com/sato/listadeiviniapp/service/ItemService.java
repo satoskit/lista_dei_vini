@@ -3,6 +3,7 @@ package com.sato.listadeiviniapp.service;
 import java.util.List;
 
 import com.sato.listadeiviniapp.model.Item;
+import com.sato.listadeiviniapp.model.ItemJson;
 
 public interface ItemService {
 	
@@ -10,29 +11,29 @@ public interface ItemService {
 	public void updateItem(Long id, Item item);
 	public void deleteItem(Long id);
 	
-	public List<Item> getList();
+	public List<ItemJson> getList();
 	
-	public Item getItemById(Long id);
+	public ItemJson getItemById(Long id);
 	
-	public List<Item> getItemsByGrade(int grade);
-	public List<Item> getItemsByCountry(String country);
-	public List<Item> getItemsByType(String type);
-	public List<Item> getItemsByGrape(String grape);
-	public List<Item> getItemsByYear(int year);
-	public List<Item> getItemsByWinery(String winery);
-	
-	public List<Item> sortByGradeAsc(int grade);
+//	public List<ItemJson> getItemsByGrade(Integer grade);
+//	public List<ItemJson> getItemsByCountry(String country);
+//	public List<ItemJson> getItemsByType(String type);
+//	public List<ItemJson> getItemsByGrape(String grape);
+//	public List<ItemJson> getItemsByYear(Integer year);
+//	public List<ItemJson> getItemsByWinery(String winery);
+//	
+	public List<Item> sortByGradeAsc(Integer grade);
 	public List<Item> sortByCountryAsc(String country);
 	public List<Item> sortByTypeAsc(String type);
 	public List<Item> sortByGrapeAsc(String grape);
-	public List<Item> sortByYearAsc(int year);
+	public List<Item> sortByYearAsc(Integer year);
 	public List<Item> sortByWineryAsc(String winery);
 	
-	public List<Item> sortByGradeDesc(int grade);
+	public List<Item> sortByGradeDesc(Integer grade);
 	public List<Item> sortByCountryDesc(String country);
 	public List<Item> sortByTypeDesc(String type);
 	public List<Item> sortByGrapeDesc(String grape);
-	public List<Item> sortByYearDesc(int year);
+	public List<Item> sortByYearDesc(Integer year);
 	public List<Item> sortByWineryDesc(String winery);
 	
 }
