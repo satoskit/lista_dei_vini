@@ -2,56 +2,43 @@ package com.sato.listadeiviniapp.model;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
-public class Item extends DateAudit {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6339678913347836248L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+@JsonIgnoreProperties({ "grade", "year"})
+public class ItemJson {
+	
+	@JsonProperty("id")
 	private Long id;
-	
-	@Column
+	@JsonProperty("name")
 	private String name;
-	@Column
+	@JsonProperty("grade")
 	private Integer grade;
-	@Column
+	@JsonProperty("type")
 	private String type;
-	@Column
+	@JsonProperty("year")
 	private Integer year;
-	@Column
+	@JsonProperty("country")
 	private String country;
-	@Column
+	@JsonProperty("winery")
 	private String winery;
-	@Column
+	@JsonProperty("grape")
 	private String grape;
-//	@Column
-//	private Timestamp created_at;
+	@JsonProperty("created_at")
+	private Timestamp created_at;
 	
-	public Item() {
+	public ItemJson convertItem(Item item) {
+		ItemJson itemJson = new ItemJson();
+		itemJson.setId(item.getId());
+		itemJson.setName(item.getName());
+		itemJson.setGrade(item.getGrade());
+		itemJson.setType(item.getType());
+		itemJson.setYear(item.getYear());
+		itemJson.setCountry(item.getCountry());
+		itemJson.setWinery(item.getWinery());
+		itemJson.setGrape(item.getGrape());
 		
-	}
-	
-	public Item(String name, Integer grade, String type, Integer year, String country, String winery, String grape) {
-		this.name = name;
-		this.grade = grade;
-		this.type = type;
-		this.year = year;
-		this.country = country;
-		this.winery = winery;
-		this.grape = grape;
-	}
-	
-	public Item(Integer year) {
-		super();
+		return itemJson;
 	}
 	
 	public Long getId() {
@@ -102,16 +89,11 @@ public class Item extends DateAudit {
 	public void setGrape(String grape) {
 		this.grape = grape;
 	}
-//	public Timestamp getCreated_at() {
-//		return created_at;
-//	}
-//	public void setCreated_at(Timestamp created_at) {
-//		this.created_at = created_at;
-//	}
-	
-	@Override
-	public String toString() {
-		return "Grade: " + grade + " || " + name + " | " + type + " | " + country; 
+	public Timestamp getCreated_at() {
+		return created_at;
 	}
-
+	public void setCreated_at(Timestamp created_at) {
+		this.created_at = created_at;
+	}
+	
 }
