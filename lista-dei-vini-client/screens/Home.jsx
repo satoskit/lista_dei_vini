@@ -31,14 +31,13 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#990000',
-        color: '#fff',
+        // color: '#fff',
         padding: 20,
         margin: 8,
         borderRadius: 5,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
-        textAlign: 'center',
     },
     buttonItem: {
         color: '#fff',
