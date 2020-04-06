@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FlatList, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from 'react';
+import { ActivtyIndicator, FlatList, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 import Item from './Item';
 
@@ -35,32 +35,48 @@ export default function ListItem ({navigation}) {
         }
     ];
 
-    const getList = () => {
-        return fetch('http://localhost:8080/api/v1/list')
-            .then((response) => response.json())
-            .then((json) => setListData(json.data))
+    useEffect(() => {
+        if(isLoading) {
+            fetch('http://localhost:8080/api/v1/list')
+            // .then((response) => response.json())
+            // .then((json) => setListData(json.data))
+            .then((response) => 
+                response.json().then((json) => {
+                setListData(json);
+                console.log(json);
+            }))
             .catch((error) => console.error(error))
             .finally(() => setLoading(false))
-    }
+        }
+    });
 
     const [ selected, setSelected ] = useState(new Map());
 
     return (
-        listData.length ? <FlatList data={listData}
-                renderItem={({item}) => (
-                    <Item  
+        <View style={{ flex: 1, padding: 24}}>
+            {isLoading ? <Text>Loading</Text> : (
+                <FlatList data={listData}
+                renderItem={({item}) => {
+                    console.log(item.name);
+                    return (<Item  
+                        item={item}
                         id={item.id}
-                        name={item.name} pic={item.pic}
+                        name={item.name}
+                        type={item.type}
+                        // pic={item.pic}
                         // selected={!!selected.get(item.id)}
                         // onPress={onPress}
                         navigation={navigation}
-                    />)}
+                    />)}}
                     keyExtractor={item => item.id}
                     extraData={selected}
                 />
-            : <View style={styles.emptyList}>
-                <Text>Start adding an item!</Text>
-            </View>
+            )}
+        </View>
+        // isLoading ? 
+        //     : <View style={styles.emptyList}>
+        //         <Text>Start adding an item!</Text>
+        //     </View>
     )
 }
 

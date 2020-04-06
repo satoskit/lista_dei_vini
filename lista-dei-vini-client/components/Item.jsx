@@ -1,14 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-export default function Item({id, navigation, selected, name, pic}) {
+export default function Item({navigation, id, name, type, selected, }) {
     return (
         <TouchableOpacity style={styles.list}
             onPress={() => {
                 navigation.navigate('Detail', {id:{id}});}}
         >
             <Text style={styles.item}>Name: {name}</Text>
-            <Text>Picture: {pic}</Text>
+            <Text>Type: {type}</Text>
+            <Text>Picture: </Text>
         </TouchableOpacity>
     );
 }
