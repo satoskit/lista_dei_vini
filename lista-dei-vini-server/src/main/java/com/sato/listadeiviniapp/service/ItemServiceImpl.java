@@ -1,5 +1,6 @@
 package com.sato.listadeiviniapp.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,31 @@ public class ItemServiceImpl implements ItemService {
 	private ItemRepository itemRepo;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ItemServiceImpl.class);
+	
+	public ItemJson convertItem(Item item) {
+		ItemJson itemJson = new ItemJson();
+		
+		itemJson.setId(item.getId());
+		itemJson.setName(item.getName());
+		itemJson.setGrade(item.getGrade());
+		itemJson.setType(item.getType());
+		itemJson.setYear(item.getYear());
+		itemJson.setCountry(item.getCountry());
+		itemJson.setWinery(item.getWinery());
+		itemJson.setGrape(item.getGrape());
+		
+		return itemJson;
+	}
+	
+	public List<ItemJson> convertToListOfItemJson(List<Item> itemList) {
+		List<ItemJson> itemJsonList = new ArrayList<>();
+		for(Item item : itemList) {
+			ItemJson itemJson = new ItemJson();
+			
+			itemJsonList.add(convertItem(item));
+		}
+		return itemJsonList;
+	}
 
 	@Override
 	public void createItem(Item item) {
@@ -56,7 +82,8 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public List<ItemJson> getList() {
 		List<Item> item = itemRepo.findAll();
-		return null;
+		
+		return convertToListOfItemJson(item);
 	}
 
 	@Override
@@ -64,10 +91,9 @@ public class ItemServiceImpl implements ItemService {
 		Optional<Item> itemOptional =itemRepo.findById(id);
 		Item item = itemOptional.get();
 		logger.info("Get an item! " + item.getName());
+//		ItemJson itemJson = convertItem(item);
 		ItemJson itemJson = new ItemJson();
-		itemJson = itemJson.convertItem(item);
-		
-		return itemJson;
+		return convertItem(item);
 	}
 
 //	@Override

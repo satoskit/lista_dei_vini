@@ -27,19 +27,19 @@ public class ItemJson {
 	@JsonProperty("created_at")
 	private Timestamp created_at;
 	
-	public ItemJson convertItem(Item item) {
-		ItemJson itemJson = new ItemJson();
-		itemJson.setId(item.getId());
-		itemJson.setName(item.getName());
-		itemJson.setGrade(item.getGrade());
-		itemJson.setType(item.getType());
-		itemJson.setYear(item.getYear());
-		itemJson.setCountry(item.getCountry());
-		itemJson.setWinery(item.getWinery());
-		itemJson.setGrape(item.getGrape());
-		
-		return itemJson;
-	}
+//	public ItemJson convertItem(Item item) {
+//		ItemJson itemJson = new ItemJson();
+//		itemJson.setId(item.getId());
+//		itemJson.setName(item.getName());
+//		itemJson.setGrade(item.getGrade());
+//		itemJson.setType(item.getType());
+//		itemJson.setYear(item.getYear());
+//		itemJson.setCountry(item.getCountry());
+//		itemJson.setWinery(item.getWinery());
+//		itemJson.setGrape(item.getGrape());
+//		
+//		return itemJson;
+//	}
 	
 	public Long getId() {
 		return id;
