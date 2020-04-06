@@ -2,6 +2,8 @@ package com.sato.listadeiviniapp.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,13 +29,10 @@ public class ItemController {
 	@Autowired
 	private final ItemServiceImpl itemService;
 	
+	private static final Logger logger = LoggerFactory.getLogger(ItemServiceImpl.class);
+	
 	public ItemController(ItemServiceImpl itemService) {
 		this.itemService = itemService;
-	}
-	
-	@GetMapping("/test")
-	public ResponseEntity<String> testtesttest() {
-		return ResponseEntity.ok().body("TEST!");
 	}
 	
 	@GetMapping("/list")
@@ -43,7 +42,7 @@ public class ItemController {
 	
 	@GetMapping("/list/")
 	public ResponseEntity<ItemJson> getItemById(@RequestParam(value="id") Long id) {
-		return ResponseEntity.ok().body(this.itemService.getItemById(id));
+		return ResponseEntity.ok().body(itemService.getItemById(id));
 	}
 	
 //	@GetMapping("/list/{grade}")
