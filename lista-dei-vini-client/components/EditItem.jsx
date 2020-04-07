@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Picker, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function EditItem({ title, setInput }) {
-    const [ value, onChangeText ] = useState('')
-    const [ typeOfWine, setTypeOfWine ] = useState("Red Wine");
+    const [ value, setValue ] = useState('')
+    const [ typeOfWine, setTypeOfWine ] = useState('Red Wine');
     if(title !== 'Type') {
         return( 
             (title !== 'Year') ? 
             <View>
                 <Text style={styles.title}>{title}</Text>
                 <TextInput style={styles.input} 
-                    // onChangeText={text => onChangeText(text)}
-                    onChangeText={onChangeText}
+                    onChangeText={text => {
+                        setInput(text)
+                        setValue(text)
+                    }}
                     value={value} />
             </View>
             : 
             <View>
                 <Text style={styles.title}>{title}</Text>
                 <TextInput style={styles.input} 
-                    onChangeText={text => setInput(text)}
+                    onChangeText={text => {
+                        setInput(text)
+                        setValue(text)
+                    }}
                     value={value} 
                     keyboardType='numeric'
                     maxLength={4} />
@@ -28,14 +33,16 @@ export default function EditItem({ title, setInput }) {
         return(
             <View>
                 <Text style={styles.title}>{title}</Text>
-                <Picker selectedValue={typeOfWine} 
-                    onValueChange={(itemValue, itemIndex) => setTypeOfWine(itemValue)} 
+                <Picker selectedValue={typeOfWine, setInput(typeOfWine)} 
+                    onValueChange={(itemValue, itemIndex) => {
+                        setTypeOfWine(itemValue)
+                        setInput(itemValue)}} 
                     style={styles.picker}
                 >
-                    <Picker.Item label="Red Wine" value="red"/>
-                    <Picker.Item label="White Wine" value="whie"/>
-                    <Picker.Item label="Rosé Wine" value="rose"/>
-                    <Picker.Item label="Sparkling Wine" value="sparkling"/>
+                    <Picker.Item label="Red Wine" value="Red Wine"/>
+                    <Picker.Item label="White Wine" value="White Wine"/>
+                    <Picker.Item label="Rosé Wine" value="Rose Wine"/>
+                    <Picker.Item label="Sparkling Wine" value="Sparkling Wine"/>
                 </Picker>
             </View>
         )
