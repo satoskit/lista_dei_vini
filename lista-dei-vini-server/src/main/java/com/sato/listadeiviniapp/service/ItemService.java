@@ -21,19 +21,19 @@ public interface ItemService {
 //	public List<ItemJson> getItemsByGrape(String grape);
 //	public List<ItemJson> getItemsByYear(Integer year);
 //	public List<ItemJson> getItemsByWinery(String winery);
-//	
-	public List<Item> sortByGradeAsc(Integer grade);
-	public List<Item> sortByCountryAsc(String country);
-	public List<Item> sortByTypeAsc(String type);
-	public List<Item> sortByGrapeAsc(String grape);
-	public List<Item> sortByYearAsc(Integer year);
-	public List<Item> sortByWineryAsc(String winery);
 	
-	public List<Item> sortByGradeDesc(Integer grade);
-	public List<Item> sortByCountryDesc(String country);
-	public List<Item> sortByTypeDesc(String type);
-	public List<Item> sortByGrapeDesc(String grape);
-	public List<Item> sortByYearDesc(Integer year);
-	public List<Item> sortByWineryDesc(String winery);
+//	public List<Item> sortByGradeAsc(Integer grade);
+//	public List<Item> sortByCountryAsc(String country);
+//	public List<Item> sortByTypeAsc(String type);
+//	public List<Item> sortByGrapeAsc(String grape);
+//	public List<Item> sortByYearAsc(Integer year);
+//	public List<Item> sortByWineryAsc(String winery);
+//	
+//	public List<Item> sortByGradeDesc(Integer grade);
+//	public List<Item> sortByCountryDesc(String country);
+//	public List<Item> sortByTypeDesc(String type);
+//	public List<Item> sortByGrapeDesc(String grape);
+//	public List<Item> sortByYearDesc(Integer year);
+//	public List<Item> sortByWineryDesc(String winery);
 	
 }
