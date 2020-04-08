@@ -1,39 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ActivtyIndicator, FlatList, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 import Item from './Item';
 
 export default function ListItem ({navigation, isLoading, listData}) {
-    // const [ isLoading, setLoading ] = useState(true);
-    // const [ listData, setListData ] = useState([]);
-    let listDataTest = [
-        {
-            id: 1,
-            name: 'Red Wine',
-            stars: 4,
-            type: 'red',
-            year: 2018,
-            winary: 'Some Cantina',
-            country: 'Italy',
-            grape: 'Pinot Noir',
-            pic: 'picture1',
-        },
-        {
-            id: 2,
-            name: 'White Wine',
-            pic: 'picture2'
-        },
-        {
-            id: 3,
-            name: 'Rose Wine',
-            pic: 'picture3'
-        },
-        {
-            id: 4,
-            name: 'Sparkling Wine',
-            pic: 'picture4'
-        }
-    ];
 
     const [ selected, setSelected ] = useState(new Map());
 
@@ -58,10 +28,6 @@ export default function ListItem ({navigation, isLoading, listData}) {
                 />
             )}
         </View>
-        // isLoading ? 
-        //     : <View style={styles.emptyList}>
-        //         <Text>Start adding an item!</Text>
-        //     </View>
     )
 }
 

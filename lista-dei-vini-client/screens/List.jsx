@@ -1,22 +1,12 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
-// import { FlatList } from 'react-native-gesture-handler';
 import ListItem from '../components/ListItem';
 
 export default function List({navigation, route}) {
     const [ isLoading, setLoading ] = useState(route.params);
     const [ listData, setListData ] = useState([]);
-    // const [ list, setList ] = useState([]);
-    
-    // useLayoutEffect(() => {
-    //     navigation.setOptions({
-    //         headerRight: () => (
-    //             <Button onPress={() => navigation.navigate('EditList')} title="Add" />
-    //         )
-    //     })
-    // });
 
     useEffect(() => {
         fetch('http://localhost:8080/api/v1/list')

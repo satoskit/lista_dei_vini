@@ -1,8 +1,7 @@
-import React, { useLayoutEffect, useState, useEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import EditItem from '../components/EditItem';
-import EditItemPicker from '../components/EditItemPicker';
 
 export default function EditList({navigation}) {
     const [ isEditing, setIsEditing ] = useState(false);
@@ -24,7 +23,6 @@ export default function EditList({navigation}) {
                     console.log(input);
                     postItem(input);
                     navigation.push('MyList', { isLoading: 'true' });
-                    // navigation.push('MyList');
                 }} 
                     title="Done"
                     style={styles.doneButton} >
@@ -44,7 +42,6 @@ export default function EditList({navigation}) {
         fetch('http://localhost:8080/api/v1/list', reqestSetting)
         .then((response) => 
             response.json())
-        // .then(data => )
     }
     
     return (
@@ -55,7 +52,6 @@ export default function EditList({navigation}) {
                 setInput({...input, name: value})}}/>
             {/* TODO: make grade stars */}
             <EditItem title='Grade' setInput={value => setInput({...input, grade: value})} />
-            {/* <EditItemPicker title='Type' /> */}
             <EditItem title='Type' setInput={value => {
                 console.log(value)
                 setInput({...input, type: value})}} />

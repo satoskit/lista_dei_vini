@@ -3,7 +3,6 @@ import { Picker, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function EditItem({ title, setInput }) {
     const [ value, setValue ] = useState('')
-    // const [ typeOfWine, setTypeOfWine ] = useState('Red Wine');
 
     useEffect(() => {
         
@@ -40,7 +39,6 @@ export default function EditItem({ title, setInput }) {
                 <Text style={styles.title}>{title}</Text>
                 <Picker /*selectedValue="none"*/ 
                     onValueChange={(itemValue, itemIndex) => {
-                        // setTypeOfWine(itemValue)
                         if(itemValue !== 'none') {
                             setInput(itemValue)
                         } else {
