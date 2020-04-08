@@ -35,6 +35,25 @@ public class ItemController {
 		this.itemService = itemService;
 	}
 	
+	//TODO: @Valid needed?
+	@PostMapping("/list")
+	public ResponseEntity<?> createItem(@RequestBody Item item) {
+		itemService.createItem(item);
+		return ResponseEntity.ok().body(item);
+	}
+	
+//	@PostMapping("/list/{id}")
+//	public ResponseEntity<Item> updateItem(@PathVariable(value="id") Long id, @RequestBody Item item) {
+//		itemService.updateItem(id, item);
+//		return ResponseEntity.ok().body(item);
+//	}
+//	
+//	@DeleteMapping("/list/{id}")
+//	public ResponseEntity<Long> deleteItem(@PathVariable Long id) {
+//		itemService.deleteItem(id);
+//		return ResponseEntity.ok().body(id);
+//	}
+	
 	@GetMapping("/list")
 	public ResponseEntity<List<ItemJson>> getList() {
 		return ResponseEntity.ok().body(itemService.getList());
@@ -81,23 +100,5 @@ public class ItemController {
 //		return ResponseEntity.ok().body(listByWinery);
 //	}
 //	
-//	//TODO: @Valid needed?
-//	@PostMapping("/list")
-//	public ResponseEntity<?> createItem(@RequestBody Item item) {
-//		itemService.createItem(item);
-//		return ResponseEntity.ok().body(item);
-//	}
-//	
-//	@PostMapping("/list/{id}")
-//	public ResponseEntity<Item> updateItem(@PathVariable(value="id") Long id, @RequestBody Item item) {
-//		itemService.updateItem(id, item);
-//		return ResponseEntity.ok().body(item);
-//	}
-//	
-//	@DeleteMapping("/list/{id}")
-//	public ResponseEntity<Long> deleteItem(@PathVariable Long id) {
-//		itemService.deleteItem(id);
-//		return ResponseEntity.ok().body(id);
-//	}
 
 }
