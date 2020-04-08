@@ -5,7 +5,7 @@ export default function Item({navigation, id, name, type, selected, }) {
     return (
         <TouchableOpacity style={styles.list}
             onPress={() => {
-                navigation.navigate('Detail', {id:{id}});}}
+                navigation.push('Detail', { selectedId: id, navigation: navigation });}}
         >
             <Text style={styles.item}>Name: {name}</Text>
             <Text>Type: {type}</Text>
