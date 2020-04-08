@@ -23,7 +23,8 @@ export default function EditList({navigation}) {
                 <TouchableOpacity onPress={() => {
                     console.log(input);
                     postItem(input);
-                    navigation.navigate('MyList');
+                    navigation.push('MyList', { isLoading: 'true' });
+                    // navigation.push('MyList');
                 }} 
                     title="Done"
                     style={styles.doneButton} >

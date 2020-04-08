@@ -3,9 +3,9 @@ import { ActivtyIndicator, FlatList, StyleSheet, Text, View, TouchableOpacity } 
 
 import Item from './Item';
 
-export default function ListItem ({navigation}) {
-    const [ isLoading, setLoading ] = useState(true);
-    const [ listData, setListData ] = useState([]);
+export default function ListItem ({navigation, isLoading, listData}) {
+    // const [ isLoading, setLoading ] = useState(true);
+    // const [ listData, setListData ] = useState([]);
     let listDataTest = [
         {
             id: 1,
@@ -34,17 +34,6 @@ export default function ListItem ({navigation}) {
             pic: 'picture4'
         }
     ];
-
-    useEffect(() => {
-        fetch('http://localhost:8080/api/v1/list')
-        .then((response) => 
-            response.json().then((json) => {
-            setListData(json);
-            console.log(json);
-        }))
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false))
-    }, []);
 
     const [ selected, setSelected ] = useState(new Map());
 

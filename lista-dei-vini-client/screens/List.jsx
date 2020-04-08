@@ -1,12 +1,13 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 // import { FlatList } from 'react-native-gesture-handler';
 import ListItem from '../components/ListItem';
 
-export default function List({navigation}) {
-    // const [ isLoading, setLoading ] = useState(true);
+export default function List({navigation, route}) {
+    const [ isLoading, setLoading ] = useState(route.params);
+    const [ listData, setListData ] = useState([]);
     // const [ list, setList ] = useState([]);
     
     // useLayoutEffect(() => {
@@ -16,18 +17,24 @@ export default function List({navigation}) {
     //         )
     //     })
     // });
-    let list = [
-        {key: 'Red Wine'},
-        {key: 'White Wine'},
-        {key: 'Rose Wine'},
-        {key: 'Sparkling Wine'}
-    ];
-    const getList = () => {
-        return list;
-    };
+
+    useEffect(() => {
+        fetch('http://localhost:8080/api/v1/list')
+        .then((response) => 
+            response.json().then((json) => {
+            setListData(json);
+            console.log(json);
+        }))
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false))
+    }, []);
+
     return (
         <View style={styles.container}>
-            <ListItem navigation={navigation} />
+            <ListItem navigation={navigation}
+                isLoading={isLoading}
+                listData={listData}
+            />
             <TouchableOpacity
                 onPress={() => navigation.navigate('EditList')} 
                 style={styles.addButton}
