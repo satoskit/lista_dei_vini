@@ -36,19 +36,15 @@ export default function ListItem ({navigation}) {
     ];
 
     useEffect(() => {
-        if(isLoading) {
-            fetch('http://localhost:8080/api/v1/list')
-            // .then((response) => response.json())
-            // .then((json) => setListData(json.data))
-            .then((response) => 
-                response.json().then((json) => {
-                setListData(json);
-                console.log(json);
-            }))
-            .catch((error) => console.error(error))
-            .finally(() => setLoading(false))
-        }
-    });
+        fetch('http://localhost:8080/api/v1/list')
+        .then((response) => 
+            response.json().then((json) => {
+            setListData(json);
+            console.log(json);
+        }))
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false))
+    }, []);
 
     const [ selected, setSelected ] = useState(new Map());
 
