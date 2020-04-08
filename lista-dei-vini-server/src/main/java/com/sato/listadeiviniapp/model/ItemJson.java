@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties({ "grade", "year"})
 public class ItemJson {
 	
 	@JsonProperty("id")
