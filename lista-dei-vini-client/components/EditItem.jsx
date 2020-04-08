@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Picker, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function EditItem({ title, setInput }) {
     const [ value, setValue ] = useState('')
-    const [ typeOfWine, setTypeOfWine ] = useState('Red Wine');
+    // const [ typeOfWine, setTypeOfWine ] = useState('Red Wine');
+
+    useEffect(() => {
+        
+    });
+
     if(title !== 'Type') {
         return( 
             (title !== 'Year') ? 
@@ -33,12 +38,18 @@ export default function EditItem({ title, setInput }) {
         return(
             <View>
                 <Text style={styles.title}>{title}</Text>
-                <Picker selectedValue={typeOfWine, setInput(typeOfWine)} 
+                <Picker /*selectedValue="none"*/ 
                     onValueChange={(itemValue, itemIndex) => {
-                        setTypeOfWine(itemValue)
-                        setInput(itemValue)}} 
+                        // setTypeOfWine(itemValue)
+                        if(itemValue !== 'none') {
+                            setInput(itemValue)
+                        } else {
+                            setInput('')
+                        } 
+                        }}
                     style={styles.picker}
                 >
+                    <Picker.Item label="Select" value="none"/>
                     <Picker.Item label="Red Wine" value="Red Wine"/>
                     <Picker.Item label="White Wine" value="White Wine"/>
                     <Picker.Item label="Rosé Wine" value="Rose Wine"/>
