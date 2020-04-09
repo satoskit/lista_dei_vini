@@ -60,6 +60,7 @@ public class ItemServiceImpl implements ItemService {
 		Optional<Item> originalItemOptional = itemRepo.findById(id);
 		Item originalItem = originalItemOptional.get();
 		
+		originalItem.setId(id);
 		originalItem.setName(item.getName());
 		originalItem.setGrade(item.getGrade());
 		originalItem.setType(item.getType());
