@@ -8,21 +8,19 @@ export default function ItemDetail({id, name, route, navigation}) {
     const [ item, setItem ] = useState({});
     const [ isLoading, setLoading ] = useState(true);
 
-    // useLayoutEffect(() => {
-    //     navigation.setOptions({
-    //         headerRight: () => (
-    //             <TouchableOpacity onPress={() => {
-    //                 console.log(input);
-    //                 postItem(input);
-    //                 navigation.push('EditList', { itemSent: item });
-    //             }} 
-    //                 title="Edit"
-    //                 style={styles.doneButton} >
-    //                     <Text style={styles.buttonItem}>Edit</Text>
-    //             </TouchableOpacity>
-    //         )
-    //     })
-    // });
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <TouchableOpacity onPress={() => {
+                    navigation.push('EditList', { itemSent: item, updating: true });
+                }} 
+                    title="Edit"
+                    style={styles.doneButton} >
+                        <Text style={styles.buttonItem}>Edit</Text>
+                </TouchableOpacity>
+            )
+        })
+    });
 
     useEffect(() => {
         fetch(`http://localhost:8080/api/v1/list/?id=${selectedId}`)
@@ -44,7 +42,8 @@ export default function ItemDetail({id, name, route, navigation}) {
                 <Text style={styles.title}>{keyToUpperCase(key)}</Text>
                 <Text style={styles.value}>{value}</Text>
             </View>)
-            : itemList.push(<View>
+            : itemList.push(
+            <View>
                 <Text style={styles.title}>{keyToUpperCase(key)}</Text>
             <Text style={styles.value}>{"    "}</Text>
             </View>)

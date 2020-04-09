@@ -1,28 +1,37 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import EditItem from '../components/EditItem';
 
-export default function EditList({navigation}) {
+export default function EditList({navigation, route}) {
     const [ isEditing, setIsEditing ] = useState(false);
-    const [ input, setInput ] = useState({
+    const emptyItem = {
+        id: null,
         name: '',
         type: '',
-        //grade: ,
+        grade: null,
         year: null,
         country: '',
         winery: '',
         grape: '',
         // picture: ''
-    });
+    }
+    const [ input, setInput ] = useState(emptyItem);
+    const { itemSent } = route.params;
+    const { updating } = route.params;
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
                 <TouchableOpacity onPress={() => {
                     console.log(input);
-                    postItem(input);
-                    navigation.push('MyList', { isLoading: 'true' });
+                    if(!(updating)){
+                        postItem(input);
+                        navigation.push('MyList', { isLoading: 'true' });
+                    } else {
+                        updateItem(input);
+                        navigation.push('MyList', { isLoading: 'true' });
+                    }
                 }} 
                     title="Done"
                     style={styles.doneButton} >
@@ -43,25 +52,48 @@ export default function EditList({navigation}) {
         .then((response) => 
             response.json())
     }
+
+    function updateItem(input) {
+        const reqestSetting = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify(input)
+        }
+        fetch(`http://localhost:8080/api/v1/list/${itemSent.id}`, reqestSetting)
+        .then((response) => 
+            response.json())
+    }
+
+    // useEffect(() => {
+
+    // })
     
     return (
         <View style={styles.container}>
             <Text>Here you can edit your wine list.</Text>
             <EditItem title='Name' setInput={value => {
-                console.log(value)
-                setInput({...input, name: value})}}/>
+                    console.log(value)
+                    setInput({...input, name: value})}}
+                itemDetail={itemSent.name}
+            />
             {/* TODO: make grade stars */}
-            <EditItem title='Grade' setInput={value => setInput({...input, grade: value})} />
+            <EditItem title='Grade' setInput={value => setInput({...input, grade: value})} 
+                itemDetail={itemSent.grade}/>
             <EditItem title='Type' setInput={value => {
-                console.log(value)
-                setInput({...input, type: value})}} />
-            <EditItem title='Year' setInput={value => setInput({...input, year: parseInt(value)})} />
-            <EditItem title='Country' setInput={value => setInput({...input, country: value})} />
-            <EditItem title='Winery' setInput={value => setInput(value)} />
-            <EditItem title='Grape' setInput={value => setInput({...input, grape: value})} />
-            {/* <EditItem title='Picture' setInput={value => setInput({...input, picture: value})} /> */}
-            
-        </View>
+                    console.log(value)
+                    setInput({...input, type: value})}} 
+                itemDetail={itemSent.type} />
+            <EditItem title='Year' setInput={value => setInput({...input, year: parseInt(value)})} 
+                itemDetail={itemSent.year} />
+            <EditItem title='Country' setInput={value => setInput({...input, country: value})}
+                itemDetail={itemSent.country} />
+            <EditItem title='Winery' setInput={value => setInput({...input, winery: value})}
+                itemDetail={itemSent.winery} />
+            <EditItem title='Grape' setInput={value => setInput({...input, grape: value})} 
+                itemDetail={itemSent.grape} />
+            {/* <EditItem title='Picture' setInput={value => setInput({...input, picture: value})} 
+                itemDetail={itemSent.picture} /> */}
+        </View> 
     )
 }
 

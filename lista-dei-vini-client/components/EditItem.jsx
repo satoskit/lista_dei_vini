@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Picker, StyleSheet, Text, TextInput, View } from 'react-native';
 
-export default function EditItem({ title, setInput }) {
-    const [ value, setValue ] = useState('')
-
-    useEffect(() => {
-        
-    });
+export default function EditItem({ title, setInput, itemDetail }) {
+    const [ value, setValue ] = useState(itemDetail);
+    console.log(itemDetail);
+    
+    // useEffect(() => {
+    //     // if(!(value == null) || !(value == '')) {
+    //         setInput({value});
+    //         console.log(value)
+    //     // }
+    // },[]);
 
     if(title !== 'Type') {
         return( 
@@ -18,7 +22,8 @@ export default function EditItem({ title, setInput }) {
                         setInput(text)
                         setValue(text)
                     }}
-                    value={value} />
+                    value={value} 
+                />
             </View>
             : 
             <View>
