@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import EditItem from '../components/EditItem';
@@ -19,14 +19,12 @@ export default function EditList({navigation, route}) {
     const [ input, setInput ] = useState(emptyItem);
     const { itemSent } = route.params;
     const { updating } = route.params;
-    const newItem = {};
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
                 <TouchableOpacity onPress={() => {
                     mergeItemSentAndInput(itemSent, input);
-                    console.log(input);
                     if(!(updating)){
                         postItem(input);
                         navigation.push('MyList', { isLoading: 'true' });
@@ -68,12 +66,10 @@ export default function EditList({navigation, route}) {
     }
 
     function mergeItemSentAndInput(sentItem, input) {
-        // if(JSON.stringify(sentItem) === JSON.stringify(input)) { return input; }
         _.isEqual(sentItem, input);
 
         for(var key in input) {
             if(input[key] === null || input[key] === '') {
-                console.log(sentItem[key]);
                 input[key] = sentItem[key];
             }
         }
@@ -84,7 +80,6 @@ export default function EditList({navigation, route}) {
         <View style={styles.container}>
             <Text>Here you can edit your wine list.</Text>
             <EditItem title='Name' getInput={value => {
-                    console.log(value)
                     setInput({...input, name: value})}}
                 itemDetail={itemSent.name}
             />
@@ -92,7 +87,6 @@ export default function EditList({navigation, route}) {
             <EditItem title='Grade' getInput={value => setInput({...input, grade: parseInt(value)})} 
                 itemDetail={itemSent.grade}/>
             <EditItem title='Type' getInput={value => {
-                    console.log(value)
                     setInput({...input, type: value})}} 
                 itemDetail={itemSent.type} />
             <EditItem title='Year' getInput={value => {setInput({...input, year: parseInt(value)})}} 

@@ -1,20 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Picker, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function EditItem({ title, getInput, itemDetail }) {
     const [ value, setValue ] = useState(itemDetail);
     console.log(value);
     
-    // useEffect(() => {
-    //     // if(!(value == null) || !(value == '')) {
-    //         getInput({value});
-    //         console.log(value)
-    //     // }
-    // },[]);
-
-    // cause crash
-    // if(itemDetail) { getInput(value); }
-
     if(title !== 'Type') {
         return( 
             (title !== 'Year') ? 

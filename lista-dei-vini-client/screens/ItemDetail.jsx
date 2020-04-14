@@ -1,12 +1,10 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import ListItems from '../components/ListItem';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import _ from 'lodash';
 
 export default function ItemDetail({route, navigation}) {
     const { selectedId } = route.params;
-    // const { navigation } = route.params;
     const [ item, setItem ] = useState({});
     const [ isLoading, setLoading ] = useState(true);
 
@@ -57,22 +55,9 @@ export default function ItemDetail({route, navigation}) {
     }
 
     return (
-        // <Text>Here will be details! {selectedId}, {item.name}</Text>
         <View style={styles.container}>
-        {itemList}
+            {itemList}
         </View>
-        // <View>
-        //     <Text style={styles.title}>Name</Text>
-        //     <Text>{item.name}</Text>
-        //     <Text style={styles.title}>Grade</Text>
-        //     <Text>{item.grade} </Text>
-        //     <Text>Type</Text>
-        //     <Text>{item.type}</Text>
-        //     <Text>Year</Text>
-        //     <Text>{item.year}</Text>
-        //     <Text>Country</Text>
-        //     <Text>{item.country}</Text>
-        // </View>
     )
 }
 
