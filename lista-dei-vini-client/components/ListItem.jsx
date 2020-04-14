@@ -5,12 +5,10 @@ import Item from './Item';
 
 export default function ListItem ({navigation, isLoading, listData}) {
 
-    const [ selected, setSelected ] = useState(new Map());
-
     return (
         <View style={{ flex: 1, padding: 24}}>
-            {isLoading ? <Text>Loading</Text> : (
-                <FlatList data={listData}
+            {isLoading ? <ActivtyIndicator /> : (
+                <FlatList data={listData.sort((a, b) => {return a.id - b.id})}
                 renderItem={({item}) => {
                     console.log(item.name);
                     return (<Item  
@@ -20,12 +18,10 @@ export default function ListItem ({navigation, isLoading, listData}) {
                         name={item.name}
                         type={item.type}
                         // pic={item.pic}
-                        // selected={!!selected.get(item.id)}
                         // onPress={onPress}
                         navigation={navigation}
                     />)}}
                     keyExtractor={(item, index) => `listitem-${index}`}
-                    extraData={selected}
                 />
             )}
         </View>
