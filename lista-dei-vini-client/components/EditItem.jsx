@@ -8,8 +8,7 @@ export default function EditItem({ title, getInput, itemDetail }) {
     
     if(title !== 'Type' && title !== 'Grade') {
         return( 
-            // TODO: change after 'grade' with stars
-            (title !== 'Year' && title !== 'Grade' ) ? 
+            (title !== 'Year') ? 
             <View>
                 <Text style={styles.title}>{title}</Text>
                 <TextInput style={styles.input} 
