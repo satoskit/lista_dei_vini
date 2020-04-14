@@ -21,10 +21,10 @@ export default function App() {
       <Stack.Navigator screenOptions={screenStyles} >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="MyList" component={List} 
-          options={{title: 'My List', headerOptions}} />
-        <Stack.Screen name="MyStat" component={Statistics} options={{title: 'My Statistics', headerOptions}} />
+          options={{title: 'My List'}, headerOptions} />
+        <Stack.Screen name="MyStat" component={Statistics} options={{title: 'My Statistics'}, headerOptions} />
 
-        <Stack.Screen name="EditList" component={EditList} options={{title: 'Edit', headerOptions }}/>
+        <Stack.Screen name="EditList" component={EditList} options={{title: 'Edit'}, headerOptions }/>
 
         <Stack.Screen name="Detail" component={ItemDetail} options={headerOptions} />
       </Stack.Navigator>
