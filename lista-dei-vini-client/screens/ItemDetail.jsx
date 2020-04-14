@@ -2,7 +2,9 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import ListItems from '../components/ListItem';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function ItemDetail({id, name, route, navigation}) {
+import _ from 'lodash';
+
+export default function ItemDetail({route, navigation}) {
     const { selectedId } = route.params;
     // const { navigation } = route.params;
     const [ item, setItem ] = useState({});

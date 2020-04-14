@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Picker, StyleSheet, Text, TextInput, View } from 'react-native';
 
-export default function EditItem({ title, setInput, itemDetail }) {
+export default function EditItem({ title, getInput, itemDetail }) {
     const [ value, setValue ] = useState(itemDetail);
-    console.log(itemDetail);
+    console.log(value);
     
     // useEffect(() => {
     //     // if(!(value == null) || !(value == '')) {
-    //         setInput({value});
+    //         getInput({value});
     //         console.log(value)
     //     // }
     // },[]);
+
+    // cause crash
+    // if(itemDetail) { getInput(value); }
 
     if(title !== 'Type') {
         return( 
@@ -19,10 +22,11 @@ export default function EditItem({ title, setInput, itemDetail }) {
                 <Text style={styles.title}>{title}</Text>
                 <TextInput style={styles.input} 
                     onChangeText={text => {
-                        setInput(text)
+                        getInput(text)
                         setValue(text)
                     }}
-                    value={value} 
+                    defaultValue={itemDetail} 
+                    value={value}
                 />
             </View>
             : 
@@ -30,7 +34,7 @@ export default function EditItem({ title, setInput, itemDetail }) {
                 <Text style={styles.title}>{title}</Text>
                 <TextInput style={styles.input} 
                     onChangeText={text => {
-                        setInput(text)
+                        getInput(text)
                         setValue(text)
                     }}
                     value={value} 
@@ -42,12 +46,13 @@ export default function EditItem({ title, setInput, itemDetail }) {
         return(
             <View>
                 <Text style={styles.title}>{title}</Text>
-                <Picker /*selectedValue="none"*/ 
+                <Picker selectedValue={value} 
                     onValueChange={(itemValue, itemIndex) => {
                         if(itemValue !== 'none') {
-                            setInput(itemValue)
+                            getInput(itemValue)
+                            setValue(itemValue)
                         } else {
-                            setInput('')
+                            getInput('')
                         } 
                         }}
                     style={styles.picker}

@@ -19,11 +19,13 @@ export default function EditList({navigation, route}) {
     const [ input, setInput ] = useState(emptyItem);
     const { itemSent } = route.params;
     const { updating } = route.params;
+    const newItem = {};
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
                 <TouchableOpacity onPress={() => {
+                    mergeItemSentAndInput(itemSent, input);
                     console.log(input);
                     if(!(updating)){
                         postItem(input);
@@ -54,6 +56,7 @@ export default function EditList({navigation, route}) {
     }
 
     function updateItem(input) {
+        console.log(input)
         const reqestSetting = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }, 
@@ -64,32 +67,41 @@ export default function EditList({navigation, route}) {
             response.json())
     }
 
-    // useEffect(() => {
+    function mergeItemSentAndInput(sentItem, input) {
+        // if(JSON.stringify(sentItem) === JSON.stringify(input)) { return input; }
+        _.isEqual(sentItem, input);
 
-    // })
-    
+        for(var key in input) {
+            if(input[key] === null || input[key] === '') {
+                console.log(sentItem[key]);
+                input[key] = sentItem[key];
+            }
+        }
+        return input;
+    }
+
     return (
         <View style={styles.container}>
             <Text>Here you can edit your wine list.</Text>
-            <EditItem title='Name' setInput={value => {
+            <EditItem title='Name' getInput={value => {
                     console.log(value)
                     setInput({...input, name: value})}}
                 itemDetail={itemSent.name}
             />
             {/* TODO: make grade stars */}
-            <EditItem title='Grade' setInput={value => setInput({...input, grade: value})} 
+            <EditItem title='Grade' getInput={value => setInput({...input, grade: parseInt(value)})} 
                 itemDetail={itemSent.grade}/>
-            <EditItem title='Type' setInput={value => {
+            <EditItem title='Type' getInput={value => {
                     console.log(value)
                     setInput({...input, type: value})}} 
                 itemDetail={itemSent.type} />
-            <EditItem title='Year' setInput={value => setInput({...input, year: parseInt(value)})} 
+            <EditItem title='Year' getInput={value => {setInput({...input, year: parseInt(value)})}} 
                 itemDetail={itemSent.year} />
-            <EditItem title='Country' setInput={value => setInput({...input, country: value})}
+            <EditItem title='Country' getInput={value => setInput({...input, country: value})}
                 itemDetail={itemSent.country} />
-            <EditItem title='Winery' setInput={value => setInput({...input, winery: value})}
+            <EditItem title='Winery' getInput={value => setInput({...input, winery: value})}
                 itemDetail={itemSent.winery} />
-            <EditItem title='Grape' setInput={value => setInput({...input, grape: value})} 
+            <EditItem title='Grape' getInput={value => setInput({...input, grape: value})} 
                 itemDetail={itemSent.grape} />
             {/* <EditItem title='Picture' setInput={value => setInput({...input, picture: value})} 
                 itemDetail={itemSent.picture} /> */}
