@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import _ from 'lodash';
+import GradeStars from '../components/GradeStars';
 
 export default function ItemDetail({route, navigation}) {
     const { selectedId } = route.params;
@@ -36,7 +37,7 @@ export default function ItemDetail({route, navigation}) {
     // const itemKeys = Object.keys(item);
     const itemList = [];
     for(let [key, value] of Object.entries(item)) {
-        if(key !== 'id' && key !== 'created_at' ) {
+        if(key !== 'id' && key !== 'created_at' && key !== 'grade' ) {
         (value) ? itemList.push(
             <View key={key}>
                 <Text style={styles.title}>{keyToUpperCase(key)}</Text>
@@ -46,6 +47,19 @@ export default function ItemDetail({route, navigation}) {
             <View key={key}>
                 <Text style={styles.title}>{keyToUpperCase(key)}</Text>
             <Text style={styles.value}>{"    "}</Text>
+            </View>)
+        } else if(key === 'grade') {
+        (value) ? itemList.push(
+            <View key={key}>
+                <Text style={styles.title}>{keyToUpperCase(key)}</Text>
+                <View style={styles.star}><GradeStars grade={value}/></View>
+                
+            </View>)
+            : itemList.push(
+            <View key={key}>
+                <Text style={styles.title}>{keyToUpperCase(key)}</Text>
+                <View style={styles.star} ><GradeStars grade={0}/></View>
+                
             </View>)
         }
     }
@@ -73,6 +87,9 @@ const styles = StyleSheet.create({
     value: {
         padding: 5,
         fontSize: 20,
+    },
+    star: {
+        padding: 5,
     },
     doneButton: {
         backgroundColor: '#fff',

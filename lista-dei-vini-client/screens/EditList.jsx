@@ -85,12 +85,12 @@ export default function EditList({navigation, route}) {
             />
             {/* TODO: make grade stars */}
             <EditItem title='Grade' getInput={value => setInput({...input, grade: value})} 
-                itemDetail={itemSent.grade}/>
+                itemDetail={parseInt(itemSent.grade)}/>
             <EditItem title='Type' getInput={value => {
                     setInput({...input, type: value})}} 
                 itemDetail={itemSent.type} />
             <EditItem title='Year' getInput={value => {setInput({...input, year: parseInt(value)})}} 
-                itemDetail={itemSent.year} />
+                itemDetail={parseInt(itemSent.year)} />
             <EditItem title='Country' getInput={value => setInput({...input, country: value})}
                 itemDetail={itemSent.country} />
             <EditItem title='Winery' getInput={value => setInput({...input, winery: value})}
