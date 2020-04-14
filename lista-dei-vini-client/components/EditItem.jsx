@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Picker, StyleSheet, Text, TextInput, View } from 'react-native';
+import GradeStars from './GradeStars';
 
 export default function EditItem({ title, getInput, itemDetail }) {
     const [ value, setValue ] = useState(itemDetail);
     console.log(value);
     
-    if(title !== 'Type') {
+    if(title !== 'Type' && title !== 'Grade') {
         return( 
             // TODO: change after 'grade' with stars
             (title !== 'Year' && title !== 'Grade' ) ? 
@@ -32,7 +33,7 @@ export default function EditItem({ title, getInput, itemDetail }) {
                     maxLength={4} />
             </View>
         )
-    } else {
+    } else if(title === 'Type'){
         return(
             <View>
                 <Text style={styles.title}>{title}</Text>
@@ -54,6 +55,21 @@ export default function EditItem({ title, getInput, itemDetail }) {
                     <Picker.Item label="Sparkling Wine" value="Sparkling Wine"/>
                 </Picker>
             </View>
+        )
+    } else if(title === 'Grade') {
+        return (
+            <View>
+                <Text style={styles.title}>{title}</Text>
+                <GradeStars grade={value} 
+                    getGrade={star => {
+                        console.log(star)
+                        getInput(star)
+                        setValue(star)
+
+                    }}
+                    editable={true}
+                /> 
+            </View> 
         )
     }
 }

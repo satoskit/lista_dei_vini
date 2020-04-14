@@ -52,13 +52,13 @@ export default function ItemDetail({route, navigation}) {
         (value) ? itemList.push(
             <View key={key}>
                 <Text style={styles.title}>{keyToUpperCase(key)}</Text>
-                <View style={styles.star}><GradeStars grade={value}/></View>
+                <View style={styles.star}><GradeStars grade={value} /></View>
                 
             </View>)
             : itemList.push(
             <View key={key}>
                 <Text style={styles.title}>{keyToUpperCase(key)}</Text>
-                <View style={styles.star} ><GradeStars grade={0}/></View>
+                <View style={styles.star} ><GradeStars grade={0}  /></View>
                 
             </View>)
         }
