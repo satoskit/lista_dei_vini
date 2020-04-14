@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Button, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Button, StyleSheet, TouchableOpacity, View, ActivityIndicator } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import ListItem from '../components/ListItem';
@@ -32,10 +32,10 @@ export default function List({navigation, route}) {
 
     return (
         <View style={styles.container}>
-            <ListItem navigation={navigation}
-                isLoading={isLoading}
-                listData={listData}
-            />
+            {isLoading ? <ActivityIndicator /> :
+                <ListItem navigation={navigation}
+                    listData={listData}
+            />}
             <TouchableOpacity
                 onPress={() => navigation.push('EditList', { itemSent: emptyItem, updating: false })} 
                 style={styles.addButton}
