@@ -16,6 +16,7 @@ export default function ListItem ({navigation, isLoading, listData}) {
                     return (<Item  
                         item={item}
                         id={item.id}
+                        grade={item.grade}
                         name={item.name}
                         type={item.type}
                         // pic={item.pic}

@@ -5,17 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default function GradeStars({grade, getGrade, editable}) {
     const [ starObjects, setStarObjects ] = useState(createArray(grade));
     const [ newGrade, setNewGrade ] = useState(null);
-    const [ clicked, setClicked ] = useState(new Map());
     
-    useEffect(() => {
-        function handleOnChange(value) {
-            console.log(value);
-            setNewGrade(value);
-            setStarObjects(createArray({newGrade}));
-        }
-
-    }, []);
-        
     function createArray(grade) {
         let tempObjects = [];
         console.log(grade)
@@ -48,7 +38,6 @@ export default function GradeStars({grade, getGrade, editable}) {
                             getStarObjects={value => {
                                 setNewGrade(value);
                                 setStarObjects(createArray(value));
-                                // handleOnChange(value);
                             }} />
                     )
                 }}
