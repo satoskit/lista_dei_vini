@@ -23,7 +23,7 @@ export default function ListItem ({navigation, isLoading, listData}) {
                         // onPress={onPress}
                         navigation={navigation}
                     />)}}
-                    keyExtractor={item => item.id}
+                    keyExtractor={(item, index) => `listitem-${index}`}
                     extraData={selected}
                 />
             )}

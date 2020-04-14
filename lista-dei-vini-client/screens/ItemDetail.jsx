@@ -33,17 +33,17 @@ export default function ItemDetail({route, navigation}) {
         .finally(() => setLoading(false))
     }, []);
 
-    const itemKeys = Object.keys(item);
+    // const itemKeys = Object.keys(item);
     const itemList = [];
     for(let [key, value] of Object.entries(item)) {
         if(key !== 'id' && key !== 'created_at' ) {
         (value) ? itemList.push(
-            <View>
+            <View key={key}>
                 <Text style={styles.title}>{keyToUpperCase(key)}</Text>
                 <Text style={styles.value}>{value}</Text>
             </View>)
             : itemList.push(
-            <View>
+            <View key={key}>
                 <Text style={styles.title}>{keyToUpperCase(key)}</Text>
             <Text style={styles.value}>{"    "}</Text>
             </View>)

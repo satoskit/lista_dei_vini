@@ -7,7 +7,8 @@ export default function EditItem({ title, getInput, itemDetail }) {
     
     if(title !== 'Type') {
         return( 
-            (title !== 'Year') ? 
+            // TODO: change after 'grade' with stars
+            (title !== 'Year' && title !== 'Grade' ) ? 
             <View>
                 <Text style={styles.title}>{title}</Text>
                 <TextInput style={styles.input} 
@@ -15,7 +16,6 @@ export default function EditItem({ title, getInput, itemDetail }) {
                         getInput(text)
                         setValue(text)
                     }}
-                    defaultValue={itemDetail} 
                     value={value}
                 />
             </View>
@@ -27,7 +27,7 @@ export default function EditItem({ title, getInput, itemDetail }) {
                         getInput(text)
                         setValue(text)
                     }}
-                    value={value} 
+                    value={`${value}`} 
                     keyboardType='numeric'
                     maxLength={4} />
             </View>
