@@ -8,7 +8,6 @@ export default function GradeStars({grade, getGrade, editable}) {
     
     function createArray(grade) {
         let tempObjects = [];
-        console.log(grade)
         if(grade > 0) {
             for(let i = 0; i < grade; i++){
                 tempObjects[i] = {};
@@ -21,7 +20,6 @@ export default function GradeStars({grade, getGrade, editable}) {
             tempObjects[i]['id'] = i+1;
             tempObjects[i]['filled'] = false;
         }
-        console.log(tempObjects);
         return tempObjects;
     }
 
@@ -30,7 +28,6 @@ export default function GradeStars({grade, getGrade, editable}) {
         <View>
             <FlatList data={starObjects} horizontal={true}
                 renderItem={({item}) => {
-                    console.log(item.id);
                     return (
                         !(editable) ? <Star filled={item.filled}/>
                         : <EditableStar filled={item.filled} index={item.id} 
@@ -65,7 +62,6 @@ function EditableStar({filled, index, getGrade, getStarObjects}) {
             </TouchableOpacity> 
         : <TouchableOpacity 
             onPress={() => {
-                console.log(index)
                 getStarObjects(index);
                 getGrade(index);
             }}>
