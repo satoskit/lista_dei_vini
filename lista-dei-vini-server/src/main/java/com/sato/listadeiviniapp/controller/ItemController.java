@@ -47,12 +47,12 @@ public class ItemController {
 		itemService.updateItem(id, item);
 		return ResponseEntity.ok().body(item);
 	}
-//	
-//	@DeleteMapping("/list/{id}")
-//	public ResponseEntity<Long> deleteItem(@PathVariable Long id) {
-//		itemService.deleteItem(id);
-//		return ResponseEntity.ok().body(id);
-//	}
+	
+	@DeleteMapping("/list/{id}")
+	public ResponseEntity<Long> deleteItem(@PathVariable(value="id") Long id) {
+		itemService.deleteItem(id);
+		return ResponseEntity.ok().body(id);
+	}
 	
 	@GetMapping("/list")
 	public ResponseEntity<List<ItemJson>> getList() {
