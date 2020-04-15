@@ -27,10 +27,10 @@ export default function EditList({navigation, route}) {
                     mergeItemSentAndInput(itemSent, input);
                     if(!(updating)){
                         postItem(input);
-                        navigation.push('MyList', { isLoading: true });
+                        navigation.push('MyList', { passedIsLoading: true });
                     } else {
                         updateItem(input);
-                        navigation.push('MyList', { isLoading: true });
+                        navigation.push('MyList', { passedIsLoading: true });
                     }
                 }} 
                     title="Done"

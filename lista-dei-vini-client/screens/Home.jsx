@@ -7,7 +7,7 @@ export default function Home({navigation}) {
         <View style={styles.container}>
             <Text>Welcome to lista dei vini!</Text>
             <TouchableOpacity title="My List"
-                onPress={() => navigation.navigate('MyList')}
+                onPress={() => navigation.push('MyList', {passedIsLoading: true})}
                 style={styles.button}
             >
                 <Text style={styles.buttonItem}>My List</Text>
