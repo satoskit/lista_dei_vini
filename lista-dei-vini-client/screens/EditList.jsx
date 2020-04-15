@@ -24,11 +24,12 @@ export default function EditList({navigation, route}) {
         navigation.setOptions({
             headerRight: () => (
                 <TouchableOpacity onPress={() => {
-                    mergeItemSentAndInput(itemSent, input);
+                    console.log(input)
                     if(!(updating)){
-                        postItem(input);
+                        createItem(input);
                         navigation.push('MyList', { passedIsLoading: true });
                     } else {
+                        mergeItemSentAndInput(itemSent, input);
                         updateItem(input);
                         navigation.push('MyList', { passedIsLoading: true });
                     }
@@ -41,7 +42,7 @@ export default function EditList({navigation, route}) {
         })
     });
 
-    function postItem(input) {
+    function createItem(input) {
         console.log(input)
         const reqestSetting = {
             method: 'POST',
@@ -80,11 +81,11 @@ export default function EditList({navigation, route}) {
         <View style={styles.container}>
             <Text>Here you can edit your wine list.</Text>
             <EditItem title='Name' getInput={value => {
-                    setInput({...input, name: value})}}
-                itemDetail={itemSent.name}
-            />
-            {/* TODO: make grade stars */}
-            <EditItem title='Grade' getInput={value => setInput({...input, grade: value})} 
+                console.log(value)
+                setInput({...input, name: value})}}
+                itemDetail={itemSent.name} />
+            <EditItem title='Grade' 
+                getInput={value => setInput({...input, grade: value})} 
                 itemDetail={parseInt(itemSent.grade) || 0}/>
             <EditItem title='Type' getInput={value => {
                     setInput({...input, type: value})}} 

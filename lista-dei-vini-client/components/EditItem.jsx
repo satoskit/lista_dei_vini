@@ -67,6 +67,7 @@ export default function EditItem({ title, getInput, itemDetail }) {
 
                     }}
                     editable={true}
+                    value={value}
                 /> 
             </View> 
         )
