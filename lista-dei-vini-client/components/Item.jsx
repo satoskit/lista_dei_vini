@@ -3,7 +3,9 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import GradeStars from './GradeStars';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function Item({navigation, id, name, grade, type, selected, }) {
+import DeleteAlert from './DeleteAlert';
+
+export default function Item({navigation, id, name, grade, type, setVisible }) {
     // set to 0 if grade is not set before
     if(grade === null) { grade = 0; }
     return (
@@ -19,13 +21,14 @@ export default function Item({navigation, id, name, grade, type, selected, }) {
                 <Text>Type: {type}</Text>
                 <Text>Picture: </Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 style={styles.delete}
                 // TODO: make modalcard
-                // onPress={() => }
+                onPress={() => setVisible(true)}
             >
                 <Icon name="trash-o" size={20} color="#990000" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <View style={styles.delete}><DeleteAlert id={id} navigation={navigation}/></View>
         </View>
     );
 }

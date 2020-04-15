@@ -5,7 +5,9 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import ListItem from '../components/ListItem';
 
 export default function List({navigation, route}) {
-    const [ isLoading, setLoading ] = useState(route.params);
+    const {passedIsLoading} = route.params
+    const [ isLoading, setLoading ] = useState(passedIsLoading);
+    console.log(passedIsLoading)
     const [ listData, setListData ] = useState([]);
     const emptyItem = {
         id: null,
@@ -28,6 +30,7 @@ export default function List({navigation, route}) {
         }))
         .catch((error) => console.error(error))
         .finally(() => setLoading(false))
+        console.log(isLoading)
     }, []);
 
     return (
