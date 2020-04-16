@@ -34,13 +34,17 @@ export default function List({navigation, route}) {
 
     return (
         <View style={styles.container}>
-            {isLoading ? <ActivityIndicator /> :
+            {isLoading ? 
+                <View style={styles.loading}>
+                    <ActivityIndicator size="large" color="#990000" />
+                </View> 
+            : 
                 <ListItem navigation={navigation}
-                    listData={listData}
-            />}
+                    listData={listData} />
+            }
             <TouchableOpacity
-                onPress={() => navigation.push('EditList', { itemSent: emptyItem, updating: false })} 
-                style={styles.addButton}
+            onPress={() => navigation.push('EditList', { itemSent: emptyItem, updating: false })} 
+            style={styles.addButton}
             >
                 <Icon name="plus-circle" size={35} color="#990000"/>
             </TouchableOpacity>
@@ -53,6 +57,11 @@ const styles = StyleSheet.create({
         flex: 1,
         // alignItems: 'center',
         // justifyContent: 'flex-start'
+    },
+    loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     addButton: {
         alignItems: 'center',

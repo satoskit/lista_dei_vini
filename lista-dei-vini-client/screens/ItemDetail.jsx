@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import _ from 'lodash';
 import GradeStars from '../components/GradeStars';
@@ -70,7 +70,10 @@ export default function ItemDetail({route, navigation}) {
 
     return (
         <View style={styles.container}>
-            {itemList}
+            {isLoading ? <View style={styles.loading}>
+                    <ActivityIndicator size="large" color="#990000" />
+                </View>
+            : <View style={styles.detail}>{itemList}</View> }
         </View>
     )
 }
@@ -78,6 +81,13 @@ export default function ItemDetail({route, navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    isLoading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    detail: {
         margin: 10,
     },
     title: {
