@@ -43,8 +43,8 @@ export default function GradeStars({grade, setGrade, editable}) {
 
 function Star({filled}) {
     return(
-        filled ? <Icon name="star" size={20} />
-        : <Icon name="star-o" size={20} />
+        filled ? <Icon name="star" size={20} color="#ffbb33" />
+        : <Icon name="star-o" size={20} color="#ffbb33" />
     )
 }
 
@@ -54,13 +54,13 @@ function EditableStar({filled, index, getGrade, getStarObjects}) {
             onPress={() => {
                 getStarObjects(index);
             }}>
-                <Icon name="star" size={20} />
+                <Icon name="star" size={20} color="#ffbb33" />
             </TouchableOpacity> 
         : <TouchableOpacity 
             onPress={() => {
                 getStarObjects(index);
             }}>
-                <Icon name="star-o" size={20} />
+                <Icon name="star-o" size={20} color="#ffbb33" />
             </TouchableOpacity> 
     )
 }
