@@ -4,22 +4,30 @@ import GradeStars from './GradeStars';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import DeleteAlert from './DeleteAlert';
+import BottleImage from './BottleImage';
 
 export default function Item({navigation, id, name, grade, type, setVisible }) {
     // set to 0 if grade is not set before
     if(grade === null) { grade = 0; }
     return (
         <View>
-            {/* TODO: subnail?
-            <Picture></Picture> */}
+            {/* TODO: thumbnail?*/}
+            {/* <View style={styles.image}></View> */}
             <TouchableOpacity style={styles.list}
                 onPress={() => {
                     navigation.push('Detail', { selectedId: id, navigation: navigation });}}
             >
-                <Text style={styles.item}>Name: {name}</Text>
-                <GradeStars grade={grade} />
-                <Text>Type: {type}</Text>
-                <Text>Picture: </Text>
+                <View style={styles.image}>
+                    <BottleImage /*source={}*/
+                        big={false}
+                    />
+                </View>
+                <View>
+                    <Text style={styles.item}>Name: {name}</Text>
+                    <GradeStars grade={grade} />
+                    <Text>Type: {type}</Text>
+                    <Text>Picture: </Text>
+                </View>
             </TouchableOpacity>
             {/* <TouchableOpacity
                 style={styles.delete}
@@ -38,6 +46,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-start',
         // justifyContent: 'flex-start'
+        flexDirection: 'row',
+    },
+    image: {
+        width: 60,
+        height: 60,
     },
     item: {
         padding: 10,
