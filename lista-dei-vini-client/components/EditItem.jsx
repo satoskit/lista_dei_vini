@@ -60,11 +60,9 @@ export default function EditItem({ title, getInput, itemDetail }) {
             <View>
                 <Text style={styles.title}>{title}</Text>
                 <GradeStars grade={value} 
-                    getGrade={star => {
-                        console.log(star)
+                    setGrade={star => {
                         getInput(star)
                         setValue(star)
-
                     }}
                     editable={true}
                     value={value}

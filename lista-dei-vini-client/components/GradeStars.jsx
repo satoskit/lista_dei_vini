@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { FlatList, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function GradeStars({grade, getGrade, editable}) {
+export default function GradeStars({grade, setGrade, editable}) {
     const [ starObjects, setStarObjects ] = useState(createArray(grade));
-    const [ newGrade, setNewGrade ] = useState(null);
     
     function createArray(grade) {
         let tempObjects = [];
@@ -23,7 +22,6 @@ export default function GradeStars({grade, getGrade, editable}) {
         return tempObjects;
     }
 
-
     return(
         <View>
             <FlatList data={starObjects} horizontal={true}
@@ -31,9 +29,8 @@ export default function GradeStars({grade, getGrade, editable}) {
                     return (
                         !(editable) ? <Star filled={item.filled}/>
                         : <EditableStar filled={item.filled} index={item.id} 
-                            getGrade={getGrade}
                             getStarObjects={value => {
-                                setNewGrade(value);
+                                setGrade(value)
                                 setStarObjects(createArray(value));
                             }} />
                     )
@@ -56,14 +53,12 @@ function EditableStar({filled, index, getGrade, getStarObjects}) {
         filled ? <TouchableOpacity 
             onPress={() => {
                 getStarObjects(index);
-                getGrade(index);
             }}>
                 <Icon name="star" size={20} />
             </TouchableOpacity> 
         : <TouchableOpacity 
             onPress={() => {
                 getStarObjects(index);
-                getGrade(index);
             }}>
                 <Icon name="star-o" size={20} />
             </TouchableOpacity> 

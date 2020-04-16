@@ -16,20 +16,21 @@ export default function EditList({navigation, route}) {
         grape: '',
         // picture: ''
     }
-    const [ input, setInput ] = useState(emptyItem);
-    const { itemSent } = route.params;
     const { updating } = route.params;
+    const { itemSent } = route.params;
+    const [ input, setInput ] = useState(emptyItem);
+    const [ newGrade, setNewGrade ] = useState(null)
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
                 <TouchableOpacity onPress={() => {
                     console.log(input)
+                    mergeItemSentAndInput(itemSent, input);
                     if(!(updating)){
                         createItem(input);
                         navigation.push('MyList', { passedIsLoading: true });
                     } else {
-                        mergeItemSentAndInput(itemSent, input);
                         updateItem(input);
                         navigation.push('MyList', { passedIsLoading: true });
                     }
@@ -74,6 +75,9 @@ export default function EditList({navigation, route}) {
                 input[key] = sentItem[key];
             }
         }
+        if(newGrade !== null){
+            input['grade'] = newGrade;
+        }
         return input;
     }
 
@@ -85,7 +89,7 @@ export default function EditList({navigation, route}) {
                 setInput({...input, name: value})}}
                 itemDetail={itemSent.name} />
             <EditItem title='Grade' 
-                getInput={value => setInput({...input, grade: value})} 
+                getInput={value => setNewGrade(value)} 
                 itemDetail={parseInt(itemSent.grade) || 0}/>
             <EditItem title='Type' getInput={value => {
                     setInput({...input, type: value})}} 
