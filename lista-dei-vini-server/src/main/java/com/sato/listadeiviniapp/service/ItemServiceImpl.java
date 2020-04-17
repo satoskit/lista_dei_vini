@@ -1,11 +1,19 @@
 package com.sato.listadeiviniapp.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+
+import javax.imageio.ImageIO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +56,34 @@ public class ItemServiceImpl implements ItemService {
 			itemJsonList.add(convertItem(item));
 		}
 		return itemJsonList;
+	}
+	
+	public byte[] convertToByte(File image) {
+		BufferedImage bImage;
+		ByteArrayOutputStream boStream = new ByteArrayOutputStream();
+		try {
+			bImage = ImageIO.read(image);
+			ImageIO.write(bImage, "jpg", boStream);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		byte[] imageByte = boStream.toByteArray();
+		return imageByte;
+	}
+	
+	public File convertFromByte(byte[] imageByte, String filepath) {
+		File image = new File(filepath + "saved.jpg");
+		ByteArrayInputStream biStream = new ByteArrayInputStream(imageByte);
+		try {
+			BufferedImage bImage = ImageIO.read(biStream);
+			ImageIO.write(bImage, "jpg", image);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return image;
 	}
 
 	@Override

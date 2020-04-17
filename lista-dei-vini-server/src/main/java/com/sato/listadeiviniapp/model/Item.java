@@ -33,8 +33,8 @@ public class Item extends DateAudit {
 	private String winery;
 	@Column
 	private String grape;
-//	@Column
-//	private Timestamp created_at;
+	@Column
+	private byte[] image;
 	
 	public Item() {
 		
@@ -102,13 +102,14 @@ public class Item extends DateAudit {
 	public void setGrape(String grape) {
 		this.grape = grape;
 	}
-//	public Timestamp getCreated_at() {
-//		return created_at;
-//	}
-//	public void setCreated_at(Timestamp created_at) {
-//		this.created_at = created_at;
-//	}
-	
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
 		return "Grade: " + grade + " || " + name + " | " + type + " | " + country; 
