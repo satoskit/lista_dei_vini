@@ -42,12 +42,20 @@ export default function List({navigation, route}) {
                 <ListItem navigation={navigation}
                     listData={listData} />
             }
-            <TouchableOpacity
-            onPress={() => navigation.push('EditList', { itemSent: emptyItem, updating: false })} 
-            style={styles.addButton}
-            >
-                <Icon name="plus-circle" size={35} color="#990000"/>
-            </TouchableOpacity>
+            <View style={styles.floatButtons}>
+                <TouchableOpacity
+                    onPress={() => navigation.push('EditList', { itemSent: emptyItem, updating: false })} 
+                    style={styles.addButton}
+                >
+                    <Icon name="plus-circle" size={35} color="#990000"/>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('CameraMode')} 
+                    style={styles.addButton}
+                >
+                    <Icon name="camera" size={35} color="#990000"/>
+                </TouchableOpacity>
+            </View>
         </View>
     ) 
 }
@@ -63,13 +71,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    addButton: {
+    floatButtons: {
+        // flex: ,
         alignItems: 'center',
+        flexDirection: 'column',
         position: 'absolute',
-        bottom: 15,
+        bottom: 20,
         right: 12,
         width: 60,
         height: 60,
+    },
+    addButton: {
+        // alignItems: 'center',
+        // position: 'absolute',
+        // bottom: 15,
+        // right: 12,
+        // width: 60,
+        // height: 60,
     },
     list: {
         justifyContent: 'flex-start'
