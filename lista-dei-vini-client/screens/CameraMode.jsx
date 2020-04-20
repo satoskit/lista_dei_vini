@@ -13,18 +13,12 @@ export default function CameraMode({navigation}) {
     let imageBase64 = '';
     // const [ imageBase64, setImageBase46 ] = useState('');
     let imageBase64Long = '';
-    const [ isBase64Set, setBase64Set ] = useState(false);
 
     useEffect(() => {
         (async() => {
             const { status } = await Permissions.askAsync(Permissions.CAMERA);
             setHasPermission(status === 'granted');
         })();
-        if(isBase64Set === true) {
-            imageBase64Long = 'new value';
-            console.log(imageBase64Long);
-            console.log(isBase64Set)
-        }
     }, []);
 
     if(hasPermission === null) {
@@ -35,12 +29,8 @@ export default function CameraMode({navigation}) {
     }
 
     const takePicture = async() => {
-        let picture = await camera.takePictureAsync({onPictureSaved: pausedImage, base64: true })
-        // .then(setImageBase46(picture.base64.split(',')[1]))
-        // .then(setBase64Set(true));
+        let picture = await camera.takePictureAsync({base64: true })
         console.log(picture.base64);
-        // let tmp = ;
-        // console.log(typeof tmp)
         imageBase64Long = picture.base64;
         imageBase64 = await picture.base64.split(',')[1];
         console.log(imageBase64);
@@ -48,19 +38,10 @@ export default function CameraMode({navigation}) {
         if(imageBase64 !=='') {
             navigation.push('CheckImage', {imageBase64Long: imageBase64Long});
         }
-        // camera.pausePreview();
     } ;
 
-    const pausedImage = image => {
-        console.log(image);
-        return image;
-    };
-
-    console.log(isBase64Set)
-    
     return (
         <View style={styles.container}>
-            {/* { !isBase64Set ?  */}
             <Camera style={styles.camera} type={cameraType}
                 ref={ref => camera=ref}
             >
@@ -70,7 +51,6 @@ export default function CameraMode({navigation}) {
                         <TouchableOpacity
                             onPress={() => {
                                 takePicture();
-                                // navigation.push('CheckImage', {imageBase64Long: imageBase64Long});
                             }}
                         >
                             <Icon name="camera" size={50} ></Icon>
@@ -87,12 +67,6 @@ export default function CameraMode({navigation}) {
                     </View>
                 </View>
             </Camera> 
-            {/* : <View><Text>Show image</Text>
-                <Image style={styles.showImage}
-                    source={{uri: imageBase64Long}}/>
-                    {console.log(imageBase64Long)}
-            </View>
-            }  */}
         </View>
     )
 }
