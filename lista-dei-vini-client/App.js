@@ -11,6 +11,7 @@ import Statistics from './screens/Statistics';
 import EditList from './screens/EditList';
 import ItemDetail from './screens/ItemDetail';
 import CameraMode from './screens/CameraMode';
+import CheckImage from './screens/CheckImage';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,8 @@ export default function App() {
         <Stack.Screen name="MyStat" component={Statistics} options={{title: 'My Statistics'}, headerOptions} />
 
         <Stack.Screen name="CameraMode" component={CameraMode} options={{title: 'Camera Mode'}} />
+        <Stack.Screen name="CheckImage" component={CheckImage} options={{title: 'Image'}} />
+
         <Stack.Screen name="EditList" component={EditList} options={{title: 'Edit'}}/>
 
         <Stack.Screen name="Detail" component={ItemDetail} options={headerOptions} />
