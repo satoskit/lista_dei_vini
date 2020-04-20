@@ -1,10 +1,13 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import EditItem from '../components/EditItem';
 
 export default function EditList({navigation, route}) {
     const [ isEditing, setIsEditing ] = useState(false);
+    const { updating } = route.params;
+    const { itemSent } = route.params;
+    const { imageBase64Long } = route.params;
     const emptyItem = {
         id: null,
         name: '',
@@ -14,10 +17,8 @@ export default function EditList({navigation, route}) {
         country: '',
         winery: '',
         grape: '',
-        // picture: ''
+        image: imageBase64Long,
     }
-    const { updating } = route.params;
-    const { itemSent } = route.params;
     const [ input, setInput ] = useState(emptyItem);
     const [ newGrade, setNewGrade ] = useState(null)
 
@@ -102,8 +103,8 @@ export default function EditList({navigation, route}) {
                 itemDetail={itemSent.winery} />
             <EditItem title='Grape' getInput={value => setInput({...input, grape: value})} 
                 itemDetail={itemSent.grape} />
-            {/* <EditItem title='Picture' setInput={value => setInput({...input, picture: value})} 
-                itemDetail={itemSent.picture} /> */}
+            <EditItem title='Image' setInput={value => setInput({...input, image: value})} 
+                itemDetail={itemSent.image} />
         </View> 
     )
 }

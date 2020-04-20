@@ -6,7 +6,7 @@ export default function BottleImage({source, big}) {
     const testsource = require('../assets/testPic.jpg');
     return (
         <View>
-            <Image source={testsource}/*{source}*/
+            <Image source={source}/*{source}*/
                 style={big ? stlyes.big : stlyes.small}
             ></Image>
         </View>

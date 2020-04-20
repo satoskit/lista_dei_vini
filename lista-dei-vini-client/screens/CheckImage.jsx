@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Dimensions, Image, StyleSheet, View } from 'react-native';
-import { ActivityIndicator } from 'react-native';
+import { Dimensions, Image, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 
 export default function CheckImage({navigation, route}) {
     // const [ isLoading, setLoading ] = useState(route.params);
     const { imageBase64Long } = route.params;
     const [ imageSize, setImageSize ] = useState({width: Dimensions.get('window').width, height: null });
+
+    const emptyItem = {
+        id: null,
+        name: '',
+        type: '',
+        grade: null,
+        year: null,
+        country: '',
+        winery: '',
+        grape: '',
+        image: imageBase64Long,
+    }
 
     // const windowWidth = Dimensions.get('window').width;
     // const windowHeight = Dimensions.get('window').height;
@@ -27,7 +38,7 @@ export default function CheckImage({navigation, route}) {
             }
         })
     }, [])
-    
+
     return(
         <View style={styles.container}>
             <Image style={/*styles.showImage,*/ {
@@ -39,6 +50,16 @@ export default function CheckImage({navigation, route}) {
                 resizeMode: 'contain',}}
             source={{uri: imageBase64Long}}
             />
+            <View>
+                <TouchableOpacity
+                    onPress={() => navigation.push('EditList', {itemSent: emptyItem, updating: false, imageBase64Long: imageBase64Long})}
+                >
+                    <Text>Save</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text>Cancel</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }

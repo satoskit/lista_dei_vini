@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Picker, StyleSheet, Text, TextInput, View } from 'react-native';
+
 import GradeStars from './GradeStars';
+import BottleImage from '../components/BottleImage';
 
 export default function EditItem({ title, getInput, itemDetail }) {
     const [ value, setValue ] = useState(itemDetail);
     console.log(value);
     
-    if(title !== 'Type' && title !== 'Grade') {
+    if(title !== 'Type' && title !== 'Grade' && title !== 'Image') {
         return( 
             (title !== 'Year') ? 
             <View>
@@ -68,6 +70,13 @@ export default function EditItem({ title, getInput, itemDetail }) {
                     value={value}
                 /> 
             </View> 
+        )
+    } else if(title === 'Image') {
+        return (
+            <View><Text> {console.log(itemDetail)}</Text>
+                <Text style={styles.title}>{title}</Text>
+                <BottleImage source={itemDetail} big={false} />
+            </View>
         )
     }
 }
