@@ -26,8 +26,8 @@ export default function App() {
           options={{title: 'My List'}} />
         <Stack.Screen name="MyStat" component={Statistics} options={{title: 'My Statistics'}, headerOptions} />
 
-        <Stack.Screen name="CameraMode" component={CameraMode} options={{title: 'Camera Mode'}} />
-        <Stack.Screen name="CheckImage" component={CheckImage} options={{title: 'Image'}} />
+        <Stack.Screen name="CameraMode" component={CameraMode} options={{title: 'Camera Mode', headerTransparent: true }} />
+        <Stack.Screen name="CheckImage" component={CheckImage} options={{title: 'Image', headerTransparent: true }} />
 
         <Stack.Screen name="EditList" component={EditList} options={{title: 'Edit'}}/>
 
@@ -56,10 +56,14 @@ const screenStyles = {
   },
   headerBackImage: () => <Icon name="arrow-alt-circle-left" size={30} color='#fff' />,
   // headerBackImage: something,
-}
+};
 
 const headerOptions = {
   // headerBackImage: () => <Icon name="arrow-alt-circle-left" size={30} color='#fff' />,//<Image source={require('./assets/arrow-alt-circle-left-solid.svg')} />,
   headerBackTitle: 'Back',
   //headerBackTitleVisible: true 
-}
+};
+
+const transparentHeader = {
+  headerTransparent: true,
+};
