@@ -18,7 +18,7 @@ export default function Item({navigation, id, name, grade, type, setVisible }) {
                     navigation.push('Detail', { selectedId: id, navigation: navigation });}}
             >
                 <View style={styles.image}>
-                    <BottleImage /*source={}*/
+                    <BottleImage source={''}
                         big={false}
                     />
                 </View>

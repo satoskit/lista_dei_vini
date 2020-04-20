@@ -9,17 +9,17 @@ export default function List({navigation, route}) {
     const [ isLoading, setLoading ] = useState(passedIsLoading);
 
     const [ listData, setListData ] = useState([]);
-    // const emptyItem = {
-    //     id: null,
-    //     name: '',
-    //     type: '',
-    //     grade: null,
-    //     year: null,
-    //     country: '',
-    //     winery: '',
-    //     grape: '',
-    //     // picture: ''
-    // }
+    const emptyItem = {
+        id: null,
+        name: '',
+        type: '',
+        grade: null,
+        year: null,
+        country: '',
+        winery: '',
+        grape: '',
+        image: ''
+    }
 
     useEffect(() => {
         fetch('http://localhost:8080/api/v1/list')
@@ -44,7 +44,7 @@ export default function List({navigation, route}) {
             }
             <View style={styles.floatButtons}>
                 <TouchableOpacity
-                    onPress={() => navigation.push('EditList', { itemSent: null, updating: false })} 
+                    onPress={() => navigation.push('EditList', { itemSent: emptyItem, updating: false })} 
                     style={styles.addButton}
                 >
                     <Icon name="plus-circle" size={35} color="#990000"/>

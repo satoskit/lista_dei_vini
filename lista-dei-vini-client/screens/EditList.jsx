@@ -7,7 +7,7 @@ export default function EditList({navigation, route}) {
     const [ isEditing, setIsEditing ] = useState(false);
     const { updating } = route.params;
     const { itemSent } = route.params;
-    const { imageBase64Long } = route.params;
+    const { imageBase64 } = route.params;
     const emptyItem = {
         id: null,
         name: '',
@@ -17,7 +17,7 @@ export default function EditList({navigation, route}) {
         country: '',
         winery: '',
         grape: '',
-        image: imageBase64Long,
+        image: '',
     }
     const [ input, setInput ] = useState(emptyItem);
     const [ newGrade, setNewGrade ] = useState(null)

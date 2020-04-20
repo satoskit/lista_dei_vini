@@ -4,6 +4,7 @@ import { Dimensions, Image, StyleSheet, View, TouchableOpacity, Text } from 'rea
 export default function CheckImage({navigation, route}) {
     // const [ isLoading, setLoading ] = useState(route.params);
     const { imageBase64Long } = route.params;
+    const imageBase64 = imageBase64Long.split(',')[1];
     const [ imageSize, setImageSize ] = useState({width: Dimensions.get('window').width, height: null });
 
     const emptyItem = {
@@ -15,7 +16,7 @@ export default function CheckImage({navigation, route}) {
         country: '',
         winery: '',
         grape: '',
-        image: imageBase64Long,
+        image: imageBase64,
     }
 
     // const windowWidth = Dimensions.get('window').width;
@@ -52,7 +53,7 @@ export default function CheckImage({navigation, route}) {
             />
             <View>
                 <TouchableOpacity
-                    onPress={() => navigation.push('EditList', {itemSent: emptyItem, updating: false, imageBase64Long: imageBase64Long})}
+                    onPress={() => navigation.push('EditList', {itemSent: emptyItem, updating: false, imageBase64: imageBase64})}
                 >
                     <Text>Save</Text>
                 </TouchableOpacity>
