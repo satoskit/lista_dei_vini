@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Item extends DateAudit {
@@ -33,8 +34,9 @@ public class Item extends DateAudit {
 	private String winery;
 	@Column
 	private String grape;
-	@Column
-	private byte[] image;
+//	@Column
+	@Lob
+	private String image;
 	
 	public Item() {
 		
@@ -102,11 +104,10 @@ public class Item extends DateAudit {
 	public void setGrape(String grape) {
 		this.grape = grape;
 	}
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
-
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

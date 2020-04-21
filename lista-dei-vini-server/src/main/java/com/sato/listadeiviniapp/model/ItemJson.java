@@ -23,6 +23,8 @@ public class ItemJson {
 	private String winery;
 	@JsonProperty("grape")
 	private String grape;
+	@JsonProperty("image")
+	private String image;
 	@JsonProperty("created_at")
 	private Timestamp created_at;
 	
@@ -87,6 +89,12 @@ public class ItemJson {
 	}
 	public void setGrape(String grape) {
 		this.grape = grape;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	public Timestamp getCreated_at() {
 		return created_at;
