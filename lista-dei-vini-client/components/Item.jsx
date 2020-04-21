@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         margin: 3,
+        // alignContent: 'center',
     },
     list: {
         flex: 0.8,
@@ -65,7 +66,8 @@ const styles = StyleSheet.create({
     delete: {
         flex: 0.5,
         alignItems: 'flex-end',
-        marginRight: 12,
+        justifyContent: 'center',
+        marginRight: 30,
         // position: 'absolute',
         // bottom: 15,
         // right: 12,
