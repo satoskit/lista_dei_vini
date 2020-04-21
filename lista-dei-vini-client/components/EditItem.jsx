@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Picker, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Picker, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 
 import GradeStars from './GradeStars';
 import BottleImage from '../components/BottleImage';
+import CameraButton from './CameraButton';
 
-export default function EditItem({ title, getInput, itemDetail }) {
+export default function EditItem({ title, getInput, itemDetail, navigation }) {
     const [ value, setValue ] = useState(itemDetail);
     console.log(value);
     
@@ -73,9 +74,14 @@ export default function EditItem({ title, getInput, itemDetail }) {
         )
     } else if(title === 'Image') {
         return (
-            <View><Text> {console.log(itemDetail)}</Text>
-                <Text style={styles.title}>{title}</Text>
-                <BottleImage source={itemDetail} big={false} />
+            <View>
+                <Text style={styles.title}>{title}{console.log(itemDetail)}</Text>
+                { itemDetail
+                    ? <BottleImage source={itemDetail} big={true} />
+                    : <Text>No Image</Text>
+                }
+                {/* TODO: make it possible to upload later */}
+                {/* <CameraButton navigation={navigation} /> */}
             </View>
         )
     }

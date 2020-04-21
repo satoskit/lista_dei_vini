@@ -3,6 +3,7 @@ import { Button, StyleSheet, TouchableOpacity, View, ActivityIndicator } from 'r
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import ListItem from '../components/ListItem';
+import CameraButton from '../components/CameraButton';
 
 export default function List({navigation, route}) {
     const {passedIsLoading} = route.params
@@ -49,12 +50,7 @@ export default function List({navigation, route}) {
                 >
                     <Icon name="plus-circle" size={35} color="#990000"/>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('CameraMode')} 
-                    style={styles.addButton}
-                >
-                    <Icon name="camera" size={35} color="#990000"/>
-                </TouchableOpacity>
+                <CameraButton navigation={navigation} />
             </View>
         </View>
     ) 

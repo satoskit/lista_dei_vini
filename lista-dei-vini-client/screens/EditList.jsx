@@ -17,7 +17,7 @@ export default function EditList({navigation, route}) {
         country: '',
         winery: '',
         grape: '',
-        image: '',
+        image: imageBase64,
     }
     const [ input, setInput ] = useState(emptyItem);
     const [ newGrade, setNewGrade ] = useState(null)
@@ -104,7 +104,8 @@ export default function EditList({navigation, route}) {
             <EditItem title='Grape' getInput={value => setInput({...input, grape: value})} 
                 itemDetail={itemSent.grape} />
             <EditItem title='Image' setInput={value => setInput({...input, image: value})} 
-                itemDetail={itemSent.image} />
+                itemDetail={itemSent.image}
+                navigation={navigation} />
         </View> 
     )
 }
