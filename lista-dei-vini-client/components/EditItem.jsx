@@ -75,7 +75,7 @@ export default function EditItem({ title, getInput, itemDetail, navigation }) {
     } else if(title === 'Image') {
         return (
             <View>
-                <Text style={styles.title}>{title}{console.log(itemDetail)}</Text>
+                <Text style={styles.title}>{title}</Text>
                 { itemDetail
                     ? <BottleImage source={itemDetail} big={true} />
                     : <Text>No Image</Text>

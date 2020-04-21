@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import DeleteAlert from './DeleteAlert';
 import BottleImage from './BottleImage';
 
-export default function Item({navigation, id, name, grade, type, setVisible }) {
+export default function Item({navigation, id, name, grade, type, image, setVisible }) {
     // set to 0 if grade is not set before
     if(grade === null) { grade = 0; }
     return (
@@ -18,9 +18,8 @@ export default function Item({navigation, id, name, grade, type, setVisible }) {
                     navigation.push('Detail', { selectedId: id, navigation: navigation });}}
             >
                 <View style={styles.image}>
-                    <BottleImage source={''}
-                        big={false}
-                    />
+                    {image ?<BottleImage source={image} big={false} />
+                    : <BottleImage source={''} big={false} />}
                 </View>
                 <View>
                     <Text style={styles.item}>Name: {name}</Text>

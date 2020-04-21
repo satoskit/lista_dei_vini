@@ -16,7 +16,7 @@ export default function ListItem ({navigation, listData}) {
                     grade={item.grade}
                     name={item.name}
                     type={item.type}
-                    // pic={item.pic}
+                    image={item.image}
                     // onPress={onPress}
                     navigation={navigation}
                 />)}}
