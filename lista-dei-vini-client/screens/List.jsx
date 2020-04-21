@@ -22,6 +22,18 @@ export default function List({navigation, route}) {
         image: ''
     }
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerLeft: () => (
+                <TouchableOpacity style={styles.backButton}
+                    onPress={() => navigation.navigate('Home') }
+                >
+                    <Icon name="arrow-alt-circle-left" size={30} color='#fff' />
+                </TouchableOpacity>
+            )
+        })
+    });
+
     useEffect(() => {
         fetch('http://localhost:8080/api/v1/list')
         .then((response) => 
@@ -90,5 +102,8 @@ const styles = StyleSheet.create({
     },
     item: {
         padding: 10,
-    }
+    },
+    backButton: {
+        margin: 10
+    },
 });
