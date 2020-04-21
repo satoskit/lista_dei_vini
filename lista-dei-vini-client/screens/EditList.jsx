@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import EditItem from '../components/EditItem';
 
@@ -83,7 +83,7 @@ export default function EditList({navigation, route}) {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <Text>Here you can edit your wine list.</Text>
             <EditItem title='Name' getInput={value => {
                 console.log(value)
@@ -106,7 +106,7 @@ export default function EditList({navigation, route}) {
             <EditItem title='Image' setInput={value => setInput({...input, image: value})} 
                 itemDetail={itemSent.image}
                 navigation={navigation} />
-        </View> 
+        </ScrollView> 
     )
 }
 
