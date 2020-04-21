@@ -51,14 +51,16 @@ export default function CheckImage({navigation, route}) {
                 resizeMode: 'contain',}}
             source={{uri: imageBase64Long}}
             />
-            <View>
+            <View style={styles.buttons}>
                 <TouchableOpacity
                     onPress={() => navigation.push('EditList', {itemSent: emptyItem, updating: false, imageBase64: imageBase64})}
                 >
-                    <Text>Save</Text>
+                    <Text style={styles.save}>Save</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text>Cancel</Text>
+                <TouchableOpacity
+                    onPress={() => navigation.pop()}
+                >
+                    <Text style={styles.cancel}>Cancel</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -69,5 +71,26 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'grey'
+    },
+    buttons: {
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        alignContent: 'center',
+    },
+    save: {
+        backgroundColor: '#fff',
+        borderRadius: 30,
+        padding: 10,
+        margin: 10,
+        fontSize: 15,
+    },
+    cancel: {
+        borderColor: '#fff',
+        borderWidth: 1,
+        borderRadius: 30,
+        padding: 10,
+        margin: 10,
+        fontSize: 15,
     },
 })
