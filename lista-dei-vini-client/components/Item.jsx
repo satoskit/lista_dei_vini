@@ -10,7 +10,7 @@ export default function Item({navigation, id, name, grade, type, image, setVisib
     // set to 0 if grade is not set before
     if(grade === null) { grade = 0; }
     return (
-        <View>
+        <View style={styles.container}>
             {/* TODO: thumbnail?*/}
             {/* <View style={styles.image}></View> */}
             <TouchableOpacity style={styles.list}
@@ -22,10 +22,9 @@ export default function Item({navigation, id, name, grade, type, image, setVisib
                     : <BottleImage source={''} big={false} />}
                 </View>
                 <View>
-                    <Text style={styles.item}>Name: {name}</Text>
+                    <Text style={styles.item}>{name}</Text>
                     <GradeStars grade={grade} />
                     <Text>Type: {type}</Text>
-                    <Text>Picture: </Text>
                 </View>
             </TouchableOpacity>
             {/* <TouchableOpacity
@@ -35,14 +34,21 @@ export default function Item({navigation, id, name, grade, type, image, setVisib
             >
                 <Icon name="trash-o" size={20} color="#990000" />
             </TouchableOpacity> */}
-            <View style={styles.delete}><DeleteAlert id={id} navigation={navigation}/></View>
+            <View style={styles.delete}>
+                <DeleteAlert id={id} navigation={navigation}/>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    list: {
+    container: {
         flex: 1,
+        flexDirection: 'row',
+        margin: 3,
+    },
+    list: {
+        flex: 0.8,
         alignItems: 'flex-start',
         // justifyContent: 'flex-start'
         flexDirection: 'row',
@@ -50,17 +56,20 @@ const styles = StyleSheet.create({
     image: {
         width: 60,
         height: 60,
+        marginRight: 5,
     },
     item: {
         padding: 10,
         fontSize: 25,
     },
     delete: {
-        alignItems: 'center',
-        position: 'absolute',
-        bottom: 15,
-        right: 12,
-        width: 60,
-        height: 60,
+        flex: 0.5,
+        alignItems: 'flex-end',
+        marginRight: 12,
+        // position: 'absolute',
+        // bottom: 15,
+        // right: 12,
+        // width: 60,
+        // height: 60,
     },
 });

@@ -12,7 +12,12 @@ export default function BottleImage({source, big}) {
     } else if(source.startsWith('/9g')) {
         sourceUri = 'data:image/jpg;base64,' + source
     } else {
-        return <View style={big ? stlyes.noimageBig : stlyes.noimageSmall}><Text>No Image</Text><Icon name="image" size={20} /></View>
+        return (
+            <View style={big ? stlyes.noimageBig : stlyes.noimageSmall}>
+                <Text>No Image</Text>
+                <Icon name="image" size={20} />
+            </View> 
+        )
     }
 
     return (
@@ -32,21 +37,24 @@ const stlyes = StyleSheet.create({
     },
     big: { // TODO: set size 
         resizeMode: 'center',
-        width: 100, 
-        height: 100,
+        width: 170, 
+        height: 170,
     },
     noimageSmall: {
-        flex: 1,
+        // flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         width: 60, 
         height: 60,
     },
     noimageBig: {
-        flex: 1,
+        // flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        width: 100, 
-        height: 100,
+        width: 170, 
+        height: 170,
+    },
+    text: {
+        textAlign: 'justify',
     },
 })

@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import _ from 'lodash';
 import GradeStars from '../components/GradeStars';
@@ -62,13 +62,17 @@ export default function ItemDetail({route, navigation}) {
                 <View style={styles.star} ><GradeStars grade={0}  /></View>
                 
             </View>)
-        } else if(key === 'image') {
-        (value) ? itemList.push(<View key={key}><BottleImage source={value} /></View>) 
-            : itemList.push(
-            <View key={key}>
-                <Text style={styles.title}>{keyToUpperCase(key)}</Text>
-                <Text style={styles.value}>{"    "}</Text>
-            </View>)
+        // } else if(key === 'image') {
+        // (value) ? itemList.push(
+        //     <View key={key}>
+        //         <Text style={styles.title}>{keyToUpperCase(key)}</Text>
+        //         <BottleImage source={value} big={true}/>
+        //     </View>) 
+        //     : itemList.push(
+        //     <View key={key}>
+        //         <Text style={styles.title}>{keyToUpperCase(key)}</Text>
+        //         <Text style={styles.value}>{"    "}</Text>
+        //     </View>)
         }
     }
 
@@ -81,7 +85,9 @@ export default function ItemDetail({route, navigation}) {
             {isLoading ? <View style={styles.loading}>
                     <ActivityIndicator size="large" color="#990000" />
                 </View>
-            : <View style={styles.detail}>{itemList}</View> }
+            : <ScrollView contentContainerStyle={styles.detail}>
+                <View style={styles.image}><BottleImage source={item.image ? item.image : ''} big={true} /></View>
+                <View>{itemList}</View></ScrollView> }
         </View>
     )
 }
@@ -101,13 +107,18 @@ const styles = StyleSheet.create({
     title: {
         padding: 5,
         fontSize: 17,
+        borderBottomColor: '#990000',
+        borderBottomWidth: StyleSheet.hairlineWidth,
     },
     value: {
-        padding: 5,
+        padding: 8,
         fontSize: 20,
     },
     star: {
         padding: 5,
+    },
+    image: {
+        alignItems: 'center',
     },
     doneButton: {
         backgroundColor: '#fff',
