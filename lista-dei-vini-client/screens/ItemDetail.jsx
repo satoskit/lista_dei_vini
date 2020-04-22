@@ -25,7 +25,7 @@ export default function ItemDetail({route, navigation}) {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/v1/list/?id=${selectedId}`)
+        fetch(`http://localhost:8080/api/v1/list/id?id=${selectedId}`)
         .then((response) => 
             response.json().then((json) => {
             setItem(json);
