@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Button, StyleSheet, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { Button, StyleSheet, TouchableOpacity, View, ActivityIndicator, Text, TextInput } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import ListItem from '../components/ListItem';
@@ -21,6 +21,8 @@ export default function List({navigation, route}) {
         grape: '',
         image: ''
     }
+    const [ searchOn, setSearchOn ] = useState(false);
+    const [ searchWord, setSearchWord ] = useState("");
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -29,6 +31,13 @@ export default function List({navigation, route}) {
                     onPress={() => navigation.navigate('Home') }
                 >
                     <Icon name="arrow-alt-circle-left" size={30} color='#fff' />
+                </TouchableOpacity>
+            ), 
+            headerRight: () => (
+                <TouchableOpacity style={styles.backButton}
+                    onPress={() => setSearchOn(!searchOn) }
+                >
+                    <Icon name="search" size={30} color='#fff' />
                 </TouchableOpacity>
             )
         })
@@ -47,6 +56,21 @@ export default function List({navigation, route}) {
 
     return (
         <View style={styles.container}>
+            {searchOn ? 
+                <View style={styles.search}>
+                    <TextInput style={styles.input} 
+                        onChangeText={text => setSearchWord(text)}
+                        value={searchWord}
+                        placeholder="Type a name of wine, type, year..."
+                    />
+                    <TouchableOpacity style={styles.searchButton}
+                        // onPress={() => }
+                    >
+                        <Text style={styles.find}>Find</Text>
+                        {/* <Icon name="search" size={25} color='#990000' /> */}
+                    </TouchableOpacity>
+                </View>
+                : null}
             {isLoading ? 
                 <View style={styles.loading}>
                     <ActivityIndicator size="large" color="#990000" />
@@ -105,5 +129,36 @@ const styles = StyleSheet.create({
     },
     backButton: {
         margin: 10
+    },
+    serach: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        margin: 5,
+    },
+    input: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginBottom: 5,
+        marginTop: 10,
+        padding: 7,
+        height: 30,
+        borderColor: '#999999',
+        borderWidth: 1,
+        borderRadius: 2,
+    },
+    searchButton: {
+        flexDirection: 'row',
+        width: 50,
+        alignSelf: 'flex-end',
+        marginRight: 15,
+        // borderWidth: 1,
+        borderRadius: 10,
+        padding: 6,
+        backgroundColor: '#990000',
+        justifyContent: 'center',
+    },
+    find: {
+        color: '#fff',
+        // marginRight: 5,
     },
 });
