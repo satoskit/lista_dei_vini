@@ -55,35 +55,6 @@ public class ItemServiceImpl implements ItemService {
 		return itemJsonList;
 	}
 	
-	// file to/from byte[]
-//	public byte[] convertToByte(File image) {
-//		BufferedImage bImage;
-//		ByteArrayOutputStream boStream = new ByteArrayOutputStream();
-//		try {
-//			bImage = ImageIO.read(image);
-//			ImageIO.write(bImage, "jpg", boStream);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		byte[] imageByte = boStream.toByteArray();
-//		return imageByte;
-//	}
-//	
-//	public File convertFromByte(byte[] imageByte, String filepath) {
-//		File image = new File(filepath + "saved.jpg");
-//		ByteArrayInputStream biStream = new ByteArrayInputStream(imageByte);
-//		try {
-//			BufferedImage bImage = ImageIO.read(biStream);
-//			ImageIO.write(bImage, "jpg", image);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return image;
-//	}
-
 	@Override
 	public void createItem(Item item) {
 		itemRepo.save(item);
@@ -225,6 +196,36 @@ public class ItemServiceImpl implements ItemService {
 //	public List<Item> sortByWineryDesc(String winery) {
 //		// TODO Auto-generated method stub
 //		return null;
+//	}
+
+	
+	// file to/from byte[]
+//	public byte[] convertToByte(File image) {
+//		BufferedImage bImage;
+//		ByteArrayOutputStream boStream = new ByteArrayOutputStream();
+//		try {
+//			bImage = ImageIO.read(image);
+//			ImageIO.write(bImage, "jpg", boStream);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		byte[] imageByte = boStream.toByteArray();
+//		return imageByte;
+//	}
+//	
+//	public File convertFromByte(byte[] imageByte, String filepath) {
+//		File image = new File(filepath + "saved.jpg");
+//		ByteArrayInputStream biStream = new ByteArrayInputStream(imageByte);
+//		try {
+//			BufferedImage bImage = ImageIO.read(biStream);
+//			ImageIO.write(bImage, "jpg", image);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		return image;
 //	}
 
 }

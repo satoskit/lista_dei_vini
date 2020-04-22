@@ -1,22 +1,14 @@
 package com.sato.listadeiviniapp.service;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sato.listadeiviniapp.ListaDeiViniAppApplicationProperties;
-import com.sato.listadeiviniapp.controller.SystembolagetAPIController;
 import com.sato.listadeiviniapp.model.ItemSystembolaget;
 
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -56,16 +48,4 @@ public class SystembolagetProductServiceImpl implements SystembolagetProductServ
 		return null;
 	}
 	
-	// Example from Pluralsight
-//	private Mono<ResponseEntity<ItemSystembolaget>> postNewItem() {
-//		
-//		return webClient.post().body(Mono.just(new ItemSystembolaget(null, "Something")), ItemSystembolaget.class)
-//				.exchange().flatMap(response -> reponse.toEntity(ItemSystembolaget.class))
-//				.doOnSuccess(o -> System.out.println("post " + o));
-//	}
-//	private Flux<ItemSystembolaget> getAllItems() {
-//		return webClient.get().retrieve().bodyToFlux(ItemSystembolaget.class)
-//				.doOnNext(o -> System.out.println("get " + o));
-//	}
-
 }
