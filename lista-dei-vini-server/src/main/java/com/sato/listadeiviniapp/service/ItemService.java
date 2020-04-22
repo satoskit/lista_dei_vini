@@ -16,7 +16,7 @@ public interface ItemService {
 	public ItemJson getItemById(Long id);
 	
 //	public List<ItemJson> getItemsByGrade(Integer grade);
-//	public List<ItemJson> getItemsByCountry(String country);
+	public List<ItemJson> getItemsByCountry(String country);
 //	public List<ItemJson> getItemsByType(String type);
 //	public List<ItemJson> getItemsByGrape(String grape);
 //	public List<ItemJson> getItemsByYear(Integer year);

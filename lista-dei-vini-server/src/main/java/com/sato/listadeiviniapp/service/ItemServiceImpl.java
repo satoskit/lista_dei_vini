@@ -135,10 +135,11 @@ public class ItemServiceImpl implements ItemService {
 //		return itemRepo.findAllByGrade(grade);
 //	}
 //	
-//	@Override
-//	public List<ItemJson> getItemsByCountry(String country) {
-//		return itemRepo.findAllByCountry(country);
-//	}
+	@Override
+	public List<ItemJson> getItemsByCountry(String country) {
+		List<Item> items = itemRepo.findAllByCountry(country);
+		return convertToListOfItemJson(items);
+	}
 //
 //	@Override
 //	public List<ItemJson> getItemsByType(String type) {

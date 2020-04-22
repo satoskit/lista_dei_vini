@@ -29,7 +29,7 @@ public class ItemController {
 	@Autowired
 	private final ItemServiceImpl itemService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(ItemServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
 	
 	public ItemController(ItemServiceImpl itemService) {
 		this.itemService = itemService;
@@ -59,7 +59,7 @@ public class ItemController {
 		return ResponseEntity.ok().body(itemService.getList());
 	}
 	
-	@GetMapping("/list/")
+	@GetMapping("/list/id")
 	public ResponseEntity<ItemJson> getItemById(@RequestParam(value="id") Long id) {
 		return ResponseEntity.ok().body(itemService.getItemById(id));
 	}
@@ -70,11 +70,11 @@ public class ItemController {
 //		return ResponseEntity.ok().body(listByGrade);
 //	}
 //	
-//	@GetMapping("/list/{country}")
-//	public ResponseEntity<List<Item>> getItemsByCountry(@PathVariable(value="country") String country) {
-//		List<Item> listByCountry = itemService.getItemsByCountry(country);
-//		return ResponseEntity.ok().body(listByCountry);
-//	}
+	@GetMapping("/list/country")
+	public ResponseEntity<List<ItemJson>> getItemsByCountry(@RequestParam(value="country") String country) {
+		List<ItemJson> listByCountry = itemService.getItemsByCountry(country);
+		return ResponseEntity.ok().body(listByCountry);
+	}
 //	
 //	@GetMapping("/list/{type}")
 //	public ResponseEntity<List<Item>> getItemsByType(@PathVariable(value="type") String type) {
