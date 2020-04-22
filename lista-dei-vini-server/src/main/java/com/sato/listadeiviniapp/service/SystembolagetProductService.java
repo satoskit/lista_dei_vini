@@ -7,13 +7,13 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import com.sato.listadeiviniapp.model.ItemJson;
+import com.sato.listadeiviniapp.model.ItemSystembolaget;
 
 
 public interface SystembolagetProductService {
 	
 //	public Mono<ResponseEntity<List<ItemJson>>> getItemByName(String searchedName);
-	public Mono<ItemJson> getItemByName(String searchedName);
-	public ItemJson getItemByInteger(int searchWord);
+	public Mono<ItemSystembolaget> getItemByName(String searchedName);
+	public ItemSystembolaget getItemByInteger(int searchWord);
 	
 }

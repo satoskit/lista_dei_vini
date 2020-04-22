@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sato.listadeiviniapp.ListaDeiViniAppApplicationProperties;
 import com.sato.listadeiviniapp.controller.SystembolagetAPIController;
-import com.sato.listadeiviniapp.model.ItemJson;
+import com.sato.listadeiviniapp.model.ItemSystembolaget;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -39,32 +39,32 @@ public class SystembolagetProductServiceImpl implements SystembolagetProductServ
 	}
 
 	@Override
-	public Mono<ItemJson> getItemByName(String searchedName) {
+	public Mono<ItemSystembolaget> getItemByName(String searchedName) {
 		logger.info(searchedName + " " + API_KEY);
 		return webClient.get().uri(uriBuilder -> 
 				uriBuilder.path("search").queryParam("SearchQuery", searchedName).build(searchedName))
 			.header(HEADER_NAME, API_KEY)
-//			.exchange().flatMap(response -> response.toEntityList(ItemJson.class));
+//			.exchange().flatMap(response -> response.toEntityList(ItemSystembolaget.class));
 			.retrieve()
-			.bodyToMono(ItemJson.class);
+			.bodyToMono(ItemSystembolaget.class);
 //		return null;
 	}
 
 	@Override
-	public ItemJson getItemByInteger(int searchWord) {
+	public ItemSystembolaget getItemByInteger(int searchWord) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	// Example from Pluralsight
-//	private Mono<ResponseEntity<ItemJson>> postNewItem() {
+//	private Mono<ResponseEntity<ItemSystembolaget>> postNewItem() {
 //		
-//		return webClient.post().body(Mono.just(new ItemJson(null, "Something")), ItemJson.class)
-//				.exchange().flatMap(response -> reponse.toEntity(ItemJson.class))
+//		return webClient.post().body(Mono.just(new ItemSystembolaget(null, "Something")), ItemSystembolaget.class)
+//				.exchange().flatMap(response -> reponse.toEntity(ItemSystembolaget.class))
 //				.doOnSuccess(o -> System.out.println("post " + o));
 //	}
-//	private Flux<ItemJson> getAllItems() {
-//		return webClient.get().retrieve().bodyToFlux(ItemJson.class)
+//	private Flux<ItemSystembolaget> getAllItems() {
+//		return webClient.get().retrieve().bodyToFlux(ItemSystembolaget.class)
 //				.doOnNext(o -> System.out.println("get " + o));
 //	}
 
