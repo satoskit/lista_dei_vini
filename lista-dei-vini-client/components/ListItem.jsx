@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ActivtyIndicator, FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
 
 import Item from './Item';
 
@@ -70,7 +70,6 @@ export default function ListItem ({navigation, listData, sortBy}) {
                     type={item.type}
                     country={item.country}
                     image={item.image}
-                    // onPress={onPress}
                     navigation={navigation}
                 />)}}
                 keyExtractor={(item, index) => `listitem-${index}`}
@@ -83,7 +82,6 @@ const styles = StyleSheet.create({
     list: {
         flex: 1,
         alignItems: 'flex-start',
-        // justifyContent: 'flex-start'
     },
     item: {
         padding: 10,

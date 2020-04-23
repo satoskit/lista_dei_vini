@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -100,11 +100,5 @@ const styles = StyleSheet.create({
         marginLeft: 250,
         bottom: 5,
         // alignItems: 'center',
-    },
-    showImage: {
-        // flex: 1,
-        height: 300,
-        width: 300,
-        resizeMode: 'contain',
     },
 })

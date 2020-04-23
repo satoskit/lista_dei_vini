@@ -1,9 +1,10 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useLayoutEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 import EditItem from '../components/EditItem';
 
 export default function EditList({navigation, route}) {
+    // TODO: create function 
     const [ isEditing, setIsEditing ] = useState(false);
     const { updating } = route.params;
     const { itemSent } = route.params;
@@ -30,7 +31,6 @@ export default function EditList({navigation, route}) {
                     mergeItemSentAndInput(itemSent, input);
                     if(!(updating)){
                         createItem(input);
-                        // navigation.push('MyList', { passedIsLoading: true });
                     } else {
                         updateItem(input);
                     }
@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'flex-start',
-        // justifyContent: 'flex-start',
         margin: 15,
         alignItems: 'stretch'
     },

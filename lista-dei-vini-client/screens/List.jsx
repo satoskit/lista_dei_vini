@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Button, StyleSheet, TouchableOpacity, View, ActivityIndicator, Text, TextInput } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, ActivityIndicator, Text, TextInput } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import ListItem from '../components/ListItem';
@@ -135,8 +135,6 @@ export default function List({navigation, route}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // alignItems: 'center',
-        // justifyContent: 'flex-start'
     },
     loading: {
         flex: 1,
@@ -144,7 +142,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     floatButtons: {
-        // flex: ,
         alignItems: 'center',
         flexDirection: 'column',
         position: 'absolute',
@@ -154,12 +151,6 @@ const styles = StyleSheet.create({
         height: 60,
     },
     addButton: {
-        // alignItems: 'center',
-        // position: 'absolute',
-        // bottom: 15,
-        // right: 12,
-        // width: 60,
-        // height: 60,
     },
     list: {
         justifyContent: 'flex-start'
@@ -199,7 +190,6 @@ const styles = StyleSheet.create({
     },
     find: {
         color: '#fff',
-        // marginRight: 5,
     },
     sortview: {
         flexDirection: 'row',
@@ -215,7 +205,6 @@ const styles = StyleSheet.create({
         padding: 3,
     },
     selected: {
-        // backgroundColor: '#808080',
         color: '#666666',
         fontWeight: 'bold',
     },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function Home({navigation}) {
 
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#990000',
-        // color: '#fff',
         padding: 20,
         margin: 8,
         borderRadius: 5,

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Dimensions, Image, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 
 export default function CheckImage({navigation, route}) {
-    // const [ isLoading, setLoading ] = useState(route.params);
     const { imageBase64Long } = route.params;
     const imageBase64 = imageBase64Long.split(',')[1];
     const [ imageSize, setImageSize ] = useState({width: Dimensions.get('window').width, height: null });

@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import GradeStars from './GradeStars';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
+import GradeStars from './GradeStars';
 import DeleteAlert from './DeleteAlert';
 import BottleImage from './BottleImage';
 
@@ -47,12 +46,10 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         margin: 3,
-        // alignContent: 'center',
     },
     list: {
         flex: 0.8,
         alignItems: 'flex-start',
-        // justifyContent: 'flex-start'
         flexDirection: 'row',
     },
     image: {
@@ -69,10 +66,5 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         justifyContent: 'center',
         marginRight: 30,
-        // position: 'absolute',
-        // bottom: 15,
-        // right: 12,
-        // width: 60,
-        // height: 60,
     },
 });

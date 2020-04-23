@@ -3,7 +3,8 @@ import { Alert, Platform, StyleSheet, Text, TouchableHighlight, TouchableOpacity
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function DeleteModal({id, navigation}) {
-    const [ isVisible, setVisible ] = useState(false);
+  // TODO: create modal for mobile
+  const [ isVisible, setVisible ] = useState(false);
 
     function toggleAlert() {
       const alertText = 'Are you sure that you want to delete?';
@@ -38,7 +39,6 @@ export default function DeleteModal({id, navigation}) {
         const reqestSetting = {
             method: 'Delete',
             headers: { 'Content-Type': 'application/json' }, 
-            // body: JSON.stringify(input)
         }
         fetch(`http://localhost:8080/api/v1/list/${id}`, reqestSetting)
         .then((response) => 

@@ -62,17 +62,6 @@ export default function ItemDetail({route, navigation}) {
                 <View style={styles.star} ><GradeStars grade={0}  /></View>
                 
             </View>)
-        // } else if(key === 'image') {
-        // (value) ? itemList.push(
-        //     <View key={key}>
-        //         <Text style={styles.title}>{keyToUpperCase(key)}</Text>
-        //         <BottleImage source={value} big={true}/>
-        //     </View>) 
-        //     : itemList.push(
-        //     <View key={key}>
-        //         <Text style={styles.title}>{keyToUpperCase(key)}</Text>
-        //         <Text style={styles.value}>{"    "}</Text>
-        //     </View>)
         }
     }
 
