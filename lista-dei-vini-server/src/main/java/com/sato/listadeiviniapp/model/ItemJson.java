@@ -1,6 +1,7 @@
 package com.sato.listadeiviniapp.model;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -84,8 +85,8 @@ public class ItemJson {
 	public Timestamp getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Timestamp created_at) {
-		this.created_at = created_at;
+	public void setCreated_at(Instant created_at) {
+		this.created_at = Timestamp.from(created_at);
 	}
 	
 }
