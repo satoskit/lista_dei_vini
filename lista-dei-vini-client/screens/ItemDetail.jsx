@@ -98,10 +98,12 @@ const styles = StyleSheet.create({
         fontSize: 17,
         borderBottomColor: '#990000',
         borderBottomWidth: StyleSheet.hairlineWidth,
+        fontFamily: 'monospace',
     },
     value: {
         padding: 8,
         fontSize: 20,
+        fontFamily: 'monospace',
     },
     star: {
         padding: 5,
@@ -118,5 +120,6 @@ const styles = StyleSheet.create({
     buttonItem: {
         fontSize: 20,
         color: '#990000',
+        fontFamily: 'monospace',
     }
 })

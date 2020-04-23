@@ -23,8 +23,8 @@ export default function Item({navigation, id, name, grade, type, country, image,
                 <View>
                     <Text style={styles.item}>{name}</Text>
                     <GradeStars grade={grade} />
-                    <Text>Type: {type}</Text>
-                    <Text>Country: {country}</Text>
+                    <Text style={{fontFamily: 'monospace',}}>Type: {type}</Text>
+                    <Text style={{fontFamily: 'monospace',}}>Country: {country}</Text>
                 </View>
             </TouchableOpacity>
             {/* <TouchableOpacity
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     item: {
         padding: 10,
         fontSize: 25,
+        fontFamily: 'monospace',
     },
     delete: {
         flex: 0.5,

@@ -126,5 +126,6 @@ const styles = StyleSheet.create({
     buttonItem: {
         fontSize: 20,
         color: '#990000',
+        fontFamily: 'monospace',
     }
 });

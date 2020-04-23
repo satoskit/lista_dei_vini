@@ -14,7 +14,7 @@ export default function BottleImage({source, big}) {
     } else {
         return (
             <View style={big ? stlyes.noimageBig : stlyes.noimageSmall}>
-                <Text>No Image</Text>
+                <Text style={{fontFamily: 'monospace',}}>No Image</Text>
                 <Icon name="image" size={20} />
             </View> 
         )

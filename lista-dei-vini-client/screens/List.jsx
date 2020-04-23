@@ -81,7 +81,7 @@ export default function List({navigation, route}) {
                 </View>
                 : 
                 <View style={styles.sortview}>
-                    <Text>Sort by: </Text>
+                    <Text style={{fontFamily: 'monospace',}}>Sort by: </Text>
                     <TouchableOpacity style={styles.sort}
                         onPress={() => {(sortBy=='nameAsc') ? setSortBy('nameDesc') : setSortBy('nameAsc')
                             setLoading(true);
@@ -207,8 +207,10 @@ const styles = StyleSheet.create({
     selected: {
         color: '#666666',
         fontWeight: 'bold',
+        fontFamily: 'monospace',
     },
     sorttext: {
         color: '#999999',
+        fontFamily: 'monospace',
     },
 });

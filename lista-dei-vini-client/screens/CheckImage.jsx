@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         fontSize: 15,
+        fontFamily: 'monospace',
     },
     cancel: {
         borderColor: '#fff',
@@ -91,5 +92,6 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         fontSize: 15,
+        fontFamily: 'monospace',
     },
 })
