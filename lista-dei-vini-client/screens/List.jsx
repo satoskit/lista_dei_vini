@@ -64,7 +64,7 @@ export default function List({navigation, route}) {
                         placeholder="Type a name of wine, type, year..."
                     />
                     <TouchableOpacity style={styles.searchButton}
-                        // onPress={() => }
+                        onPress={() => navigation.push('SearchResult', {searchedWord: searchWord})}
                     >
                         <Text style={styles.find}>Find</Text>
                         {/* <Icon name="search" size={25} color='#990000' /> */}

@@ -12,6 +12,7 @@ import EditList from './screens/EditList';
 import ItemDetail from './screens/ItemDetail';
 import CameraMode from './screens/CameraMode';
 import CheckImage from './screens/CheckImage';
+import SearchResult from './screens/SearchResult';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,8 @@ export default function App() {
         <Stack.Screen name="EditList" component={EditList} options={{title: 'Edit'}}/>
 
         <Stack.Screen name="Detail" component={ItemDetail} options={headerOptions} />
+
+        <Stack.Screen name="SearchResult" component={SearchResult} />
       </Stack.Navigator>
     </NavigationContainer>
   )
