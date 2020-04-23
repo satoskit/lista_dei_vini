@@ -4,10 +4,11 @@ import { Button, StyleSheet, TouchableOpacity, View, ActivityIndicator, Text, Te
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import ListItem from '../components/ListItem';
 import CameraButton from '../components/CameraButton';
+import SearchOption from '../components/SearchOption';
 
 export default function List({navigation, route}) {
     const {passedIsLoading} = route.params
-    const [ isLoading, setLoading ] = useState(passedIsLoading);
+    const [ isLoading, setLoading ] = useState({passedIsLoading});
 
     const [ listData, setListData ] = useState([]);
     const emptyItem = {
@@ -22,7 +23,14 @@ export default function List({navigation, route}) {
         image: ''
     }
     const [ searchOn, setSearchOn ] = useState(false);
-    const [ searchWord, setSearchWord ] = useState("");
+    const [ searchWord, setSearchWord ] = useState('');
+    const [ sortBy, setSortBy ] = useState('id');
+    const [ isSelected, setSelected ] = useState({
+        name: false,
+        grade: false,
+        country: false,
+        type: false,
+    });
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -51,12 +59,13 @@ export default function List({navigation, route}) {
             console.log(json);
         }))
         .catch((error) => console.error(error))
-        .finally(() => setLoading(false))
-    }, []);
+        .finally(() => setLoading(false));
+    }, [isLoading]);
 
     return (
         <View style={styles.container}>
             {searchOn ? 
+                // <SearchOption navigation={navigation} />
                 <View style={styles.search}>
                     <TextInput style={styles.input} 
                         onChangeText={text => setSearchWord(text)}
@@ -70,14 +79,45 @@ export default function List({navigation, route}) {
                         {/* <Icon name="search" size={25} color='#990000' /> */}
                     </TouchableOpacity>
                 </View>
-                : null}
+                : 
+                <View style={styles.sortview}>
+                    <Text>Sort by: </Text>
+                    <TouchableOpacity style={styles.sort}
+                        onPress={() => {(sortBy=='nameAsc') ? setSortBy('nameDesc') : setSortBy('nameAsc')
+                            setLoading(true);
+                            setSelected({name: true})
+                        }}
+                    >
+                        <Text style={isSelected.name ? styles.selected : styles.sorttext}>Name</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.sort}
+                        onPress={() => {(sortBy=='gradeAsc') ? setSortBy   ('gradeDesc') : setSortBy('gradeAsc')
+                            setLoading(true);
+                            setSelected({grade: true})
+                        }}
+                    >
+                        <Text style={isSelected.grade ? styles.selected : styles.sorttext}>Grade</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.sort}
+                        onPress={() => { if(sortBy=='typeAsc') { return null; } 
+                            setSortBy('typeAsc');
+                            setLoading(true);
+                            setSelected({type: true});
+                        }}
+                    >
+                        <Text style={isSelected.type ? styles.selected : styles.sorttext}>Type</Text>
+                    </TouchableOpacity>
+                </View>
+                }
             {isLoading ? 
                 <View style={styles.loading}>
                     <ActivityIndicator size="large" color="#990000" />
                 </View> 
             : 
                 <ListItem navigation={navigation}
-                    listData={listData} />
+                    listData={listData} 
+                    sortBy={sortBy}
+                    />
             }
             <View style={styles.floatButtons}>
                 <TouchableOpacity
@@ -160,5 +200,26 @@ const styles = StyleSheet.create({
     find: {
         color: '#fff',
         // marginRight: 5,
+    },
+    sortview: {
+        flexDirection: 'row',
+        alignSelf: 'flex-end',
+        marginRight: 15,
+        alignItems: 'center'
+    },
+    sort: {
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: '#808080',
+        margin:2,
+        padding: 3,
+    },
+    selected: {
+        // backgroundColor: '#808080',
+        color: '#666666',
+        fontWeight: 'bold',
+    },
+    sorttext: {
+        color: '#999999',
     },
 });

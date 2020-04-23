@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import DeleteAlert from './DeleteAlert';
 import BottleImage from './BottleImage';
 
-export default function Item({navigation, id, name, grade, type, image, setVisible }) {
+export default function Item({navigation, id, name, grade, type, country, image, setVisible }) {
     // set to 0 if grade is not set before
     if(grade === null) { grade = 0; }
     return (
@@ -25,6 +25,7 @@ export default function Item({navigation, id, name, grade, type, image, setVisib
                     <Text style={styles.item}>{name}</Text>
                     <GradeStars grade={grade} />
                     <Text>Type: {type}</Text>
+                    <Text>Country: {country}</Text>
                 </View>
             </TouchableOpacity>
             {/* <TouchableOpacity
