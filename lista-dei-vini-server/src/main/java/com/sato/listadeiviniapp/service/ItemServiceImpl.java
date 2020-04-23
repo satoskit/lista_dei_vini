@@ -135,73 +135,7 @@ public class ItemServiceImpl implements ItemService {
 //		return itemRepo.findAllByWinery(winery);
 //	}
 
-//	@Override
-//	public List<Item> sortByGradeAsc(Integer grade) {
-//		return itemRepo.findAll(Sort.by(Sort.Direction.ASC, "grade"));
-//	}
-//
-//	@Override
-//	public List<Item> sortByCountryAsc(String country) {
-//		return itemRepo.findAll(Sort.by(Sort.Direction.ASC, "country"));
-//	}
-//
-//	@Override
-//	public List<Item> sortByTypeAsc(String type) {
-//		return itemRepo.findAll(Sort.by(Sort.Direction.ASC, "type"));
-//	}
-//
-//	@Override
-//	public List<Item> sortByGrapeAsc(String grape) {
-//		return itemRepo.findAll(Sort.by(Sort.Direction.ASC, "grape"));
-//	}
-//
-//	@Override
-//	public List<Item> sortByYearAsc(Integer year) {
-//		return itemRepo.findAll(Sort.by(Sort.Direction.ASC, "year"));
-//	}
-//
-//	@Override
-//	public List<Item> sortByWineryAsc(String winery) {
-//		return itemRepo.findAll(Sort.by(Sort.Direction.ASC, "winery"));
-//	}
-//
-//	@Override
-//	public List<Item> sortByGradeDesc(Integer grade) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Item> sortByCountryDesc(String country) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Item> sortByTypeDesc(String type) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Item> sortByGrapeDesc(String grape) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Item> sortByYearDesc(Integer year) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Item> sortByWineryDesc(String winery) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
-	
 	// file to/from byte[]
 //	public byte[] convertToByte(File image) {
 //		BufferedImage bImage;
