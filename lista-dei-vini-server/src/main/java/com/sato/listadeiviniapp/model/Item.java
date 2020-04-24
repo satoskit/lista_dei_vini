@@ -40,6 +40,19 @@ public class Item extends DateAudit {
 		
 	}
 	
+	// for JUnit test
+	public Item(String name) {
+		this.name = name;	
+	}
+	public Item(String name, String country) {
+		this(name);
+		this.country = country;
+	}
+	public Item(String name, Integer grade) {
+		this(name);
+		this.grade = grade;
+	}
+	
 	public Item(String name, Integer grade, String type, Integer year, String country, String winery, String grape) {
 		this.name = name;
 		this.grade = grade;
