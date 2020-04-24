@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.5",
@@ -29,8 +30,28 @@
     "expo-permissions": "~8.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0",
-    "@babel/core": "^7.0.0"
+    "jest-expo": "^37.0.0",
+    "react-test-renderer": "^16.13.1"
   },
-  "private": true
+  "private": true,
+  "jest": {
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-native|my-project|react-native-button|react-native-gesture-handler|react-native-iphone-x-helper|react-native-vector-icons)/)",
+      "node_modules/(?!((jest-)?react-native|react-clone-referenced-element|expo(nent)?|@expo(nent)?/.*|react-navigation|react-native-vector-icons|@react-navigation/.*|sentry-expo|native-base))"
+    ],
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js",
+      "NavigationStacks.js": "<rootDir>/NavigationStacks.js",
+      "screens(.*)$": "<rootDir>/screens/$1"
+    },
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+    }
+  }
 }
