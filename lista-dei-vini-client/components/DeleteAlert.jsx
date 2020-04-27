@@ -40,7 +40,7 @@ export default function DeleteModal({id, navigation}) {
             method: 'Delete',
             headers: { 'Content-Type': 'application/json' }, 
         }
-        fetch(`http://localhost:8080/api/v1/list/${id}`, reqestSetting)
+        fetch(`http://localhost:8080/api/v1/delete/${id}`, reqestSetting)
         .then((response) => 
             response.json())
     }

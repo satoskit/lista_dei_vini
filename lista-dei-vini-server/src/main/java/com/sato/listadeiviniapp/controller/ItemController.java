@@ -36,19 +36,19 @@ public class ItemController {
 	}
 	
 	//TODO: @Valid needed?
-	@PostMapping("/list")
+	@PostMapping("/new-item")
 	public ResponseEntity<?> createItem(@RequestBody Item item) {
 		itemService.createItem(item);
 		return ResponseEntity.ok().body(item);
 	}
 	
-	@PostMapping("/list/{id}")
+	@PostMapping("/update/{id}")
 	public ResponseEntity<Item> updateItem(@PathVariable(value="id") Long id, @RequestBody Item item) {
 		itemService.updateItem(id, item);
 		return ResponseEntity.ok().body(item);
 	}
 	
-	@DeleteMapping("/list/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Long> deleteItem(@PathVariable(value="id") Long id) {
 		itemService.deleteItem(id);
 		return ResponseEntity.ok().body(id);

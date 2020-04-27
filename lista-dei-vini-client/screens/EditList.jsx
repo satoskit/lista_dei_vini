@@ -51,7 +51,7 @@ export default function EditList({navigation, route}) {
             headers: { 'Content-Type': 'application/json' }, 
             body: JSON.stringify(input)
         }
-        fetch('http://localhost:8080/api/v1/list', reqestSetting)
+        fetch('http://localhost:8080/api/v1/new-item', reqestSetting)
         .then((response) => 
             response.json())
     }
@@ -63,7 +63,7 @@ export default function EditList({navigation, route}) {
             headers: { 'Content-Type': 'application/json' }, 
             body: JSON.stringify(input)
         }
-        fetch(`http://localhost:8080/api/v1/list/${itemSent.id}`, reqestSetting)
+        fetch(`http://localhost:8080/api/v1/update/${itemSent.id}`, reqestSetting)
         .then((response) => 
             response.json())
     }
