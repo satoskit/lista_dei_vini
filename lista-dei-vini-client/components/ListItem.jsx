@@ -53,7 +53,7 @@ export default function ListItem ({navigation, listData, sortBy}) {
                     // names equal
                     return 0; });
             default:
-                return listData.sort((a, b) => {return a.id - b.id})
+                return listData.sort((a, b) => {return b.id - a.id})
         }
     }
     
