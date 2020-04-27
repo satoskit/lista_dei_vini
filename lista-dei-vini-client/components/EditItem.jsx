@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Picker, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 
 import GradeStars from './GradeStars';
 import BottleImage from '../components/BottleImage';
 import CameraButton from './CameraButton';
 
-export default function EditItem({ title, getInput, itemDetail, navigation }) {
+export default function EditItem({ title, getInput, itemDetail, fetchedData, navigation }) {
     const [ value, setValue ] = useState(itemDetail);
     console.log(value);
+
+    useEffect(() => {
+        if(fetchedData != '') {
+            getInput(fetchedData);
+            setValue(fetchedData); 
+        }
+    }, [fetchedData])
     
     if(title !== 'Type' && title !== 'Grade' && title !== 'Image') {
         return( 
