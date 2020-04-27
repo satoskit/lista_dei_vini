@@ -52,8 +52,10 @@ export default function ListItem ({navigation, listData, sortBy}) {
                     else if((typeA === 'Rose Wine' || typeA === 'Rosé Wine') && typeB == 'Sparkling Wine') { return -1 }
                     // names equal
                     return 0; });
+            case 'createdDesc' : 
+                return listData.sort((a, b) => {return a.id - b.id});
             default:
-                return listData.sort((a, b) => {return b.id - a.id})
+                return listData.sort((a, b) => {return b.id - a.id});
         }
     }
     

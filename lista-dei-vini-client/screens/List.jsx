@@ -24,8 +24,9 @@ export default function List({navigation, route}) {
     }
     const [ searchOn, setSearchOn ] = useState(false);
     const [ searchWord, setSearchWord ] = useState('');
-    const [ sortBy, setSortBy ] = useState('id');
+    const [ sortBy, setSortBy ] = useState('default');
     const [ isSelected, setSelected ] = useState({
+        new: false,
         name: false,
         grade: false,
         country: false,
@@ -82,6 +83,14 @@ export default function List({navigation, route}) {
                 : 
                 <View style={styles.sortview}>
                     <Text style={{fontFamily: 'monospace',}}>Sort by: </Text>
+                    <TouchableOpacity style={styles.sort}
+                        onPress={() => {(sortBy=='default') ? setSortBy('createdDesc') : setSortBy('default')
+                            setLoading(true);
+                            setSelected({new: true})
+                        }}
+                    >
+                        <Text style={isSelected.new ? styles.selected : styles.sorttext}>New</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.sort}
                         onPress={() => {(sortBy=='nameAsc') ? setSortBy('nameDesc') : setSortBy('nameAsc')
                             setLoading(true);
