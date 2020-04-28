@@ -23,7 +23,7 @@ import com.sato.listadeiviniapp.service.ItemServiceImpl;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin(origins="http://localhost:19006")
+@CrossOrigin(origins= {"http://localhost:19006", "http://localhost:19000"})
 public class ItemController {
 	
 	@Autowired
