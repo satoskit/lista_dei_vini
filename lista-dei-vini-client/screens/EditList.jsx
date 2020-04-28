@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 import EditItem from '../components/EditItem';
+import ipaddress from '../ipaddress';
 
 export default function EditList({navigation, route}) {
     // TODO: create function 
@@ -66,7 +67,7 @@ export default function EditList({navigation, route}) {
             headers: { 'Content-Type': 'application/json' }, 
             body: JSON.stringify(input)
         }
-        fetch('http://localhost:8080/api/v1/new-item', reqestSetting)
+        fetch(`http://${ipaddress}:8080/api/v1/new-item`, reqestSetting)
         .then((response) => 
             response.json())
     }
@@ -78,7 +79,7 @@ export default function EditList({navigation, route}) {
             headers: { 'Content-Type': 'application/json' }, 
             body: JSON.stringify(input)
         }
-        fetch(`http://localhost:8080/api/v1/update/${itemSent.id}`, reqestSetting)
+        fetch(`http://${ipaddress}/api/v1/update/${itemSent.id}`, reqestSetting)
         .then((response) => 
             response.json())
     }
@@ -102,7 +103,7 @@ export default function EditList({navigation, route}) {
         if(!name) { return setCannotFind(true); }
         if(fetchedData) { setFetchedData(emptyItem); }
         
-        fetch(`http://localhost:8080/systembolaget/v1/product/result-list/?searchedName=${name}`)
+        fetch(`http://${ipaddress}/systembolaget/v1/product/result-list/?searchedName=${name}`)
         .then((response) => {
             if(response.ok){
                 response.json().then((json) => {

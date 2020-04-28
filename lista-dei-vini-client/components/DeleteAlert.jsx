@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Alert, Platform, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import ipaddress from '../ipaddress';
+
 export default function DeleteModal({id, navigation}) {
   // TODO: create modal for mobile
   const [ isVisible, setVisible ] = useState(false);
@@ -40,7 +42,7 @@ export default function DeleteModal({id, navigation}) {
             method: 'Delete',
             headers: { 'Content-Type': 'application/json' }, 
         }
-        fetch(`http://localhost:8080/api/v1/delete/${id}`, reqestSetting)
+        fetch(`http://${ipaddress}:8080/api/v1/delete/${id}`, reqestSetting)
         .then((response) => 
             response.json())
     }

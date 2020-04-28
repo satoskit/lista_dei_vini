@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 
 import ListItem from '../components/ListItem';
+import ipaddress from '../ipaddress';
 
 export default function SearchResult({navigation, route}) {
     const { searchedWord } = route.params; 
@@ -15,7 +16,7 @@ export default function SearchResult({navigation, route}) {
     }, [navigation, searchedWord]);
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/v1/list')
+        fetch(`http://${ipaddress}/api/v1/list`)
         .then((response) => 
             response.json().then((json) => {
             setListData(json);

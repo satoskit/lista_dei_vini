@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import ListItem from '../components/ListItem';
 import CameraButton from '../components/CameraButton';
 import SearchOption from '../components/SearchOption';
+import ipaddress from '../ipaddress';
 
 export default function List({navigation, route}) {
     const {passedIsLoading} = route.params
@@ -53,7 +54,8 @@ export default function List({navigation, route}) {
     });
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/v1/list')
+        // fetch('http://localhost:8080/api/v1/list')
+        fetch(`http://${ipaddress}:8080/api/v1/list`)
         .then((response) => 
             response.json().then((json) => {
             setListData(json);
