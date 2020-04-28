@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import _ from 'lodash';
 
 import EditItem from '../components/EditItem';
 import ipaddress from '../ipaddress';
@@ -16,7 +17,7 @@ export default function EditList({navigation, route}) {
         name: '',
         type: '',
         grade: null,
-        year: null,
+        year: '',
         country: '',
         winery: '',
         grape: '',
@@ -85,7 +86,9 @@ export default function EditList({navigation, route}) {
     }
 
     function mergeItemSentAndInput(sentItem, input) {
-        _.isEqual(sentItem, input);
+        if(_.isEqual(sentItem, input)) {
+            return input;
+        }
 
         for(var key in input) {
             if(input[key] === null || input[key] === '') {
