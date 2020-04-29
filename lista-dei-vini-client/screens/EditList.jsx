@@ -10,7 +10,7 @@ export default function EditList({navigation, route}) {
     const [ isEditing, setIsEditing ] = useState(false);
     const { updating } = route.params;
     const { itemSent } = route.params;
-    console.log(itemSent);
+    // console.log(itemSent);
     const { imageBase64 } = route.params;
     const emptyItem = {
         id: null,
