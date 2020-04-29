@@ -129,8 +129,8 @@ export default function EditList({navigation, route}) {
     }
 
     return (
-        <View contentContainerStyle={styles.container}>
-            <ScrollView>
+        <View style={{flex: 1}}>
+            <ScrollView contentContainerStyle={styles.container}>
                 <Text>Here you can edit your wine list.</Text>
                 <EditItem title='Name' getInput={value => {
                     console.log(value)
@@ -182,7 +182,7 @@ export default function EditList({navigation, route}) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         alignItems: 'flex-start',
         margin: 15,
         alignItems: 'stretch'
