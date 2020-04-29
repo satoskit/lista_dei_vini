@@ -4,7 +4,7 @@ import { Dimensions, Image, StyleSheet, View, TouchableOpacity, Text } from 'rea
 export default function CheckImage({navigation, route}) {
     const [ isLoading, setIsLoading ] = useState(true);
     const { imageBase64Long } = route.params;
-    let imageBase64; // = imageBase64Long.split(',')[1];
+    let imageBase64 = imageBase64Long.split(',')[1];
     const [ imageSize, setImageSize ] = useState({width: Dimensions.get('window').width, height: null });
     // console.log(imageBase64Long)
     const [ emptyItem, setEmptyItem] = useState({
@@ -23,15 +23,7 @@ export default function CheckImage({navigation, route}) {
     // const windowHeight = Dimensions.get('window').height;
     
     useEffect(() => {
-        if(imageBase64Long.startsWith("/9j/")) {
-            imageBase64 =`data:image/jpeg;base64,${imageBase64Long}`;
-            console.log("jpg")
-        } else if(imageBase64Long.startsWith("iVBORw0KGgo")) {
-            imageBase64 = 'data:image/png;base64,' + imageBase64Long;
-        } else {
-            imageBase64 = imageBase64Long;
-        }
-        Image.getSize(imageBase64, (width, height) => {
+        Image.getSize(imageBase64Long, (width, height) => {
             if (imageSize.width && !imageSize.height) {
                 setImageSize({
                     width: imageSize.width,
@@ -47,7 +39,7 @@ export default function CheckImage({navigation, route}) {
             }
         }, (error) => {console.log(error)})
         if(imageBase64 !== null) { 
-            setEmptyItem({...emptyItem, image: imageBase64Long});
+            setEmptyItem({...emptyItem, image: imageBase64});
             setIsLoading(false); 
         }
     }, [])
@@ -62,7 +54,7 @@ export default function CheckImage({navigation, route}) {
                     height: imageSize.height, 
                     width: imageSize.width,
                     resizeMode: 'contain',}}
-                source={{uri: `${imageBase64}`}}
+                source={{uri: imageBase64Long}}
                 />
             }
             <View style={styles.buttons}>
