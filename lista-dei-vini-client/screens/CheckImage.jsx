@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Dimensions, Image, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 
 export default function CheckImage({navigation, route}) {
+    const [ isLoading, setIsLoading ] = useState(true);
     const { imageBase64Long } = route.params;
-    const imageBase64 = imageBase64Long.split(',')[1];
+    let imageBase64; // = imageBase64Long.split(',')[1];
     const [ imageSize, setImageSize ] = useState({width: Dimensions.get('window').width, height: null });
-
-    const emptyItem = {
+    // console.log(imageBase64Long)
+    const [ emptyItem, setEmptyItem] = useState({
         id: null,
         name: '',
         type: '',
@@ -15,14 +16,22 @@ export default function CheckImage({navigation, route}) {
         country: '',
         winery: '',
         grape: '',
-        image: imageBase64,
-    }
+        image: '',
+    })
 
     // const windowWidth = Dimensions.get('window').width;
     // const windowHeight = Dimensions.get('window').height;
     
     useEffect(() => {
-        Image.getSize(imageBase64Long, (width, height) => {
+        if(imageBase64Long.startsWith("/9j/")) {
+            imageBase64 =`data:image/jpeg;base64,${imageBase64Long}`;
+            console.log("jpg")
+        } else if(imageBase64Long.startsWith("iVBORw0KGgo")) {
+            imageBase64 = 'data:image/png;base64,' + imageBase64Long;
+        } else {
+            imageBase64 = imageBase64Long;
+        }
+        Image.getSize(imageBase64, (width, height) => {
             if (imageSize.width && !imageSize.height) {
                 setImageSize({
                     width: imageSize.width,
@@ -36,20 +45,26 @@ export default function CheckImage({navigation, route}) {
             } else {
                 setImageSize({ width: width, height: height });
             }
-        })
+        }, (error) => {console.log(error)})
+        if(imageBase64 !== null) { 
+            setEmptyItem({...emptyItem, image: imageBase64Long});
+            setIsLoading(false); 
+        }
     }, [])
 
     return(
         <View style={styles.container}>
-            <Image style={/*styles.showImage,*/ {
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: imageSize.height, 
-                width: imageSize.width,
-                resizeMode: 'contain',}}
-            source={{uri: imageBase64Long}}
-            />
+            { isLoading ? null
+                : <Image style={/*styles.showImage,*/ {
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: imageSize.height, 
+                    width: imageSize.width,
+                    resizeMode: 'contain',}}
+                source={{uri: `${imageBase64}`}}
+                />
+            }
             <View style={styles.buttons}>
                 <TouchableOpacity
                     onPress={() => navigation.push('EditList', {itemSent: emptyItem, updating: false, imageBase64: imageBase64})}

@@ -29,11 +29,11 @@ export default function CameraMode({navigation}) {
     }
 
     const takePicture = async() => {
-        let picture = await camera.takePictureAsync({base64: true })
+        let picture = await camera.takePictureAsync({quality: 0, base64: true})
         imageBase64Long = picture.base64;
         imageBase64 = await picture.base64.split(',')[1];
         console.log((picture.uri === picture.base64));
-        if(imageBase64 !=='') {
+        if(imageBase64Long !=='') {
             navigation.push('CheckImage', {imageBase64Long: imageBase64Long});
         }
     } ;
