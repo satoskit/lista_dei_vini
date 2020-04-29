@@ -37,7 +37,7 @@ export default function EditItem({ title, getInput, itemDetail, fetchedData, nav
                         getInput(text)
                         setValue(text)
                     }}
-                    value={`${value}`} 
+                    value={value} 
                     keyboardType='numeric'
                     maxLength={4} />
             </View>
