@@ -1,16 +1,47 @@
 version: '3.4'
 
 services:
-  postgres:
+  # app-client:
+  #   container_name: lista-dei-vini-client_1
+  #   build:
+  #     context: lista-dei-vini-client
+  #     dockerfile: Dockerfile
+  #   ports: 
+  #     - 19000:19000
+  #     - 19001:19001
+  #     - 19006:80
+  #   volumes: 
+  #     - ${PWD}/:/app/
+  #   depends_on: 
+  #     - app-server
+  #   networks: 
+  #     - frontend
+
+  # app-server:
+  #   container_name: lista-dei-vini-server_1
+  #   build:
+  #     context: lista-dei-vini-server
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - database
+  #   networks: 
+  #     - backend
+  #     - frontend
+      
+  database:
     image: postgres  # TODO: tag
     # restart: always
     env_file: configuration.env
     ports:
       - 5432:5432
+    volumes: 
+      - db-data:/var/lib/postgresql/data
+#     networks:
+#       - backend
 
-#networks:
-#  frontend:
-#  backend:
+# networks:
+#   frontend:
+#   backend:
 
-#volumes:
-#  db-data:
+volumes:
+  db-data:
