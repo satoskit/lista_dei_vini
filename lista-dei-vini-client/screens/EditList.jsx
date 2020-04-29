@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import _ from 'lodash';
 
 import EditItem from '../components/EditItem';
@@ -129,52 +129,54 @@ export default function EditList({navigation, route}) {
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <Text>Here you can edit your wine list.</Text>
-            <EditItem title='Name' getInput={value => {
-                console.log(value)
-                setInput({...input, name: value})}}
-                itemDetail={itemSent.name}
-                fetchedData = {fetchedData.name}
-            />
-            <TouchableOpacity style={styles.autofill}
-                onPress={() => findFromSystembolaget(input.name)}
-            >
-                <Text style={styles.autofilltext}>Auto Fill</Text>
-            </TouchableOpacity>
-            {cannotFind ? <Text style={styles.notfoundtext}>Could not find.</Text>: null}
-            <EditItem title='Grade' 
-                getInput={value => setNewGrade(value)} 
-                itemDetail={parseInt(itemSent.grade) || 0}
-                fetchedData = {parseInt(itemSent.grade) || 0}
-            />
-            <EditItem title='Type' getInput={value => {
-                    setInput({...input, type: value})}} 
-                itemDetail={itemSent.type} 
-                fetchedData = {fetchedData.type}
-            />
-            <EditItem title='Year' getInput={value => {setInput({...input, year: parseInt(value)})}} 
-                itemDetail={parseInt(itemSent.year)} 
-                fetchedData = {parseInt(itemSent.year)}
-            />
-            <EditItem title='Country' getInput={value => setInput({...input, country: value})}
-                itemDetail={itemSent.country} 
-                fetchedData = {fetchedData.country}
-            />
-            <EditItem title='Winery' getInput={value => setInput({...input, winery: value})}
-                itemDetail={itemSent.winery} 
-                fetchedData = {fetchedData.winery}
-            />
-            <EditItem title='Grape' getInput={value => setInput({...input, grape: value})} 
-                itemDetail={itemSent.grape} 
-                fetchedData = {itemSent.grape}
-            />
-            <EditItem title='Image' getInput={value => setInput({...input, image: value})} 
-                itemDetail={itemSent.image}
-                fetchedData = {itemSent.image}
-                navigation={navigation} 
-            />
-        </ScrollView> 
+        <View contentContainerStyle={styles.container}>
+            <ScrollView>
+                <Text>Here you can edit your wine list.</Text>
+                <EditItem title='Name' getInput={value => {
+                    console.log(value)
+                    setInput({...input, name: value})}}
+                    itemDetail={itemSent.name}
+                    fetchedData = {fetchedData.name}
+                />
+                <TouchableOpacity style={styles.autofill}
+                    onPress={() => findFromSystembolaget(input.name)}
+                >
+                    <Text style={styles.autofilltext}>Auto Fill</Text>
+                </TouchableOpacity>
+                {cannotFind ? <Text style={styles.notfoundtext}>Could not find.</Text>: null}
+                <EditItem title='Grade' 
+                    getInput={value => setNewGrade(value)} 
+                    itemDetail={parseInt(itemSent.grade) || 0}
+                    fetchedData = {parseInt(itemSent.grade) || 0}
+                />
+                <EditItem title='Type' getInput={value => {
+                        setInput({...input, type: value})}} 
+                    itemDetail={itemSent.type} 
+                    fetchedData = {fetchedData.type}
+                />
+                <EditItem title='Year' getInput={value => {setInput({...input, year: parseInt(value)})}} 
+                    itemDetail={parseInt(itemSent.year)} 
+                    fetchedData = {parseInt(itemSent.year)}
+                />
+                <EditItem title='Country' getInput={value => setInput({...input, country: value})}
+                    itemDetail={itemSent.country} 
+                    fetchedData = {fetchedData.country}
+                />
+                <EditItem title='Winery' getInput={value => setInput({...input, winery: value})}
+                    itemDetail={itemSent.winery} 
+                    fetchedData = {fetchedData.winery}
+                />
+                <EditItem title='Grape' getInput={value => setInput({...input, grape: value})} 
+                    itemDetail={itemSent.grape} 
+                    fetchedData = {itemSent.grape}
+                />
+                <EditItem title='Image' getInput={value => setInput({...input, image: value})} 
+                    itemDetail={itemSent.image}
+                    fetchedData = {itemSent.image}
+                    navigation={navigation} 
+                />
+            </ScrollView>
+        </View> 
     )
 }
 
