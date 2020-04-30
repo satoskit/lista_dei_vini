@@ -17,7 +17,7 @@ export default function List({navigation, route}) {
         name: '',
         type: '',
         grade: null,
-        year: null,
+        year: '',
         country: '',
         winery: '',
         grape: '',

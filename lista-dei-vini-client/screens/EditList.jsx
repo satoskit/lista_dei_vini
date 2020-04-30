@@ -155,8 +155,8 @@ export default function EditList({navigation, route}) {
                     fetchedData = {fetchedData.type}
                 />
                 <EditItem title='Year' getInput={value => {setInput({...input, year: parseInt(value)})}} 
-                    itemDetail={parseInt(itemSent.year)} 
-                    fetchedData = {parseInt(itemSent.year)}
+                    itemDetail={itemSent.year} 
+                    fetchedData = {itemSent.year}
                 />
                 <EditItem title='Country' getInput={value => setInput({...input, country: value})}
                     itemDetail={itemSent.country} 
