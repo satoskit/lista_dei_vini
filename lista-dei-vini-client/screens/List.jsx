@@ -132,7 +132,7 @@ export default function List({navigation, route}) {
             }
             <View style={styles.floatButtons}>
                 <TouchableOpacity
-                    onPress={() => navigation.push('EditList', { itemSent: emptyItem, updating: false })} 
+                    onPress={() => navigation.push('EditList', { /*itemSent: emptyItem,*/ updating: false })} 
                     style={styles.addButton}
                 >
                     <Icon name="plus-circle" size={35} color="#990000"/>

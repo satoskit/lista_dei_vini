@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import * as FileSystem from 'expo-file-system';
 
 export default function CameraMode({navigation}) {
     // TODO: how to store the permission, make user database?
@@ -10,9 +11,9 @@ export default function CameraMode({navigation}) {
     // choose front/back camera
     const [ cameraType, setCameraType ] = useState(Camera.Constants.Type.back);
     let camera = null;
-    let imageBase64 = '';
+    let imageBase64 = ''; // without 'data:...'
     // const [ imageBase64, setImageBase46 ] = useState('');
-    let imageBase64Long = '';
+    let imageBase64Long = ''; // with 'data:...'
 
     useEffect(() => {
         (async() => {
@@ -30,13 +31,21 @@ export default function CameraMode({navigation}) {
 
     const takePicture = async() => {
         let picture = await camera.takePictureAsync({quality: 0, base64: true})
-        imageBase64Long = picture.base64;
-        imageBase64 = await picture.base64.split(',')[1];
+        // imageBase64 = await picture.base64.split(',')[1];
         console.log((picture.uri === picture.base64));
+        // console.log(picture.uri)
+        
+        if(Platform.OS == 'android') {
+            imageBase64 = await FileSystem.readAsStringAsync(picture.uri, {encoding: FileSystem.EncodingType.Base64})
+            imageBase64Long = `data:image/jpeg;base64,${imageBase64}`
+        } else {
+            imageBase64Long = picture.base64;
+        }
+
         if(imageBase64Long !=='') {
             navigation.push('CheckImage', {imageBase64Long: imageBase64Long});
         }
-    } ;
+    };
 
     return (
         <View style={styles.container}>

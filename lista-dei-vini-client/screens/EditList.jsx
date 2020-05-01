@@ -1,17 +1,18 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import _ from 'lodash';
 
 import EditItem from '../components/EditItem';
 import ipaddress from '../ipaddress';
+import { getImage } from '../functions/HandleImage';
 
 export default function EditList({navigation, route}) {
     // TODO: create function 
     const [ isEditing, setIsEditing ] = useState(false);
     const { updating } = route.params;
     const { itemSent } = route.params;
-    // console.log(itemSent);
-    const { imageBase64 } = route.params;
+    const { base64 } = route.params;
+    let imageBase64 = null;
     const emptyItem = {
         id: null,
         name: '',
@@ -23,17 +24,22 @@ export default function EditList({navigation, route}) {
         grape: '',
         image: imageBase64 ? imageBase64 : null,
     }
+    const originalItem = (itemSent !== undefined) ? itemSent : emptyItem; 
+
+console.log(originalItem);
+
     const [ input, setInput ] = useState(emptyItem);
     const [ newGrade, setNewGrade ] = useState(null);
-
+    
+    // for Systembolaget data
     const [ cannotFind, setCannotFind ] = useState(false);
     const [ fetchedData, setFetchedData ] = useState(emptyItem);
-
+    
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
                 <TouchableOpacity onPress={() => {
-                    setInput(mergeItemSentAndInput(itemSent, input));
+                    setInput(mergeItemSentAndInput(originalItem, input));
                     if(!(updating)){
                         createItem(input);
                     } else {
@@ -41,14 +47,19 @@ export default function EditList({navigation, route}) {
                     }
                     navigation.push('MyList', { passedIsLoading: true });
                 }} 
-                    title="Done"
-                    style={styles.doneButton} >
+                title="Done"
+                style={styles.doneButton} >
                         <Text style={styles.buttonItem}>Done</Text>
                 </TouchableOpacity>
             )
         })
     });
 
+    // const [ isLoadingImage, setLoadingImage ] = useState(true);
+    // useEffect(() => {
+        
+    // }, [])
+    
     useEffect(() => {
         if(fetchedData.name != '') {
             setInput({
@@ -62,6 +73,9 @@ export default function EditList({navigation, route}) {
     }, [fetchedData])
 
     function createItem(input) {
+        if(base64) {
+
+        }
         console.log(input)
         const reqestSetting = {
             method: 'POST',
@@ -80,7 +94,7 @@ export default function EditList({navigation, route}) {
             headers: { 'Content-Type': 'application/json' }, 
             body: JSON.stringify(input)
         }
-        fetch(`http://${ipaddress}/api/v1/update/${itemSent.id}`, reqestSetting)
+        fetch(`http://${ipaddress}/api/v1/update/${originalItem.id}`, reqestSetting)
         .then((response) => 
             response.json())
     }
@@ -135,7 +149,7 @@ export default function EditList({navigation, route}) {
                 <EditItem title='Name' getInput={value => {
                     console.log(value)
                     setInput({...input, name: value})}}
-                    itemDetail={itemSent.name}
+                    itemDetail={originalItem.name}
                     fetchedData = {fetchedData.name}
                 />
                 <TouchableOpacity style={styles.autofill}
@@ -146,35 +160,39 @@ export default function EditList({navigation, route}) {
                 {cannotFind ? <Text style={styles.notfoundtext}>Could not find.</Text>: null}
                 <EditItem title='Grade' 
                     getInput={value => setNewGrade(value)} 
-                    itemDetail={parseInt(itemSent.grade) || 0}
-                    fetchedData = {parseInt(itemSent.grade) || 0}
+                    itemDetail={parseInt(originalItem.grade) || 0}
+                    fetchedData = {parseInt(originalItem.grade) || 0}
                 />
                 <EditItem title='Type' getInput={value => {
                         setInput({...input, type: value})}} 
-                    itemDetail={itemSent.type} 
+                    itemDetail={originalItem.type} 
                     fetchedData = {fetchedData.type}
                 />
                 <EditItem title='Year' getInput={value => {setInput({...input, year: parseInt(value)})}} 
-                    itemDetail={itemSent.year} 
-                    fetchedData = {itemSent.year}
+                    itemDetail={originalItem.year} 
+                    fetchedData = {originalItem.year}
                 />
                 <EditItem title='Country' getInput={value => setInput({...input, country: value})}
-                    itemDetail={itemSent.country} 
+                    itemDetail={originalItem.country} 
                     fetchedData = {fetchedData.country}
                 />
                 <EditItem title='Winery' getInput={value => setInput({...input, winery: value})}
-                    itemDetail={itemSent.winery} 
+                    itemDetail={originalItem.winery} 
                     fetchedData = {fetchedData.winery}
                 />
                 <EditItem title='Grape' getInput={value => setInput({...input, grape: value})} 
-                    itemDetail={itemSent.grape} 
-                    fetchedData = {itemSent.grape}
+                    itemDetail={originalItem.grape} 
+                    fetchedData = {originalItem.grape}
                 />
-                <EditItem title='Image' getInput={value => setInput({...input, image: value})} 
-                    itemDetail={itemSent.image}
-                    fetchedData = {itemSent.image}
+                {/* <EditItem title='Image' getInput={value => setInput({...input, image: value})} 
+                    itemDetail={originalItem.image}
+                    fetchedData = {originalItem.image}
                     navigation={navigation} 
-                />
+                /> */}
+                <Image 
+                    source={{uri: `http://${ipaddress}:8080/temp/image/${Math.floor(Math.random() * 100)}`, cache: 'reload'}}
+                    style={{resizeMode: 'center', height: 170, width: 170}}
+                ></Image>
             </ScrollView>
         </View> 
     )

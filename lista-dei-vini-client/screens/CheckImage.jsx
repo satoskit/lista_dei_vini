@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions, Image, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 
+import { createImage } from '../functions/HandleImage';
+
 export default function CheckImage({navigation, route}) {
     const [ isLoading, setIsLoading ] = useState(true);
-    const { imageBase64Long } = route.params;
+    const { imageBase64Long } = route.params; // with 'data:...'
     let imageBase64 = imageBase64Long.split(',')[1];
     const [ imageSize, setImageSize ] = useState({width: Dimensions.get('window').width, height: null });
     // console.log(imageBase64Long)
-    const [ emptyItem, setEmptyItem] = useState({
+    const emptyItem = {
         id: null,
         name: '',
         type: '',
         grade: null,
-        year: null,
+        year: '',
         country: '',
         winery: '',
         grape: '',
-        image: '',
-    })
+        image: imageBase64
+    }
+
+    const [ imageSent, setImageSent ] = useState(false);
 
     // const windowWidth = Dimensions.get('window').width;
     // const windowHeight = Dimensions.get('window').height;
@@ -39,7 +43,6 @@ export default function CheckImage({navigation, route}) {
             }
         }, (error) => {console.log(error)})
         if(imageBase64 !== null) { 
-            setEmptyItem({...emptyItem, image: imageBase64});
             setIsLoading(false); 
         }
     }, [])
@@ -59,7 +62,14 @@ export default function CheckImage({navigation, route}) {
             }
             <View style={styles.buttons}>
                 <TouchableOpacity
-                    onPress={() => navigation.push('EditList', {itemSent: emptyItem, updating: false, imageBase64: imageBase64})}
+                    onPress={() => {
+                        createImage(imageBase64)
+                        .then(() => 
+                        // setImageSent(true));
+                        // if(imageSent) {
+                            navigation.push('EditList', {/*itemSent: emptyItem,*/ updating: false, base64: true }));
+                        // }
+                    }}
                 >
                     <Text style={styles.save}>Save</Text>
                 </TouchableOpacity>
