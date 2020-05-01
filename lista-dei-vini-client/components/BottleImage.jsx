@@ -10,8 +10,11 @@ export default function BottleImage({source, big}) {
     if(source.startsWith('iVBORw0KGgo')) {
         sourceUri = 'data:image/png;base64,' + source;
     } else if(source.startsWith('/9g')) {
-        sourceUri = 'data:image/jpg;base64,' + source
-    } else {
+        sourceUri = 'data:image/jpg;base64,' + source;
+    } else if(source.startsWith('/9j')) {
+        sourceUri = 'data:image/jpeg;base64,' + source;
+    }
+    else {
         return (
             <View style={big ? stlyes.noimageBig : stlyes.noimageSmall}>
                 <Text style={{fontFamily: 'monospace',}}>No Image</Text>
