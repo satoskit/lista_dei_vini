@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import EditItem from '../components/EditItem';
 import ipaddress from '../ipaddress';
-import { getImage } from '../functions/HandleImage';
+import { createItemWithPic } from '../functions/HandleItem';
 
 export default function EditList({navigation, route}) {
     // TODO: create function 
@@ -22,7 +22,7 @@ export default function EditList({navigation, route}) {
         country: '',
         winery: '',
         grape: '',
-        image: imageBase64 ? imageBase64 : null,
+        // image: base64 ? base64 : null,
     }
     const originalItem = (itemSent !== undefined) ? itemSent : emptyItem; 
 
@@ -34,18 +34,29 @@ console.log(originalItem);
     // for Systembolaget data
     const [ cannotFind, setCannotFind ] = useState(false);
     const [ fetchedData, setFetchedData ] = useState(emptyItem);
-    
+
+    const [ sending, setSending ] = useState(false);
+
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
                 <TouchableOpacity onPress={() => {
                     setInput(mergeItemSentAndInput(originalItem, input));
+                    setSending(true);
                     if(!(updating)){
-                        createItem(input);
+                        if(!base64) {
+                            createItem(input);
+                        } else {
+                            createItemWithPic(input)
+                            .then(() => setSending(false));
+                        }
+
                     } else {
                         updateItem(input);
                     }
-                    navigation.push('MyList', { passedIsLoading: true });
+                    if(!sending) {
+                        navigation.push('MyList', { passedIsLoading: true });
+                    }
                 }} 
                 title="Done"
                 style={styles.doneButton} >
@@ -56,9 +67,14 @@ console.log(originalItem);
     });
 
     // const [ isLoadingImage, setLoadingImage ] = useState(true);
-    // useEffect(() => {
-        
-    // }, [])
+    const [ source, setSource ] = useState(null);
+    useEffect(() => {
+        if(!updating) {
+            setSource(`http://${ipaddress}:8080/temp/image/${Math.floor(Math.random() * 100)}`);
+        } else {
+            setSource(`http://${ipaddress}:8080/api/v1/list/image/id?id=${itemSent.id}`);
+        }
+    }, [])
     
     useEffect(() => {
         if(fetchedData.name != '') {
@@ -187,12 +203,15 @@ console.log(originalItem);
                 {/* <EditItem title='Image' getInput={value => setInput({...input, image: value})} 
                     itemDetail={originalItem.image}
                     fetchedData = {originalItem.image}
-                    navigation={navigation} 
+                    navigation={navigation}
                 /> */}
-                <Image 
-                    source={{uri: `http://${ipaddress}:8080/temp/image/${Math.floor(Math.random() * 100)}`, cache: 'reload'}}
-                    style={{resizeMode: 'center', height: 170, width: 170}}
-                ></Image>
+                <View>
+                    <Text style={styles.title}>Image</Text>
+                    <Image 
+                        source={{uri: source}}
+                        style={{resizeMode: 'center', height: 170, width: 170}}
+                    ></Image>
+                </View>
             </ScrollView>
         </View> 
     )
@@ -231,5 +250,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#990000',
         fontFamily: 'monospace',
-    }
+    },
+    title: {
+        fontSize: 20,
+        marginBottom: 5,
+        fontFamily: 'monospace',
+    },
 });

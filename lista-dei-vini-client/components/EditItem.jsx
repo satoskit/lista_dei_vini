@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Picker, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { Image, Picker, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 
 import GradeStars from './GradeStars';
 import BottleImage from '../components/BottleImage';
 import CameraButton from './CameraButton';
+import ipaddress from '../ipaddress';
 
 export default function EditItem({ title, getInput, itemDetail, fetchedData, navigation }) {
     const [ value, setValue ] = useState(itemDetail);
@@ -37,7 +38,7 @@ export default function EditItem({ title, getInput, itemDetail, fetchedData, nav
                         getInput(text)
                         setValue(text)
                     }}
-                    value={value} 
+                    value={value ? `${value}` : null} 
                     keyboardType='numeric'
                     maxLength={4} />
             </View>
@@ -84,7 +85,12 @@ export default function EditItem({ title, getInput, itemDetail, fetchedData, nav
             <View>
                 <Text style={styles.title}>{title}</Text>
                 { itemDetail
-                    ? <BottleImage source={itemDetail} big={true} />
+                    ? 
+                    // <BottleImage source={itemDetail} big={true} />
+                    <Image 
+                        source={{uri: `http://${ipaddress}:8080/temp/image/${Math.floor(Math.random() * 100)}`, cache: 'reload'}}
+                        style={{resizeMode: 'center', height: 170, width: 170}}
+                    ></Image>
                     : <Text>No Image</Text>
                 }
                 {/* TODO: make it possible to upload later */}

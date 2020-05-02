@@ -23,6 +23,17 @@ export function createItem(input) {
         response.json())
 }
 
+export const createItemWithPic = async(input) => {
+    const reqestSetting = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify(input)
+    }
+    fetch(`http://${ipaddress}:8080/api/v1/new-item-with-pic`, reqestSetting)
+    .then((response) => response.json());
+    return new Promise(resolve => { resolve('Sent') });
+}
+
 export function updateItem(input) {
     console.log(input)
     const reqestSetting = {

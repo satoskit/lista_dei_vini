@@ -21,7 +21,7 @@ export default function List({navigation, route}) {
         country: '',
         winery: '',
         grape: '',
-        image: ''
+        // image: ''
     }
     const [ searchOn, setSearchOn ] = useState(false);
     const [ searchWord, setSearchWord ] = useState('');
@@ -59,7 +59,7 @@ export default function List({navigation, route}) {
         .then((response) => 
             response.json().then((json) => {
             setListData(json);
-            console.log(json);
+            // console.log(json);
         }))
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));

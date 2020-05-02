@@ -2,33 +2,42 @@ import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function BottleImage({source, big}) {
+import ipaddress from '../ipaddress';
+
+export default function BottleImage({big, id}) {
     // to test
     const testsource = require('../assets/testPic.jpg');
     let sourceUri = '';
     // check JPEG or PNG
-    if(source.startsWith('iVBORw0KGgo')) {
-        sourceUri = 'data:image/png;base64,' + source;
-    } else if(source.startsWith('/9g')) {
-        sourceUri = 'data:image/jpg;base64,' + source;
-    } else if(source.startsWith('/9j')) {
-        sourceUri = 'data:image/jpeg;base64,' + source;
-    }
-    else {
-        return (
-            <View style={big ? stlyes.noimageBig : stlyes.noimageSmall}>
-                <Text style={{fontFamily: 'monospace',}}>No Image</Text>
-                <Icon name="image" size={20} />
-            </View> 
-        )
-    }
+    // if(source.startsWith('iVBORw0KGgo')) {
+    //     sourceUri = 'data:image/png;base64,' + source;
+    // } else if(source.startsWith('/9g')) {
+    //     sourceUri = 'data:image/jpg;base64,' + source;
+    // } else if(source.startsWith('/9j')) {
+    //     sourceUri = 'data:image/jpeg;base64,' + source;
+    // }
+    // else {
+    //     return (
+    //         <View style={big ? stlyes.noimageBig : stlyes.noimageSmall}>
+    //             <Text style={{fontFamily: 'monospace',}}>No Image</Text>
+    //             <Icon name="image" size={20} />
+    //         </View> 
+    //     )
+    // }
 
     return (
+        id ? 
         <View>
-            <Image source={sourceUri}/*{source}*/
+            <Image 
+                source={{uri: `http://${ipaddress}:8080/api/v1/list/image/id?id=${id}`}}
                 style={big ? stlyes.big : stlyes.small}
             ></Image>
         </View>
+        : 
+        <View style={big ? stlyes.noimageBig : stlyes.noimageSmall}>
+            <Text style={{fontFamily: 'monospace',}}>No Image</Text>
+            <Icon name="image" size={20} />
+        </View> 
     )
 }
 

@@ -71,7 +71,7 @@ export default function ListItem ({navigation, listData, sortBy}) {
                     name={item.name}
                     type={item.type}
                     country={item.country}
-                    image={item.image}
+                    image={item.image ? true : false}
                     navigation={navigation}
                 />)}}
                 keyExtractor={(item, index) => `listitem-${index}`}

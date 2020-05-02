@@ -30,10 +30,10 @@ export default function ItemDetail({route, navigation}) {
         .then((response) => 
             response.json().then((json) => {
             setItem(json);
-            console.log(json);
+            // console.log(json);
         }))
         .catch((error) => console.error(error))
-        .finally(() => setLoading(false))
+        .finally(() => setLoading(false));
     }, []);
 
     // const itemKeys = Object.keys(item);
@@ -76,7 +76,9 @@ export default function ItemDetail({route, navigation}) {
                     <ActivityIndicator size="large" color="#990000" />
                 </View>
             : <ScrollView contentContainerStyle={styles.detail}>
-                <View style={styles.image}><BottleImage source={item.image ? item.image : ''} big={true} /></View>
+                <View style={styles.image}>
+                    <BottleImage big={true} id={item.image ? selectedId : null} />
+                </View>
                 <View>{itemList}</View></ScrollView> }
         </View>
     )
