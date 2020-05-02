@@ -1,7 +1,7 @@
 import ipaddress from '../ipaddress';
 
 export function getAllItems(setListData, setLoading) {
-    fetch(`http://${ipaddress}:8080/api/v1/list`)
+    fetch(`http://${ipaddress}:8080/api/v1/list-without-pic`)
         .then((response) => 
             response.json().then((json) => {
             setListData(json);
