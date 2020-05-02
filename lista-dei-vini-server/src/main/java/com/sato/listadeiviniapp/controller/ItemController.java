@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sato.listadeiviniapp.model.Item;
 import com.sato.listadeiviniapp.model.ItemJson;
-import com.sato.listadeiviniapp.repository.ItemRepository;
 import com.sato.listadeiviniapp.service.ImageService;
 import com.sato.listadeiviniapp.service.ItemServiceImpl;
 
@@ -51,8 +50,16 @@ public class ItemController {
 	
 	@PostMapping("/new-item-with-pic")
 	public ResponseEntity<?> createItemWithPic(@RequestBody Item item) {
-		String imageBase64 = Base64.getEncoder().encodeToString(imageService.getImageString().getImage());
-		item.setImage(imageBase64);
+		String imageBase64 = Base64.getEncoder().encodeToString(imageService.getImage().getImage());
+		if(imageBase64.startsWith("/9j")) {
+			item.setImageType("jpeg");
+		} else if(imageBase64.startsWith("/9g")) {
+			item.setImageType("jpg");
+		} else if(imageBase64.startsWith("iVBORw0KGgo")) {
+			item.setImageType("png");
+		}
+		item.setImageByte(imageService.getImageByte());
+		
 		itemService.createItem(item);
 		
 		return ResponseEntity.ok().body(item);
@@ -75,19 +82,35 @@ public class ItemController {
 		return ResponseEntity.ok().body(itemService.getList());
 	}
 	
+	@GetMapping("/list-without-pic")
+	public ResponseEntity<List<ItemJson>> getListWithoutPic() {
+		return ResponseEntity.ok().body(itemService.getListWithoutPic());
+	}
+	
 	@GetMapping("/list/id")
 	public ResponseEntity<ItemJson> getItemById(@RequestParam(value="id") Long id) {
-		return ResponseEntity.ok().body(itemService.getItemById(id));
+		return ResponseEntity.ok().body(itemService.getItemJsonById(id));
+	}
+	
+	@GetMapping("/list/id-without-pic")
+	public ResponseEntity<ItemJson> getItemByIdWithoutPic(@RequestParam(value="id") Long id) {
+		return ResponseEntity.ok().body(itemService.getItemJsonByIdWithoutPic(id));
 	}
 	
 	@GetMapping(value="/list/image/id", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<byte[]> getImageById(@RequestParam(value="id") Long id) {
-		ItemJson item = itemService.getItemById(id);
-		if(item.getImage().isEmpty()) {
+//		if(item.getImage().isEmpty()) {
+		String itemString = itemService.getImageTypeById(id);
+		byte[] imageByte = itemService.getImageByteById(id);
+		if(itemString.isEmpty()) {
 			return null;
+		} else {
+		if(itemString.equals("png")) {
+			return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageByte);
+		} else {
+			return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageByte);
 		}
-		byte[] imageByte = Base64.getDecoder().decode(item.getImage());
-		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageByte);
+		}
 	}
 	
 //	@GetMapping("/list/{grade}")

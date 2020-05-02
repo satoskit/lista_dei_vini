@@ -33,17 +33,21 @@ public class ImageService {
 		}
 		imageRepo.save(image);
 	}
-//	public void createImage(String imageString) {
-//		TempImage image = new TempImage();
-//		image.setImageString(imageString);
-//		imageRepo.save(image);
-//	}
 	
 	public void deleteImage() {
 		imageRepo.deleteAll();
 	}
 	
-	public byte[] getImage() {
+	public TempImage getImage() {
+		List<TempImage> list = imageRepo.findAll();
+		
+		if(list.isEmpty()) { // to prevent exception
+			return null;
+		}
+		return list.get(0);//.getImageString();
+	}
+	
+	public byte[] getImageByte() {
 		List<TempImage> list = imageRepo.findAll();
 		
 		if(list.isEmpty()) { // to prevent exception
@@ -51,14 +55,6 @@ public class ImageService {
 		}
 		TempImage image = list.get(0);
 		return image.getImage();
-	}
-	public TempImage getImageString() {
-		List<TempImage> list = imageRepo.findAll();
-		
-		if(list.isEmpty()) { // to prevent exception
-			return null;
-		}
-		return list.get(0);//.getImageString();
 	}
 	
 	public List<TempImage> getAllImage() {

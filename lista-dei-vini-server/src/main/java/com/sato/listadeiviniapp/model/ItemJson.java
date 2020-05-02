@@ -24,7 +24,9 @@ public class ItemJson {
 	@JsonProperty("grape")
 	private String grape;
 	@JsonProperty("image")
-	private String image;
+	private boolean image;
+	@JsonProperty("imageType")
+	private String imageType;
 	@JsonProperty("created_at")
 	private Timestamp created_at;
 	
@@ -76,11 +78,17 @@ public class ItemJson {
 	public void setGrape(String grape) {
 		this.grape = grape;
 	}
-	public String getImage() {
+	public boolean getImage() {
 		return image;
 	}
-	public void setImage(String image) {
+	public void setImage(boolean image) {
 		this.image = image;
+	}
+	public String getImageType() {
+		return imageType;
+	}
+	public void setImageType(String imageType) {
+		this.imageType = imageType;
 	}
 	public Timestamp getCreated_at() {
 		return created_at;

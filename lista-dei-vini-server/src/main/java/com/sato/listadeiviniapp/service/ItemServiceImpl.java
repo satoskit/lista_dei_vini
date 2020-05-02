@@ -1,16 +1,8 @@
 package com.sato.listadeiviniapp.service;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import javax.imageio.ImageIO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,8 +32,10 @@ public class ItemServiceImpl implements ItemService {
 		itemJson.setCountry(item.getCountry());
 		itemJson.setWinery(item.getWinery());
 		itemJson.setGrape(item.getGrape());
-		if(item.getImage() != null) {
-			itemJson.setImage(item.getImage());
+		if(item.getImageByte() != null) {
+//			itemJson.setImage(item.getImage());
+			itemJson.setImage(true);
+//			itemJson.setImageByte(item.getImage());
 		}
 		if(item.getCreatedAt() != null) {
 			itemJson.setCreated_at(item.getCreatedAt());			
@@ -50,12 +44,43 @@ public class ItemServiceImpl implements ItemService {
 		return itemJson;
 	}
 	
+	public ItemJson convertItemWithoutPic(Item item) {
+		ItemJson itemJsonWithoutPic = new ItemJson();
+		
+		itemJsonWithoutPic.setId(item.getId());
+		itemJsonWithoutPic.setName(item.getName());
+		itemJsonWithoutPic.setGrade(item.getGrade());
+		itemJsonWithoutPic.setType(item.getType());
+		itemJsonWithoutPic.setYear(item.getYear());
+		itemJsonWithoutPic.setCountry(item.getCountry());
+		itemJsonWithoutPic.setWinery(item.getWinery());
+		itemJsonWithoutPic.setGrape(item.getGrape());
+		if(item.getImageByte() != null) {
+			itemJsonWithoutPic.setImage(true);
+			itemJsonWithoutPic.setImageType(item.getImageType());
+		} else {
+			itemJsonWithoutPic.setImage(false);
+		}
+		if(item.getCreatedAt() != null) {
+			itemJsonWithoutPic.setCreated_at(item.getCreatedAt());			
+		}
+		
+		return itemJsonWithoutPic;
+	}
+	
 	public List<ItemJson> convertToListOfItemJson(List<Item> itemList) {
 		List<ItemJson> itemJsonList = new ArrayList<>();
 		for(Item item : itemList) {
-			ItemJson itemJson = new ItemJson();
-			
 			itemJsonList.add(convertItem(item));
+		}
+		return itemJsonList;
+	}
+	
+	public List<ItemJson> convertToListOfItemJsonWithoutPic(List<Item> itemList) {
+		List<ItemJson> itemJsonList = new ArrayList<>();
+		for(Item item : itemList) {
+			ItemJson itemJson = new ItemJson();
+			itemJsonList.add(convertItemWithoutPic(item));
 		}
 		return itemJsonList;
 	}
@@ -84,26 +109,49 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public void deleteItem(Long id) {
-//		Optional<Item> itemOptional =itemRepo.findById(id);
-//		Item item = itemOptional.get();
-		
 		itemRepo.deleteById(id);
 	}
 
 	@Override
 	public List<ItemJson> getList() {
-		List<Item> item = itemRepo.findAll();
-		return convertToListOfItemJson(item);
+		List<Item> items = itemRepo.findAll();
+		return convertToListOfItemJson(items);
+	}
+	
+	@Override
+	public List<ItemJson> getListWithoutPic() {
+		List<Item> items = itemRepo.findAll();
+		return convertToListOfItemJsonWithoutPic(items);
 	}
 
 	@Override
-	public ItemJson getItemById(Long id) {
+	public ItemJson getItemJsonById(Long id) {
 		Optional<Item> itemOptional =itemRepo.findById(id);
 		Item item = itemOptional.get();
 		logger.info("Get an item! " + item.getName());
-//		ItemJson itemJson = convertItem(item);
-		ItemJson itemJson = new ItemJson();
 		return convertItem(item);
+	}
+	
+	@Override
+	public ItemJson getItemJsonByIdWithoutPic(Long id) {
+		Optional<Item> itemOptional =itemRepo.findById(id);
+		Item item = itemOptional.get();
+		logger.info("Get an item without image! " + item.getName());
+		return convertItemWithoutPic(item);
+	}
+	
+	@Override
+	public byte[] getImageByteById(Long id) {
+		Optional<Item> itemOptional =itemRepo.findById(id);
+		Item item = itemOptional.get();
+		return item.getImageByte();
+	}
+	
+	@Override
+	public String getImageTypeById(Long id) {
+		Optional<Item> itemOptional =itemRepo.findById(id);
+		Item item = itemOptional.get();
+		return item.getImageType();
 	}
 
 //	@Override

@@ -12,8 +12,12 @@ public interface ItemService {
 	public void deleteItem(Long id);
 	
 	public List<ItemJson> getList();
+	public List<ItemJson> getListWithoutPic();
 	
-	public ItemJson getItemById(Long id);
+	public ItemJson getItemJsonById(Long id);
+	public ItemJson getItemJsonByIdWithoutPic(Long id);
+	public byte[] getImageByteById(Long id);
+	public String getImageTypeById(Long id);
 	
 //	public List<ItemJson> getItemsByGrade(Integer grade);
 	public List<ItemJson> getItemsByCountry(String country);

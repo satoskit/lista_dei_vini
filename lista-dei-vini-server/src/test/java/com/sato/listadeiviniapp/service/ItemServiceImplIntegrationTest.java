@@ -61,7 +61,7 @@ public class ItemServiceImplIntegrationTest {
 	
 	@Test
 	public void whenValidId_thenItemShouldBeFound() {
-		ItemJson itemJson = itemService.getItemById(1L);
+		ItemJson itemJson = itemService.getItemJsonById(1L);
 		
 		assertThat(itemJson.getName()).isEqualTo("Red Wine");
 	}

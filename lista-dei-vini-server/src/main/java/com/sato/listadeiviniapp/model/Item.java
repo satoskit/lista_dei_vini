@@ -32,9 +32,10 @@ public class Item extends DateAudit {
 	private String winery;
 	@Column
 	private String grape;
-//	@Column
-	@Lob
-	private String image;
+	@Column
+	private byte[] imageByte;
+	@Column
+	private String imageType;
 	
 	public Item() {
 		
@@ -115,11 +116,19 @@ public class Item extends DateAudit {
 	public void setGrape(String grape) {
 		this.grape = grape;
 	}
-	public String getImage() {
-		return image;
+
+	public byte[] getImageByte() {
+		return imageByte;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setImageByte(byte[] imageByte) {
+		this.imageByte = imageByte;
+	}
+
+	public String getImageType() {
+		return imageType;
+	}
+	public void setImageType(String imageType) {
+		this.imageType = imageType;
 	}
 
 	@Override
