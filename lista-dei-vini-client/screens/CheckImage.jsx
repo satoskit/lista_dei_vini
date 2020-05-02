@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Dimensions, Image, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 
 import { createImage } from '../functions/HandleImage';
+import { Constants } from 'expo-constants';
 
 export default function CheckImage({navigation, route}) {
     const [ isLoading, setIsLoading ] = useState(true);
@@ -21,7 +22,7 @@ export default function CheckImage({navigation, route}) {
         image: imageBase64
     }
 
-    const [ imageSent, setImageSent ] = useState(false);
+    const [ imageSent, setImageSent ] = useState(true);
 
     // const windowWidth = Dimensions.get('window').width;
     // const windowHeight = Dimensions.get('window').height;
@@ -48,6 +49,7 @@ export default function CheckImage({navigation, route}) {
     }, [])
 
     return(
+        imageSent ? 
         <View style={styles.container}>
             { isLoading ? null
                 : <Image style={/*styles.showImage,*/ {
@@ -56,13 +58,16 @@ export default function CheckImage({navigation, route}) {
                     justifyContent: 'center',
                     height: imageSize.height, 
                     width: imageSize.width,
-                    resizeMode: 'contain',}}
+                    resizeMode: 'contain',
+                    paddingTop: 30
+                    }}
                 source={{uri: imageBase64Long}}
                 />
             }
             <View style={styles.buttons}>
                 <TouchableOpacity
                     onPress={() => {
+                        setImageSent(false)
                         createImage(imageBase64)
                         .then(() => 
                         // setImageSent(true));
@@ -80,6 +85,9 @@ export default function CheckImage({navigation, route}) {
                 </TouchableOpacity>
             </View>
         </View>
+        : <View style={[styles.container, styles.textcontainer]}>
+            <Text style={styles.loadingtext}>Uploading the picture...</Text>
+            </View>
     )
 }
 
@@ -111,4 +119,11 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontFamily: 'monospace',
     },
+    textcontainer: {
+        alignItems: 'center', 
+        justifyContent: 'center'
+    },
+    loadingtext: {
+        fontFamily: 'monospace',
+    }
 })
