@@ -71,16 +71,19 @@ export default function ItemDetail({route, navigation}) {
     }
 
     return (
-        <View style={styles.container}>
-            {isLoading ? <View style={styles.loading}>
-                    <ActivityIndicator size="large" color="#990000" />
-                </View>
-            : <ScrollView contentContainerStyle={styles.detail}>
-                <View style={styles.image}>
-                    <BottleImage big={true} id={item.image ? selectedId : null} />
-                </View>
-                <View>{itemList}</View></ScrollView> }
-        </View>
+        isLoading ? 
+            <View style={styles.loading}>
+                <ActivityIndicator size="large" color="#990000" />
+            </View>
+        :
+            <View style={styles.container}>
+                <ScrollView contentContainerStyle={styles.detail}>
+                    <View style={styles.image}>
+                        <BottleImage big={true} id={item.image ? selectedId : null} />
+                    </View>
+                    <View>{itemList}</View>
+                </ScrollView> 
+            </View>
     )
 }
 
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    isLoading: {
+    loading: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

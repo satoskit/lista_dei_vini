@@ -1,29 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ipaddress from '../ipaddress';
 
 export default function BottleImage({big, id}) {
-    // to test
-    const testsource = require('../assets/testPic.jpg');
-    let sourceUri = '';
-    // check JPEG or PNG
-    // if(source.startsWith('iVBORw0KGgo')) {
-    //     sourceUri = 'data:image/png;base64,' + source;
-    // } else if(source.startsWith('/9g')) {
-    //     sourceUri = 'data:image/jpg;base64,' + source;
-    // } else if(source.startsWith('/9j')) {
-    //     sourceUri = 'data:image/jpeg;base64,' + source;
-    // }
-    // else {
-    //     return (
-    //         <View style={big ? stlyes.noimageBig : stlyes.noimageSmall}>
-    //             <Text style={{fontFamily: 'monospace',}}>No Image</Text>
-    //             <Icon name="image" size={20} />
-    //         </View> 
-    //     )
-    // }
+    const [ isLoading, setLoading ] = useState(false);
     const [ source, setSource ] = useState(null);
     useEffect(() => {
         if(id) {
@@ -34,20 +16,28 @@ export default function BottleImage({big, id}) {
     return (
         id ? 
         <View>
+            <ActivityIndicator size="large" color="#990000" animating={isLoading} />
             <Image 
                 source={{uri: source}}
-                style={big ? stlyes.big : stlyes.small}
+                style={big ? styles.big : styles.small}
+                onLoadStart={() => setLoading(true)}
+                onLoad={() => setLoading(false)}
             ></Image>
         </View>
         : 
-        <View style={big ? stlyes.noimageBig : stlyes.noimageSmall}>
-            <Text style={{fontFamily: 'monospace',}}>No Image</Text>
-            <Icon name="image" size={20} />
-        </View> 
+            <View style={big ? styles.noimageBig : styles.noimageSmall}>
+                <Text style={{fontFamily: 'monospace',}}>No Image</Text>
+                <Icon name="image" size={20} />
+            </View> 
     )
 }
 
-const stlyes = StyleSheet.create({
+const styles = StyleSheet.create({
+    loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     small: {
         resizeMode: 'center',
         width: 60, 
