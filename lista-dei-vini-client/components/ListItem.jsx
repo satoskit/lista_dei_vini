@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import Item from './Item';
 
@@ -60,7 +60,7 @@ export default function ListItem ({navigation, listData, sortBy}) {
     }
     
     return (
-        <View style={{ flex: 1, padding: 24}}>
+        listData ?<View style={{ flex: 1, padding: 24}}>
             <FlatList data={sortListData(listData, sortBy)}
             renderItem={({item}) => {
                 console.log(item.name);
@@ -76,7 +76,8 @@ export default function ListItem ({navigation, listData, sortBy}) {
                 />)}}
                 keyExtractor={(item, index) => `listitem-${index}`}
             />
-        </View>
+            </View>
+        : <Text style={styles.noitem}>No item yet!</Text>
     )
 }
 
@@ -93,5 +94,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
+    noitem: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontFamily: 'monospace'
+    },
 });

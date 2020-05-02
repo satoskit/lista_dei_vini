@@ -26,7 +26,7 @@ export default function ItemDetail({route, navigation}) {
     });
 
     useEffect(() => {
-        fetch(`http://${ipaddress}:8080/api/v1/list/id?id=${selectedId}`)
+        fetch(`http://${ipaddress}:8080/api/v1/list/id-without-pic?id=${selectedId}`)
         .then((response) => 
             response.json().then((json) => {
             setItem(json);

@@ -55,7 +55,7 @@ export default function List({navigation, route}) {
 
     useEffect(() => {
         // fetch('http://localhost:8080/api/v1/list')
-        fetch(`http://${ipaddress}:8080/api/v1/list`)
+        fetch(`http://${ipaddress}:8080/api/v1/list-without-pic`)
         .then((response) => 
             response.json().then((json) => {
             setListData(json);

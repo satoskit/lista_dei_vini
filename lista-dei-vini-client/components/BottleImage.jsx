@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -24,12 +24,18 @@ export default function BottleImage({big, id}) {
     //         </View> 
     //     )
     // }
+    const [ source, setSource ] = useState(null);
+    useEffect(() => {
+        if(id) {
+            setSource(`http://${ipaddress}:8080/api/v1/list/image/id?id=${id}`)
+        }
+    }, []);
 
     return (
         id ? 
         <View>
             <Image 
-                source={{uri: `http://${ipaddress}:8080/api/v1/list/image/id?id=${id}`}}
+                source={{uri: source}}
                 style={big ? stlyes.big : stlyes.small}
             ></Image>
         </View>
