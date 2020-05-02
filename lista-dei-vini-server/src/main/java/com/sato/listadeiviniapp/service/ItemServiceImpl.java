@@ -40,7 +40,9 @@ public class ItemServiceImpl implements ItemService {
 		itemJson.setCountry(item.getCountry());
 		itemJson.setWinery(item.getWinery());
 		itemJson.setGrape(item.getGrape());
-		itemJson.setImage(item.getImage());
+		if(item.getImage() != null) {
+			itemJson.setImage(item.getImage());
+		}
 		if(item.getCreatedAt() != null) {
 			itemJson.setCreated_at(item.getCreatedAt());			
 		}

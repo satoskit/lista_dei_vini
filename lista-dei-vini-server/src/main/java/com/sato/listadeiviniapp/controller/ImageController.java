@@ -60,8 +60,10 @@ public class ImageController {
 	public ResponseEntity<byte[]> getImage(@PathVariable(value="random") int random) {
 		TempImage image = imageService.getImageString();
 	    byte[] imageByte = image.getImage();
-	     
-//	    ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+	    
+	    if(image.getType() == "png") {
+	    	return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageByte);
+	    }
 	    return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageByte);
 	}
 	
