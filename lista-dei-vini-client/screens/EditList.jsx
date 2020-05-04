@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View, Image } from 'rea
 import _ from 'lodash';
 
 import EditItem from '../components/EditItem';
-import ipaddress from '../ipaddress';
+import ipaddress from '../functions/ipaddress';
 import { createItemWithPic } from '../functions/HandleItem';
 
 export default function EditList({navigation, route}) {

@@ -4,7 +4,7 @@ import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View
 import _ from 'lodash';
 import GradeStars from '../components/GradeStars';
 import BottleImage from '../components/BottleImage';
-import ipaddress from '../ipaddress';
+import ipaddress from '../functions/ipaddress';
 
 export default function ItemDetail({route, navigation}) {
     const { selectedId } = route.params;

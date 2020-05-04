@@ -1,4 +1,4 @@
-import ipaddress from '../ipaddress';
+import ipaddress from './ipaddress';
 
 export const createImage = async(base64) => {
     const reqestSetting = {

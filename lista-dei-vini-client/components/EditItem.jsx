@@ -4,7 +4,7 @@ import { Image, Picker, StyleSheet, Text, TextInput, View, TouchableOpacity } fr
 import GradeStars from './GradeStars';
 import BottleImage from '../components/BottleImage';
 import CameraButton from './CameraButton';
-import ipaddress from '../ipaddress';
+import ipaddress from '../functions/ipaddress';
 
 export default function EditItem({ title, getInput, itemDetail, fetchedData, navigation }) {
     const [ value, setValue ] = useState(itemDetail);

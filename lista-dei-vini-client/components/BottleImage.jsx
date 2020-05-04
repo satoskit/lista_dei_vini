@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import ipaddress from '../ipaddress';
+import ipaddress from '../functions/ipaddress';
 
 export default function BottleImage({big, id}) {
     const [ isLoading, setLoading ] = useState(false);

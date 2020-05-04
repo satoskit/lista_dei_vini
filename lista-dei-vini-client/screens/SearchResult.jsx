@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 
 import ListItem from '../components/ListItem';
-import ipaddress from '../ipaddress';
+import ipaddress from '../functions/ipaddress';
 
 export default function SearchResult({navigation, route}) {
     const { searchedWord } = route.params; 

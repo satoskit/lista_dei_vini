@@ -1,4 +1,4 @@
-import ipaddress from '../ipaddress';
+import ipaddress from './ipaddress';
 
 export function getAllItems(setListData, setLoading) {
     fetch(`http://${ipaddress}:8080/api/v1/list-without-pic`)

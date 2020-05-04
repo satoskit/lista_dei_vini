@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import ListItem from '../components/ListItem';
 import CameraButton from '../components/CameraButton';
 import SearchOption from '../components/SearchOption';
-import ipaddress from '../ipaddress';
+import ipaddress from '../functions/ipaddress';
 
 export default function List({navigation, route}) {
     const {passedIsLoading} = route.params

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Alert, Platform, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import ipaddress from '../ipaddress';
+import ipaddress from '../functions/ipaddress';
 
 export default function DeleteModal({id, navigation}) {
   // TODO: create modal for mobile
