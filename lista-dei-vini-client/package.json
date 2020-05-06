@@ -32,5 +32,8 @@
     "babel-preset-expo": "~8.0.0",
     "@babel/core": "^7.0.0"
   },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
   "private": true
 }
