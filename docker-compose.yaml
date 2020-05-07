@@ -5,9 +5,10 @@ services:
     container_name: lista-dei-vini-client_1
     build:
       context: lista-dei-vini-client
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-buster #Dockerfile
     environment: 
-      - REACT_NATIVE_PACKAGER_HOSTNAME="192.186.78.1"
+      - ADB_IP=192.168.1.77
+      - REACT_NATIVE_PACKAGER_HOSTNAME=192.168.1.77
     ports: 
       - 19000:19000
       - 19001:19001
