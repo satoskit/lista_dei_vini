@@ -30,3 +30,4 @@ node_modules/
 
 # for private use
 *.md
+!README.md
