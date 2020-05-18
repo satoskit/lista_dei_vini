@@ -3,7 +3,6 @@ package com.sato.listadeiviniapp.service;
 import java.util.List;
 
 import com.sato.listadeiviniapp.model.Item;
-import com.sato.listadeiviniapp.model.ItemJson;
 
 public interface ItemService {
 	
@@ -11,19 +10,20 @@ public interface ItemService {
 	public void updateItem(Long id, Item item);
 	public void deleteItem(Long id);
 	
-	public List<ItemJson> getList();
-	public List<ItemJson> getListWithoutPic();
+	public List<Item> getList();
+	public List<Item> getListWithoutPic();
 	
-	public ItemJson getItemJsonById(Long id);
-	public ItemJson getItemJsonByIdWithoutPic(Long id);
+	public Item getItemById(Long id);
+	public Item getItemByIdWithoutPic(Long id);
+	
 	public byte[] getImageByteById(Long id);
 	public String getImageTypeById(Long id);
 	
-//	public List<ItemJson> getItemsByGrade(Integer grade);
-	public List<ItemJson> getItemsByCountry(String country);
-//	public List<ItemJson> getItemsByType(String type);
-//	public List<ItemJson> getItemsByGrape(String grape);
-//	public List<ItemJson> getItemsByYear(Integer year);
-//	public List<ItemJson> getItemsByWinery(String winery);
+//	public List<Item> getItemsByGrade(Integer grade);
+	public List<Item> getItemsByCountry(String country);
+//	public List<Item> getItemsByType(String type);
+//	public List<Item> getItemsByGrape(String grape);
+//	public List<Item> getItemsByYear(Integer year);
+//	public List<Item> getItemsByWinery(String winery);
 	
 }

@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sato.listadeiviniapp.exceptions.NoItemFoundException;
 import com.sato.listadeiviniapp.model.Item;
-import com.sato.listadeiviniapp.model.ItemJson;
 import com.sato.listadeiviniapp.repository.ItemRepository;
 
 @Service
@@ -20,70 +20,6 @@ public class ItemServiceImpl implements ItemService {
 	private ItemRepository itemRepo;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ItemServiceImpl.class);
-	
-	public ItemJson convertItem(Item item) {
-		ItemJson itemJson = new ItemJson();
-		
-		itemJson.setId(item.getId());
-		itemJson.setName(item.getName());
-		itemJson.setGrade(item.getGrade());
-		itemJson.setType(item.getType());
-		itemJson.setYear(item.getYear());
-		itemJson.setCountry(item.getCountry());
-		itemJson.setWinery(item.getWinery());
-		itemJson.setGrape(item.getGrape());
-		if(item.getImageByte() != null) {
-//			itemJson.setImage(item.getImage());
-			itemJson.setImage(true);
-//			itemJson.setImageByte(item.getImage());
-		}
-		if(item.getCreatedAt() != null) {
-			itemJson.setCreated_at(item.getCreatedAt());			
-		}
-		
-		return itemJson;
-	}
-	
-	public ItemJson convertItemWithoutPic(Item item) {
-		ItemJson itemJsonWithoutPic = new ItemJson();
-		
-		itemJsonWithoutPic.setId(item.getId());
-		itemJsonWithoutPic.setName(item.getName());
-		itemJsonWithoutPic.setGrade(item.getGrade());
-		itemJsonWithoutPic.setType(item.getType());
-		itemJsonWithoutPic.setYear(item.getYear());
-		itemJsonWithoutPic.setCountry(item.getCountry());
-		itemJsonWithoutPic.setWinery(item.getWinery());
-		itemJsonWithoutPic.setGrape(item.getGrape());
-		if(item.getImageByte() != null) {
-			itemJsonWithoutPic.setImage(true);
-			itemJsonWithoutPic.setImageType(item.getImageType());
-		} else {
-			itemJsonWithoutPic.setImage(false);
-		}
-		if(item.getCreatedAt() != null) {
-			itemJsonWithoutPic.setCreated_at(item.getCreatedAt());			
-		}
-		
-		return itemJsonWithoutPic;
-	}
-	
-	public List<ItemJson> convertToListOfItemJson(List<Item> itemList) {
-		List<ItemJson> itemJsonList = new ArrayList<>();
-		for(Item item : itemList) {
-			itemJsonList.add(convertItem(item));
-		}
-		return itemJsonList;
-	}
-	
-	public List<ItemJson> convertToListOfItemJsonWithoutPic(List<Item> itemList) {
-		List<ItemJson> itemJsonList = new ArrayList<>();
-		for(Item item : itemList) {
-			ItemJson itemJson = new ItemJson();
-			itemJsonList.add(convertItemWithoutPic(item));
-		}
-		return itemJsonList;
-	}
 	
 	@Override
 	public void createItem(Item item) {
@@ -113,43 +49,67 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemJson> getList() {
+	public List<Item> getList() {
 		List<Item> items = itemRepo.findAll();
-		return convertToListOfItemJson(items);
+		if(items.isEmpty()) {
+			throw new NoItemFoundException("No item found.");
+		}
+		return items;
 	}
 	
 	@Override
-	public List<ItemJson> getListWithoutPic() {
+	public List<Item> getListWithoutPic() {
 		List<Item> items = itemRepo.findAll();
-		return convertToListOfItemJsonWithoutPic(items);
+		if(items.isEmpty()) {
+			throw new NoItemFoundException("No item found.");
+		}
+		return items;
 	}
 
 	@Override
-	public ItemJson getItemJsonById(Long id) {
+	public Item getItemById(Long id) {
 		Optional<Item> itemOptional =itemRepo.findById(id);
+		
+		if(!(itemOptional.isPresent())) {
+			throw new NoItemFoundException("No item found.");
+		}
+		
 		Item item = itemOptional.get();
 		logger.info("Get an item! " + item.getName());
-		return convertItem(item);
+		return item;
 	}
 	
 	@Override
-	public ItemJson getItemJsonByIdWithoutPic(Long id) {
-		Optional<Item> itemOptional =itemRepo.findById(id);
-		Item item = itemOptional.get();
-		logger.info("Get an item without image! " + item.getName());
-		return convertItemWithoutPic(item);
+	public Item getItemByIdWithoutPic(Long id) {
+		Item itemWithoutPic =itemRepo.findByIdWithoutPicture(id);
+		
+		if(itemWithoutPic == null) {
+			throw new NoItemFoundException("No item found.");
+		}
+		
+		logger.info("Get an item without image! " + itemWithoutPic.getName());
+		return itemWithoutPic;
 	}
 	
 	@Override
 	public byte[] getImageByteById(Long id) {
-		Optional<Item> itemOptional =itemRepo.findById(id);
-		Item item = itemOptional.get();
-		return item.getImageByte();
+		byte[] imageByte =itemRepo.findImageByteById(id);
+		
+		if(imageByte.length == 0 || imageByte == null) {
+			throw new NoItemFoundException("No item found.");
+		}
+		
+		return imageByte;
 	}
 	
 	@Override
 	public String getImageTypeById(Long id) {
 		Optional<Item> itemOptional =itemRepo.findById(id);
+		
+		if(!(itemOptional.isPresent())) {
+			throw new NoItemFoundException("No item found.");
+		}
+		
 		Item item = itemOptional.get();
 		return item.getImageType();
 	}
@@ -160,9 +120,14 @@ public class ItemServiceImpl implements ItemService {
 //	}
 //	
 	@Override
-	public List<ItemJson> getItemsByCountry(String country) {
+	public List<Item> getItemsByCountry(String country) {
 		List<Item> items = itemRepo.findAllByCountry(country);
-		return convertToListOfItemJson(items);
+		
+		if(items.isEmpty()) {
+			throw new NoItemFoundException("No item found.");
+		}
+		
+		return items;
 	}
 //
 //	@Override

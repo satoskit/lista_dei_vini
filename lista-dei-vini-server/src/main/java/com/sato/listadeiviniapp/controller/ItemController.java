@@ -35,6 +35,7 @@ public class ItemController {
 	private final ImageService imageService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
+	private ConvertJson jsonConverter = new ConvertJson();
 	
 	public ItemController(ItemServiceImpl itemService, ImageService imageService) {
 		this.itemService = itemService;
@@ -79,22 +80,30 @@ public class ItemController {
 	
 	@GetMapping("/list")
 	public ResponseEntity<List<ItemJson>> getList() {
-		return ResponseEntity.ok().body(itemService.getList());
+		List<Item> items = itemService.getList();
+		List<ItemJson> itemJsons = jsonConverter.convertToListOfItemJson(items);
+		return ResponseEntity.ok().body(itemJsons);
 	}
 	
 	@GetMapping("/list-without-pic")
 	public ResponseEntity<List<ItemJson>> getListWithoutPic() {
-		return ResponseEntity.ok().body(itemService.getListWithoutPic());
+		List<Item> items = itemService.getListWithoutPic();
+		List<ItemJson> itemJsons = jsonConverter.convertToListOfItemJsonWithoutPic(items);
+		return ResponseEntity.ok().body(itemJsons);
 	}
 	
 	@GetMapping("/list/id")
 	public ResponseEntity<ItemJson> getItemById(@RequestParam(value="id") Long id) {
-		return ResponseEntity.ok().body(itemService.getItemJsonById(id));
+		Item foundItem = itemService.getItemById(id);
+		ItemJson itemJson = jsonConverter.convertItem(foundItem);
+		return ResponseEntity.ok().body(itemJson);
 	}
 	
 	@GetMapping("/list/id-without-pic")
 	public ResponseEntity<ItemJson> getItemByIdWithoutPic(@RequestParam(value="id") Long id) {
-		return ResponseEntity.ok().body(itemService.getItemJsonByIdWithoutPic(id));
+		Item foundItem = itemService.getItemByIdWithoutPic(id);
+		ItemJson itemJson = jsonConverter.convertItemWithoutPic(foundItem);
+		return ResponseEntity.ok().body(itemJson);
 	}
 	
 	@GetMapping(value="/list/image/id", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
@@ -121,8 +130,9 @@ public class ItemController {
 //	
 	@GetMapping("/list/country")
 	public ResponseEntity<List<ItemJson>> getItemsByCountry(@RequestParam(value="country") String country) {
-		List<ItemJson> listByCountry = itemService.getItemsByCountry(country);
-		return ResponseEntity.ok().body(listByCountry);
+		List<Item> items = itemService.getItemsByCountry(country);
+		List<ItemJson> itemJsons = jsonConverter.convertToListOfItemJson(items);
+		return ResponseEntity.ok().body(itemJsons);
 	}
 //	
 //	@GetMapping("/list/{type}")
