@@ -55,7 +55,7 @@ const screenStyles = {
   headerTintColor: '#fff',
   headerTitleStyle: {
     fontWeight: 'bold',
-    fontFamily: 'monospace',
+    // fontFamily: 'monospace',
   },
   headerBackImage: () => <Icon name="arrow-alt-circle-left" size={30} color='#fff' />,
 };
