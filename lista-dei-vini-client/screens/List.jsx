@@ -9,20 +9,7 @@ import ipaddress from '../functions/ipaddress';
 
 export default function List({navigation, route}) {
     const {passedIsLoading} = route.params
-    const [ isLoading, setLoading ] = useState({passedIsLoading});
 
-    const [ listData, setListData ] = useState([]);
-    const emptyItem = {
-        id: null,
-        name: '',
-        type: '',
-        grade: null,
-        year: '',
-        country: '',
-        winery: '',
-        grape: '',
-        // image: ''
-    }
     const [ searchOn, setSearchOn ] = useState(false);
     const [ searchWord, setSearchWord ] = useState('');
     const [ sortBy, setSortBy ] = useState('default');
@@ -53,17 +40,6 @@ export default function List({navigation, route}) {
         })
     });
 
-    useEffect(() => {
-        fetch(`http://${ipaddress}:8080/api/v1/list-without-pic`)
-        .then((response) => 
-            response.json().then((json) => {
-            setListData(json);
-            // console.log(json);
-        }))
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false));
-    }, [isLoading]);
-
     return (
         <View style={styles.container}>
             {searchOn ? 
@@ -86,7 +62,7 @@ export default function List({navigation, route}) {
                     <Text /*style={{fontFamily: 'monospace',}}*/>Sort by: </Text>
                     <TouchableOpacity style={styles.sort}
                         onPress={() => {(sortBy=='default') ? setSortBy('createdDesc') : setSortBy('default')
-                            setLoading(true);
+                            // setLoading(true);
                             setSelected({new: true})
                         }}
                     >
@@ -94,7 +70,7 @@ export default function List({navigation, route}) {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.sort}
                         onPress={() => {(sortBy=='nameAsc') ? setSortBy('nameDesc') : setSortBy('nameAsc')
-                            setLoading(true);
+                            // setLoading(true);
                             setSelected({name: true})
                         }}
                     >
@@ -102,7 +78,7 @@ export default function List({navigation, route}) {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.sort}
                         onPress={() => {(sortBy=='gradeAsc') ? setSortBy   ('gradeDesc') : setSortBy('gradeAsc')
-                            setLoading(true);
+                            // setLoading(true);
                             setSelected({grade: true})
                         }}
                     >
@@ -111,7 +87,7 @@ export default function List({navigation, route}) {
                     <TouchableOpacity style={styles.sort}
                         onPress={() => { if(sortBy=='typeAsc') { return null; } 
                             setSortBy('typeAsc');
-                            setLoading(true);
+                            // setLoading(true);
                             setSelected({type: true});
                         }}
                     >
@@ -119,16 +95,10 @@ export default function List({navigation, route}) {
                     </TouchableOpacity>
                 </View>
                 }
-            {isLoading ? 
-                <View style={styles.loading}>
-                    <ActivityIndicator size="large" color="#990000" />
-                </View> 
-            : 
                 <ListItem navigation={navigation}
-                    listData={listData} 
+                    // listData={listData} 
                     sortBy={sortBy}
                     />
-            }
             <View style={styles.floatButtons}>
                 <TouchableOpacity
                     onPress={() => navigation.push('EditList', { /*itemSent: emptyItem,*/ updating: false })} 
