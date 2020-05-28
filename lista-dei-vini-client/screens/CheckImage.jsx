@@ -9,18 +9,6 @@ export default function CheckImage({navigation, route}) {
     const { imageBase64Long } = route.params; // with 'data:...'
     let imageBase64 = imageBase64Long.split(',')[1];
     const [ imageSize, setImageSize ] = useState({width: Dimensions.get('window').width, height: null });
-    // console.log(imageBase64Long)
-    const emptyItem = {
-        id: null,
-        name: '',
-        type: '',
-        grade: null,
-        year: '',
-        country: '',
-        winery: '',
-        grape: '',
-        image: imageBase64
-    }
 
     const [ imageSent, setImageSent ] = useState(true);
 
@@ -70,10 +58,7 @@ export default function CheckImage({navigation, route}) {
                         setImageSent(false)
                         createImage(imageBase64)
                         .then(() => 
-                        // setImageSent(true));
-                        // if(imageSent) {
-                            navigation.push('EditList', {/*itemSent: emptyItem,*/ updating: false, base64: true }));
-                        // }
+                            navigation.push('EditList', { updating: false, base64: true }));
                     }}
                 >
                     <Text style={styles.save}>Save</Text>
@@ -108,7 +93,7 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         fontSize: 15,
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     },
     cancel: {
         borderColor: '#fff',
@@ -117,13 +102,13 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         fontSize: 15,
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     },
     textcontainer: {
         alignItems: 'center', 
         justifyContent: 'center'
     },
     loadingtext: {
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     }
 })

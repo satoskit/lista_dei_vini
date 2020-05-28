@@ -12,7 +12,6 @@ export default function EditList({navigation, route}) {
     const { updating } = route.params;
     const { itemSent } = route.params;
     const { base64 } = route.params;
-    let imageBase64 = null;
     const emptyItem = {
         id: null,
         name: '',
@@ -22,7 +21,6 @@ export default function EditList({navigation, route}) {
         country: '',
         winery: '',
         grape: '',
-        // image: base64 ? base64 : null,
     }
     const originalItem = (itemSent !== undefined) ? itemSent : emptyItem; 
 
@@ -66,7 +64,6 @@ console.log(originalItem);
         })
     });
 
-    // const [ isLoadingImage, setLoadingImage ] = useState(true);
     const [ source, setSource ] = useState(null);
     useEffect(() => {
         if(!updating) {
@@ -110,7 +107,7 @@ console.log(originalItem);
             headers: { 'Content-Type': 'application/json' }, 
             body: JSON.stringify(input)
         }
-        fetch(`http://${ipaddress}/api/v1/update/${originalItem.id}`, reqestSetting)
+        fetch(`http://${ipaddress}:8080/api/v1/update/${originalItem.id}`, reqestSetting)
         .then((response) => 
             response.json())
     }
@@ -136,7 +133,7 @@ console.log(originalItem);
         if(!name) { return setCannotFind(true); }
         if(fetchedData) { setFetchedData(emptyItem); }
         
-        fetch(`http://${ipaddress}/systembolaget/v1/product/result-list/?searchedName=${name}`)
+        fetch(`http://${ipaddress}:8080/systembolaget/v1/product/result-list/?searchedName=${name}`)
         .then((response) => {
             if(response.ok){
                 response.json().then((json) => {
@@ -208,7 +205,7 @@ console.log(originalItem);
                 <View>
                     <Text style={styles.title}>Image</Text>
                     <Image 
-                        source={{uri: source}}
+                        source={(updating==true)? {uri: source} : null}
                         style={{resizeMode: 'center', height: 170, width: 170}}
                     ></Image>
                 </View>
@@ -232,11 +229,11 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     autofilltext: {
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
         color: '#fff',
     },
     notfoundtext: {
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
         padding: 5,
         marginLeft: 5,
     },
@@ -249,11 +246,11 @@ const styles = StyleSheet.create({
     buttonItem: {
         fontSize: 20,
         color: '#990000',
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     },
     title: {
         fontSize: 20,
         marginBottom: 5,
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     },
 });

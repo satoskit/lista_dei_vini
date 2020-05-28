@@ -41,7 +41,7 @@ export function updateItem(input) {
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify(input)
     }
-    fetch(`http://${ipaddress}/api/v1/update/${originalItem.id}`, reqestSetting)
+    fetch(`http://${ipaddress}:8080/api/v1/update/${originalItem.id}`, reqestSetting)
     .then((response) => 
         response.json())
 }

@@ -11,8 +11,8 @@ export default function CameraMode({navigation}) {
     // choose front/back camera
     const [ cameraType, setCameraType ] = useState(Camera.Constants.Type.back);
     let camera = null;
+    // useState doesn't work with Base64 string
     let imageBase64 = ''; // without 'data:...'
-    // const [ imageBase64, setImageBase46 ] = useState('');
     let imageBase64Long = ''; // with 'data:...'
 
     useEffect(() => {
@@ -23,7 +23,7 @@ export default function CameraMode({navigation}) {
     }, []);
 
     if(hasPermission === null) {
-        return <View></View>
+        return <View><Text>Something went wrong.</Text></View>
     }
     if(hasPermission === false) {
         return <Text>No access to camera.</Text>
@@ -56,9 +56,7 @@ export default function CameraMode({navigation}) {
                     <View style={styles.cameraButtons}>
                         <View style={styles.cameraCapture}>
                         <TouchableOpacity
-                            onPress={() => {
-                                takePicture();
-                            }}
+                            onPress={() => takePicture() }
                         >
                             <Icon name="camera" size={50} ></Icon>
                         </TouchableOpacity>
@@ -94,7 +92,6 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
-        // alignSelf: 'bottom',
         alignItems: 'flex-end',
         bottom: 20,
     },
@@ -108,6 +105,5 @@ const styles = StyleSheet.create({
     cameraFlip: {
         marginLeft: 250,
         bottom: 5,
-        // alignItems: 'center',
     },
 })

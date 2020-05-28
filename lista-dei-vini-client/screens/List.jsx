@@ -54,7 +54,6 @@ export default function List({navigation, route}) {
     });
 
     useEffect(() => {
-        // fetch('http://localhost:8080/api/v1/list')
         fetch(`http://${ipaddress}:8080/api/v1/list-without-pic`)
         .then((response) => 
             response.json().then((json) => {
@@ -84,7 +83,7 @@ export default function List({navigation, route}) {
                 </View>
                 : 
                 <View style={styles.sortview}>
-                    <Text style={{fontFamily: 'monospace',}}>Sort by: </Text>
+                    <Text /*style={{fontFamily: 'monospace',}}*/>Sort by: </Text>
                     <TouchableOpacity style={styles.sort}
                         onPress={() => {(sortBy=='default') ? setSortBy('createdDesc') : setSortBy('default')
                             setLoading(true);
@@ -218,10 +217,10 @@ const styles = StyleSheet.create({
     selected: {
         color: '#666666',
         fontWeight: 'bold',
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     },
     sorttext: {
         color: '#999999',
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     },
 });

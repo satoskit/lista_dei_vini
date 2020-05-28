@@ -61,7 +61,11 @@ export default function ListItem ({navigation, listData, sortBy}) {
     
     return (
         listData ?<View style={{ flex: 1, padding: 24}}>
-            <FlatList data={sortListData(listData, sortBy)}
+            {isLoading ?
+                <View style={styles.loading}>
+                    <ActivityIndicator size="large" color="#990000" />
+                </View>
+            : <FlatList data={sortListData(listData, sortBy)}
             renderItem={({item}) => {
                 console.log(item.name);
                 return (<Item  
@@ -75,8 +79,10 @@ export default function ListItem ({navigation, listData, sortBy}) {
                     navigation={navigation}
                 />)}}
                 keyExtractor={(item, index) => `listitem-${index}`}
-            />
-            </View>
+                onRefresh={() => getListData()}
+                refreshing={isLoading}
+                /> }
+            </View> 
         : <Text style={styles.noitem}>No item yet!</Text>
     )
 }
@@ -99,6 +105,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: 'monospace'
+        // fontFamily: 'monospace'
+    },
+    loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });

@@ -36,10 +36,9 @@ export default function ItemDetail({route, navigation}) {
         .finally(() => setLoading(false));
     }, []);
 
-    // const itemKeys = Object.keys(item);
     const itemList = [];
     for(let [key, value] of Object.entries(item)) {
-        if(key !== 'id' && key !== 'created_at' && key !== 'grade' && key !== 'image' ) {
+        if(key !== 'id' && key !== 'created_at' && key !== 'grade' && key !== 'image' && key !== 'imageType' ) {
         (value) ? itemList.push(
             <View key={key}>
                 <Text style={styles.title}>{keyToUpperCase(key)}</Text>
@@ -104,12 +103,12 @@ const styles = StyleSheet.create({
         fontSize: 17,
         borderBottomColor: '#990000',
         borderBottomWidth: StyleSheet.hairlineWidth,
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     },
     value: {
         padding: 8,
         fontSize: 20,
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     },
     star: {
         padding: 5,
@@ -126,6 +125,6 @@ const styles = StyleSheet.create({
     buttonItem: {
         fontSize: 20,
         color: '#990000',
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     }
 })

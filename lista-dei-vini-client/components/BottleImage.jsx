@@ -22,7 +22,7 @@ export default function BottleImage({big, id}) {
                 style={big ? styles.big : styles.small}
                 onLoadStart={() => setLoading(true)}
                 onLoad={() => setLoading(false)}
-            ></Image>
+            />
         </View>
         : 
             <View style={big ? styles.noimageBig : styles.noimageSmall}>
@@ -40,11 +40,13 @@ const styles = StyleSheet.create({
     },
     small: {
         resizeMode: 'center',
+        resizeMethod: 'scale',
         width: 60, 
         height: 60,
     },
     big: { // TODO: set size 
         resizeMode: 'center',
+        resizeMethod: 'scale',
         width: 170, 
         height: 170,
     },

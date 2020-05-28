@@ -16,7 +16,7 @@ export default function SearchResult({navigation, route}) {
     }, [navigation, searchedWord]);
 
     useEffect(() => {
-        fetch(`http://${ipaddress}/api/v1/list`)
+        fetch(`http://${ipaddress}:8080/api/v1/list`)
         .then((response) => 
             response.json().then((json) => {
             setListData(json);

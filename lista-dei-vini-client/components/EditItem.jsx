@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         marginBottom: 5,
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     },
     input: {
         height: 35,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         padding: 3,
         marginBottom: 8,
-        fontFamily: 'monospace',
+        // fontFamily: 'monospace',
     },
     picker: {
         height: 35,
