@@ -81,11 +81,21 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Override
 	public Item getItemByIdWithoutPic(Long id) {
-		Item itemWithoutPic =itemRepo.findByIdWithoutPicture(id);
+		Optional<Item> itemOptional = itemRepo.findById(id);
 		
-		if(itemWithoutPic == null) {
+		if(itemOptional == null) {
 			throw new NoItemFoundException("No item found.");
 		}
+		Item item = itemOptional.get();
+		Item itemWithoutPic = new Item();
+		itemWithoutPic.setId(id);
+		itemWithoutPic.setName(item.getName());
+		itemWithoutPic.setGrade(item.getGrade());
+		itemWithoutPic.setCountry(item.getCountry());
+		itemWithoutPic.setType(item.getType());
+		itemWithoutPic.setWinery(item.getWinery());
+		itemWithoutPic.setGrape(item.getGrape());
+		itemWithoutPic.setImageType(item.getImageType());
 		
 		logger.info("Get an item without image! " + itemWithoutPic.getName());
 		return itemWithoutPic;

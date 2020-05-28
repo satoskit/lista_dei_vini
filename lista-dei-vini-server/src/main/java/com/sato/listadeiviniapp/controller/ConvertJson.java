@@ -41,7 +41,7 @@ public class ConvertJson {
 		itemJsonWithoutPic.setCountry(item.getCountry());
 		itemJsonWithoutPic.setWinery(item.getWinery());
 		itemJsonWithoutPic.setGrape(item.getGrape());
-		if(item.getImageByte() != null) {
+		if(item.getImageType() != null) {
 			itemJsonWithoutPic.setImage(true);
 			itemJsonWithoutPic.setImageType(item.getImageType());
 		} else {

@@ -11,15 +11,15 @@ import com.sato.listadeiviniapp.model.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
 	
-	@Query(value="SELECT id, name, grade, type, year, country, winery, grape, image_type, created_at" 
-			+ " FROM item WHERE id = :id", nativeQuery=true)
-	Item findByIdWithoutPicture(@Param("id") Long id);
+//	@Query(value="SELECT id, name, grade, type, year, country, winery, grape, image_type, created_at" 
+//			+ " FROM item WHERE id = :id", nativeQuery=true)
+//	Item findByIdWithoutPicture(@Param("id") Long id);
 	
 	@Query(value="SELECT image_byte FROM item WHERE id = :id", nativeQuery=true)
 	byte[] findImageByteById(@Param("id") Long id);
 	
 	@Query(value="SELECT image_type FROM item WHERE id = :id", nativeQuery=true)
-	byte[] findImageTypeById(@Param("id") Long id);
+	String findImageTypeById(@Param("id") Long id);
 	
 	List<Item> findAllByGrade(int grade);
 	List<Item> findAllByCountry(String country);
