@@ -1,6 +1,7 @@
 # Lista dei Vini 
 
-> This project is still work in progress.
+> This project is still work in progress.  
+> There will be separated repositories which backend part on Heroku and frontend with Docker-compose.
 
 ## About the project
 This is a graduation project for Java Enterprise Developer at Yrgo.  
