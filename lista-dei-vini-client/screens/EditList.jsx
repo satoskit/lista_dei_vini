@@ -128,32 +128,32 @@ console.log(originalItem);
         return input;
     }
 
-
-    function findFromSystembolaget(name) {
-        if(!name) { return setCannotFind(true); }
-        if(fetchedData) { setFetchedData(emptyItem); }
+//** API NO LONGER AVAILABLE! **//
+    // function findFromSystembolaget(name) {
+    //     if(!name) { return setCannotFind(true); }
+    //     if(fetchedData) { setFetchedData(emptyItem); }
         
-        fetch(`http://${ipaddress}:8080/systembolaget/v1/product/result-list/?searchedName=${name}`)
-        .then((response) => {
-            if(response.ok){
-                response.json().then((json) => {
-                    setFetchedData(json);
-                    console.log(json);
-                })
-            } else if(response.status == 500) {
-                return setCannotFind(true);
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-            setCannotFind(true)
-        })
-        if(fetchedData.status) {
-            console.log(fetchedData)
-        }
-        setCannotFind(false);
-        return fetchedData;
-    }
+    //     fetch(`http://${ipaddress}:8080/systembolaget/v1/product/result-list/?searchedName=${name}`)
+    //     .then((response) => {
+    //         if(response.ok){
+    //             response.json().then((json) => {
+    //                 setFetchedData(json);
+    //                 console.log(json);
+    //             })
+    //         } else if(response.status == 500) {
+    //             return setCannotFind(true);
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //         setCannotFind(true)
+    //     })
+    //     if(fetchedData.status) {
+    //         console.log(fetchedData)
+    //     }
+    //     setCannotFind(false);
+    //     return fetchedData;
+    // }
 
     return (
         <View style={{flex: 1}}>
@@ -165,12 +165,12 @@ console.log(originalItem);
                     itemDetail={originalItem.name}
                     fetchedData = {fetchedData.name}
                 />
-                <TouchableOpacity style={styles.autofill}
+                {/* <TouchableOpacity style={styles.autofill}
                     onPress={() => findFromSystembolaget(input.name)}
                 >
                     <Text style={styles.autofilltext}>Auto Fill</Text>
-                </TouchableOpacity>
-                {cannotFind ? <Text style={styles.notfoundtext}>Could not find.</Text>: null}
+                </TouchableOpacity> */}
+                {/* {cannotFind ? <Text style={styles.notfoundtext}>Could not find.</Text>: null} */}
                 <EditItem title='Grade' 
                     getInput={value => setNewGrade(value)} 
                     itemDetail={parseInt(originalItem.grade) || 0}
